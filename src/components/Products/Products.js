@@ -5,6 +5,7 @@ import "./products.css";
 export function Products() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState("");
   useEffect(() => {
     axios
@@ -31,13 +32,14 @@ export function Products() {
               {/* <p>{product._id}</p> */}
               <img
                 src={`http://localhost:5000/uploads/${product.photo}`}
-                width="300px"
+                width="300px" alt={product.photo} 
+                
               />
               <p className="fw-bold fs-4">{product.prix}</p>
               <h3 className="text-capitalize fw-bold">{product.nom}</h3>
               <p>{product.categorie}</p>
               <p>{product.description}</p>
-              <a className="btn btn-warning " src="#"> Ajouter Panier</a>
+              <button className="btn btn-warning " > Ajouter Panier</button>
             </div>
           ))}
         </div>

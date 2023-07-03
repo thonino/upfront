@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ProductForm = () => {
   const [categorie, setCategorie] = useState("");
@@ -8,7 +8,7 @@ const ProductForm = () => {
   const [description, setDescription] = useState("");
   const [photo, setPhoto] = useState(null);
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleCategorieChange = (e) => {
     setCategorie(e.target.value);
@@ -43,15 +43,16 @@ const ProductForm = () => {
       method: "POST",
       body: formData,
     })
-      .then((response) => response.json())
-      .then((data) => { 
-        
-        // navigate("/");
+      .then((response) => {
+        if (response.ok) {
+          navigate("/");
+        } else {
+          throw new Error("Erreur lors de l'envoi du formulaire");
+        }
       })
       .catch((error) => {
         console.error(error);
       });
-      
   };
 
   return (
