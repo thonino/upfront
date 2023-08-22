@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import "./products.css";
 import { Link } from "react-router-dom";
-// import DeleteProduct from "../DeleteProduct/DeleteProduct.js";
+import { AuthContext } from "../AuthContext/AuthContext"; // Assurez-vous que le chemin d'importation est correct
 
 export function Products() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState("");
+
+  // Utilisez le contexte pour extraire l'utilisateur actuel
+  const { user } = useContext(AuthContext);
+
   useEffect(() => {
     axios
       .get("http://localhost:5000/products")
@@ -24,6 +27,16 @@ export function Products() {
       });
   }, []);
 
+  const addToCart = (productId) => {
+    axios.post(`http://localhost:5000/add-to-cart/${productId}`)
+      .then(response => {
+        // Gérer la réponse, par exemple: notifier l'utilisateur
+      })
+      .catch(error => {
+        // Gérer l'erreur, par exemple: afficher une notification
+      });
+  };
+
   return (
     <div>
       <h1>Nos Produits</h1>
@@ -33,7 +46,6 @@ export function Products() {
         <div className="d-flex flex-wrap justify-content-center gap-2 rounded">
           {products.map((product) => (
             <div className="card" key={product._id}>
-              {/* <p>{product._id}</p> */}
               <img
                 src={`http://localhost:5000/uploads/${product.photo}`}
                 width="300px"
@@ -43,21 +55,29 @@ export function Products() {
               <h3 className="text-capitalize fw-bold">{product.nom}</h3>
               <p>{product.categorie}</p>
               <p>{product.description}</p>
-              <div>
-                <a
-                  href={"/product/edit/"+ product._id}
-                  className="btn btn-warning mb-2 me-2"
+              {user && user.data && user.data.role === 'admin' ? (
+                <div>
+                  <Link
+                    to={`/product/edit/${product._id}`}
+                    className="btn btn-warning mb-2 me-2"
+                  >
+                    Modifier
+                  </Link>
+                  <Link
+                    to={`/product/delete/${product._id}`}
+                    className="btn btn-danger mb-2"
+                  >
+                    Supprimer
+                  </Link>
+                </div>
+              ) : (
+                <button
+                  className="btn btn-warning"
+                  onClick={() => addToCart(product._id)}
                 >
-                  Modifier
-                </a>
-                <Link
-                  to={`/product/delete/${product._id}`}
-                  className="btn btn-danger mb-2"
-                >
-                  Supprimer
-                </Link>
-              </div>
-              <button className="btn btn-warning "> Ajouter Panier</button>
+                  Ajouter au Panier
+                </button>
+              )}
             </div>
           ))}
         </div>

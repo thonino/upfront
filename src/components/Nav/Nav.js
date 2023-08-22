@@ -1,27 +1,34 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../AuthContext/AuthContext";
 
 const Nav = () => {
+  const { isLoggedIn, logout, user } = useContext(AuthContext);  // Extract user from AuthContext
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    fetch("http://localhost:5000/logout", {
+      method: "POST",
+      credentials: "include",
+    })
+      .then(() => {
+        logout();
+        navigate("/");
+      })
+      .catch(() => {
+        throw new Error("Erreur lors de la déconnexion");
+      });
+  };
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    
+    <nav className="navbar navbar-expand-sm navbar-light bg-light">
       <div className="container">
-        <h1 className="navbar-brand">Uppercase</h1>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-              <Link className="nav-link" to="/">
-                Produits
+              <Link className="nav-link text-success fw-bold" to="/">
+                UPPERCASE
               </Link>
             </li>
             <li className="nav-item">
@@ -29,6 +36,20 @@ const Nav = () => {
                 Ajouter Produit
               </Link>
             </li>
+            {isLoggedIn ? (
+              <li className="nav-item">
+                <Link className="nav-link" to="#" onClick={handleLogout}>
+                  Logout 
+                  <span className="ml-2">   {user.data.prenom}</span> 
+                </Link>
+              </li>
+            ) : (
+              <li className="nav-item">
+                <Link className="nav-link" to="/login">
+                  Login
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       </div>

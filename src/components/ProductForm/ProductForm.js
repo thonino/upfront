@@ -66,7 +66,6 @@ const ProductForm = () => {
           <input
             type="text"
             className="form-control"
-            id="categorie"
             name="categorie"
             value={categorie}
             onChange={handleCategorieChange}
@@ -79,7 +78,6 @@ const ProductForm = () => {
           <input
             type="text"
             className="form-control"
-            id="nom"
             name="nom"
             value={nom}
             onChange={handleNomChange}
@@ -92,7 +90,6 @@ const ProductForm = () => {
           <input
             type="string"
             className="form-control"
-            id="prix"
             name="prix"
             value={prix}
             onChange={handlePrixChange}
@@ -104,7 +101,6 @@ const ProductForm = () => {
           </label>
           <textarea
             className="form-control"
-            id="description"
             name="description"
             rows="3"
             value={description}
@@ -118,7 +114,6 @@ const ProductForm = () => {
           <input
             type="file"
             className="form-control"
-            id="photo"
             name="photo"
             onChange={handlePhotoChange}
           />
@@ -132,39 +127,3 @@ const ProductForm = () => {
 };
 
 export default ProductForm;
-
-// syntax sans hook
-// import React, { Component } from "react";
-// export class ProductForm extends Component {
-//   render() {
-//     return (
-//       <div className="container">
-//         <h1 className="mb-4">Ajouter un produit</h1>
-//         <form action="http://localhost:5000/product/new" method="POST" enctype="multipart/form-data">
-//           <div className="mb-3">
-//             <label for="categorie" className="form-label">Catégorie</label>
-//             <input type="text" className="form-control" id="categorie" name="categorie"/>
-//           </div>
-//           <div className="mb-3">
-//             <label for="nom" className="form-label">Nom</label>
-//             <input type="text" className="form-control" id="nom" name="nom"/>
-//           </div>
-//           <div className="mb-3">
-//             <label for="prix" className="form-label">Prix</label>
-//             <input type="string" className="form-control" id="prix" name="prix"/>
-//           </div>
-//           <div className="mb-3">
-//             <label for="description" className="form-label">Description</label>
-//             <textarea className="form-control" id="description" name="description" rows="3"></textarea>
-//           </div>
-//           <div className="mb-3">
-//             <label for="photo" className="form-label">Photo</label>
-//             <input type="file" className="form-control" id="photo" name="photo"/>
-//           </div>
-//           <button type="submit" className="btn btn-primary">Ajouter</button>
-//         </form>
-//       </div>
-//     );
-//   }
-// }
-// export default ProductForm;
