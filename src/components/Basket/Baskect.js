@@ -161,7 +161,7 @@ const Basket = () => {
                         <td>
                             <button 
                               type="button" 
-                              className={`btn btn-warning  ${modifiedFields[item.product.id] ? "" : "d-none"}`}
+                              className={` btn fst-italic btn-warning  ${modifiedFields[item.product.id] ? "" : "d-none"}`}
                               onClick={() => handleApply(item.product.id)}
                             >
                               Appliquer
