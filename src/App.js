@@ -9,6 +9,7 @@ import Login from "./components/Login/Login";
 import Navbar from "./components/Nav/Nav";
 import { AuthProvider } from "./components/AuthContext/AuthContext";
 import Register from "./components/Register/Register";
+import Basket from "./components/Basket/Baskect";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/product/delete/:id" element={<DeleteProduct />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/basket" element={<Basket />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AuthProvider>
