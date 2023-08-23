@@ -2,14 +2,13 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import "./products.css";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../AuthContext/AuthContext"; // Assurez-vous que le chemin d'importation est correct
+import { AuthContext } from "../AuthContext/AuthContext"; 
 
 export function Products() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // Utilisez le contexte pour extraire l'utilisateur actuel
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
@@ -28,14 +27,18 @@ export function Products() {
   }, []);
 
   const addToCart = (productId) => {
-    axios.post(`http://localhost:5000/add-to-cart/${productId}`)
+    console.log("Tentative d'ajout au panier pour le produit:", productId);
+
+    axios.post(`http://localhost:5000/add-to-cart/${productId}`, {}, { withCredentials: true })
       .then(response => {
+        console.log('Produit ajouté au panier avec succès:', response.data);
         // Gérer la réponse, par exemple: notifier l'utilisateur
       })
       .catch(error => {
+        console.error('Erreur lors de l’ajout du produit au panier:', error.response ? error.response.data : error.message);
         // Gérer l'erreur, par exemple: afficher une notification
       });
-  };
+};
 
   return (
     <div>

@@ -32,15 +32,24 @@ const Nav = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/product/new">
-                Ajouter Produit
-              </Link>
-            </li>
+                <Link className="nav-link" to="/basket">
+                  Panier
+                </Link>
+              </li>
+            {user && user.data && user.data.role === 'admin' ? (
+                <li className="nav-item">
+                <Link className="nav-link" to="/product/new">
+                  Ajouter Produit
+                </Link>
+              </li>
+              ) : null}
+            
+
             {isLoggedIn ? (
               <li className="nav-item">
-                <Link className="nav-link" to="#" onClick={handleLogout}>
+                <Link className="nav-link text-danger" to="#" onClick={handleLogout}>
                   Logout 
-                  <span className="ml-2">   {user.data.prenom}</span> 
+                  <span className="ml-2 text-success ">   ({user.data.prenom} est connecté) </span> 
                 </Link>
               </li>
             ) : (
