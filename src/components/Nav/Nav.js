@@ -46,12 +46,19 @@ const Nav = () => {
             
 
             {isLoggedIn ? (
-              <li className="nav-item">
-                <Link className="nav-link text-danger" to="#" onClick={handleLogout}>
-                  Logout 
-                  {/* <span className="ml-2 text-success ">   ({user.data.prenom} est connecté) </span>  */}
-                </Link>
-              </li>
+              <div className="d-flex">
+                <li className="nav-item">
+                  <Link className="nav-link " to="/messageform" >
+                    Nous-contacter
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link text-danger" to="#" onClick={handleLogout}>
+                    Logout 
+                    
+                  </Link>
+                </li>
+              </div>
             ) : (
               <li className="nav-item">
                 <Link className="nav-link" to="/login">
