@@ -12,6 +12,7 @@ function Order() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+
   // Récupération des détails de la commande lors du montage du composant
   useEffect(() => {
     const fetchOrderDetails = async () => {
@@ -33,10 +34,10 @@ function Order() {
   // Gestion du paiement accepté
   const handlePaymentAccepted = async () => {
     try {
-      const response = await axios.post(`http://localhost:5000/createInvoice`, { basketId: basketId }, { withCredentials: true });
+      const response = await axios.post(`http://localhost:5000/createInvoice`, { basketId: basketId , basketEmail: orderDetails.email}, { withCredentials: true });
       if (response.data.success) {
         // Si le paiement est réussi, redirection vers la page de succès
-        navigate(`/payementsuccess/${response.data.invoiceId}`, { state: { basketId: basketId } });
+        navigate(`/payementsuccess/${response.data.invoiceId}`, { state: { basketId: basketId, basketEmail: orderDetails.email } });
       } else {
         setError('Erreur lors de la finalisation du paiement.');
       }
@@ -48,6 +49,8 @@ function Order() {
   // Affichage des états de chargement ou d'erreur
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
+
+
 
   return (
     <div className="container text-center">

@@ -14,7 +14,7 @@ export function Products() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/products",{ withCredentials: true })
+      .get("http://localhost:5000/products")
       .then((response) => {
         setProducts(response.data);
         setError("");
