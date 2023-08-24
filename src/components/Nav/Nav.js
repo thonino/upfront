@@ -49,7 +49,7 @@ const Nav = () => {
               <li className="nav-item">
                 <Link className="nav-link text-danger" to="#" onClick={handleLogout}>
                   Logout 
-                  <span className="ml-2 text-success ">   ({user.data.prenom} est connecté) </span> 
+                  {/* <span className="ml-2 text-success ">   ({user.data.prenom} est connecté) </span>  */}
                 </Link>
               </li>
             ) : (
