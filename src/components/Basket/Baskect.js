@@ -4,6 +4,7 @@ import { AuthContext } from "../AuthContext/AuthContext";
 import { Link } from "react-router-dom";
 
 const Basket = () => {
+  // Initialiser les états locaux
   const { isLoggedIn, logout, user } = useContext(AuthContext);
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -12,13 +13,17 @@ const Basket = () => {
   const [modifiedFields, setModifiedFields] = useState({});
   const [inputErrors, setInputErrors] = useState({});
 
+  // Récupérer les éléments du panier au chargement du composant
   useEffect(() => {
     fetchBasket();
   }, []);
 
+  // Récupérer les éléments du panier depuis l'API
   const fetchBasket = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/basket", { withCredentials: true });
+      const response = await axios.get("http://localhost:5000/basket", {
+        withCredentials: true,
+      });
       setCartItems(response.data.cartItems);
       setTotalPrice(response.data.prix_total);
       const initialValues = {};
@@ -31,6 +36,7 @@ const Basket = () => {
     }
   };
 
+  // Gérer les changements d'input des quantités de produits
   const handleInputChange = (e, productId) => {
     const value = e.target.value;
     setInputValues((prevValues) => ({ ...prevValues, [productId]: value }));
@@ -50,6 +56,7 @@ const Basket = () => {
     setModifiedFields((prev) => ({ ...prev, [productId]: true }));
   };
 
+  // Mettre à jour les quantités modifiées dans le panier
   const handleApply = () => {
     const quantities = {};
     for (let productId in modifiedFields) {
@@ -60,17 +67,23 @@ const Basket = () => {
     updateQuantities(quantities);
     setModifiedFields({});
   };
-  
 
+  // Mettre à jour les quantités de produits dans l'API
   const updateQuantities = async (quantities) => {
     try {
-      const response = await axios.post("http://localhost:5000/update-quantities", quantities, {
-        withCredentials: true,
-      });
+      const response = await axios.post(
+        "http://localhost:5000/update-quantities",
+        quantities,
+        {
+          withCredentials: true,
+        }
+      );
       if (response.data.success) {
         fetchBasket();
       } else {
-        setError(response.data.message || "Erreur inattendue lors de la mise à jour.");
+        setError(
+          response.data.message || "Erreur inattendue lors de la mise à jour."
+        );
       }
     } catch (err) {
       setError("Erreur lors de la mise à jour.");
@@ -78,12 +91,16 @@ const Basket = () => {
     document.activeElement.blur();
   };
 
+  // Retirer un produit du panier
   const removeItem = async (e, productId) => {
     e.preventDefault();
     try {
-      const response = await axios.get(`http://localhost:5000/removeProduct/${productId}`, {
-        withCredentials: true,
-      });
+      const response = await axios.get(
+        `http://localhost:5000/removeProduct/${productId}`,
+        {
+          withCredentials: true,
+        }
+      );
       if (response.data.success) {
         fetchBasket();
       } else {
@@ -93,11 +110,13 @@ const Basket = () => {
       setError("Erreur lors de la suppression.");
     }
   };
-
+ // Vider le panier
   const clearBasket = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get("http://localhost:5000/clearBasket", { withCredentials: true });
+      const response = await axios.get("http://localhost:5000/clearBasket", {
+        withCredentials: true,
+      });
       if (response.data.success) {
         fetchBasket();
       } else {
@@ -108,90 +127,125 @@ const Basket = () => {
     }
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = {
+      email: isLoggedIn ? user.data.email : e.target.email.value,
+      prix_total: totalPrice
+    };
+    
+    try {
+      const response = await axios.post("http://localhost:5000/validateBasket", data, {
+        withCredentials: true
+      });
+  
+      if (response.data.success) {
+        window.location.href = `/order/${response.data.basketId}`;
+      } else {
+        setError(response.data.message || "Erreur lors de la validation du panier.");
+      }
+    } catch (err) {
+      setError("Erreur lors de la validation du panier.");
+    }
+  };
+
   return (
     <div className="container mt-4">
-        <h1 className="mb-3 text-center">Votre panier</h1>
-        {error && <div className="alert alert-danger mb-3">{error}</div>}
+      <h1 className="mb-3 text-center">Votre panier</h1>
+      {error && <div className="alert alert-danger mb-3">{error}</div>}
 
-        <table className="table">
-            <thead>
-                <tr>
-                    <th scope="col">Produit</th>
-                    <th scope="col">Prix</th>
-                    <th scope="col" className="d-flex justify-content-end">Quantité</th>
-                    <th scope="col" ></th>
-                    <th scope="col" className="text-warning fw-bold fst-italic">Action</th>
-                    <th scope="col">Total</th>
-                    <th scope="col"className="text-danger fw-bold fst-italic">Retirer</th>
-                </tr>
-            </thead>
-            <tbody>
-    {cartItems.map((item) => (
-        <tr key={item.product.id}>
-            <td className="text-capitalize">{item.product.nom}</td>
-            <td>{item.product.prix} €</td>
-            <td>
-                <form onSubmit={(e) => {
+      <table className="table">
+        <thead>
+          <tr>
+            <th scope="col">Produit</th>
+            <th scope="col">Prix</th>
+            <th scope="col" className="d-flex justify-content-end">
+              Quantité
+            </th>
+            <th scope="col"></th>
+            <th scope="col" className="text-warning fw-bold fst-italic">
+              Action
+            </th>
+            <th scope="col">Total</th>
+            <th scope="col" className="text-danger fw-bold fst-italic">
+              Retirer
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {cartItems.map((item) => (
+            <tr key={item.product.id}>
+              <td className="text-capitalize">{item.product.nom}</td>
+              <td>{item.product.prix} €</td>
+              <td>
+                <form
+                  onSubmit={(e) => {
                     e.preventDefault();
                     handleApply(item.product.id);
-                }}>
-                    <div className="d-flex">
-                        <div className="ms-auto col-5 ">
-                            <input
-                                type="text"
-                                name={`product-${item.product.id}`}
-                                pattern="^[1-9][0-9]*$"
-                                defaultValue={
-                                    inputValues[item.product.id] ||
-                                    (item.quantite ? item.quantite.toString() : "1")
-                                }
-                                onChange={(e) => handleInputChange(e, item.product.id)}
-                                className="form-control text-end"
-                            />
-                        </div>
+                  }}
+                >
+                  <div className="d-flex">
+                    <div className="ms-auto col-5 ">
+                      <input
+                        type="text"
+                        name={`product-${item.product.id}`}
+                        pattern="^[1-9][0-9]*$"
+                        defaultValue={
+                          inputValues[item.product.id] ||
+                          (item.quantite ? item.quantite.toString() : "1")
+                        }
+                        onChange={(e) => handleInputChange(e, item.product.id)}
+                        className="form-control text-end"
+                      />
                     </div>
+                  </div>
                 </form>
-            </td>
-            <td className="">
+              </td>
+              <td className="">
                 <span className="text-danger fst-italic fw-bold">
-                    {inputErrors[item.product.id]}
+                  {inputErrors[item.product.id]}
                 </span>
-            </td>
-            <td>
+              </td>
+              <td>
                 <button
-                    type="button"
-                    className={`btn fst-italic btn-warning ${modifiedFields[item.product.id] ? "" : "d-none"}`}
-                    onClick={() => handleApply(item.product.id)}
-                    disabled={!inputValues[item.product.id] || parseInt(inputValues[item.product.id], 10) < 1} 
+                  type="button"
+                  className={`btn fst-italic btn-warning ${
+                    modifiedFields[item.product.id] ? "" : "d-none"
+                  }`}
+                  onClick={() => handleApply(item.product.id)}
+                  disabled={
+                    !inputValues[item.product.id] ||
+                    parseInt(inputValues[item.product.id], 10) < 1
+                  }
                 >
-                    Appliquer
+                  Appliquer
                 </button>
-            </td>
-            <td>
+              </td>
+              <td>
                 {item.total ? item.total : item.product.prix * item.quantite} €
-            </td>
-            <td>
+              </td>
+              <td>
                 <button
-                    type="button"
-                    className="btn btn-danger btn-sm"
-                    onClick={(e) => removeItem(e, item.product.id)}
+                  type="button"
+                  className="btn btn-danger btn-sm"
+                  onClick={(e) => removeItem(e, item.product.id)}
                 >
-                    <i className="bi bi-dash-circle"></i>
+                  <i className="bi bi-dash-circle"></i>
                 </button>
-            </td>
-        </tr>
-    ))}
-</tbody>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div className="text-end mt-3">
+        {cartItems.length > 0 ? (
+          <>
+            <p className="text-end fs-4 fw-bold">
+              Prix total:{" "}
+              <span className="fw-bold text-success">{totalPrice} €</span>
+            </p>
 
-        </table>
-
-        <div className="text-end mt-3">
-            {cartItems.length > 0 ? (
-                <>
-                    <p className="text-end fs-4 fw-bold">
-                        Prix total: <span className="fw-bold text-success">{totalPrice} €</span>
-                    </p>
-                    <form method="POST" className="mb-3">
+            <form onSubmit={handleSubmit} className="mb-3">
                         <div className="mb-3">
                             {isLoggedIn ? (
                                 <>
@@ -221,15 +275,13 @@ const Basket = () => {
                             Valider le panier
                         </button>
                     </form>
-                </>
-            ) : (
-                <p>Votre panier est vide.</p>
-            )}
-        </div>
+          </>
+        ) : (
+          <p>Votre panier est vide.</p>
+        )}
+      </div>
     </div>
-);
-
-
+  );
 };
 
 export default Basket;

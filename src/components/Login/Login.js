@@ -15,8 +15,7 @@ const Login = () => {
       .then(() => {
         navigate("/");
       })
-      .catch((error) => {
-        console.error("Une erreur s'est produite: ", error);
+      .catch(() => {
         setError("Erreur lors de la connexion");
       });
   };

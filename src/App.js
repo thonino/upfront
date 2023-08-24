@@ -10,6 +10,8 @@ import Navbar from "./components/Nav/Nav";
 import { AuthProvider } from "./components/AuthContext/AuthContext";
 import Register from "./components/Register/Register";
 import Basket from "./components/Basket/Baskect";
+import Order from "./components/Order/Order";
+import PayementSuccess from "./components/PayementSuccess/PayementSuccess";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/basket" element={<Basket />} />
+          <Route path="/order/:basketId" element={<Order />}  />
+          <Route path="/payementsuccess/:invoiceid" element={<PayementSuccess/>}  />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AuthProvider>
