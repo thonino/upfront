@@ -3,25 +3,37 @@ import axios from 'axios';
 import { AuthContext } from '../AuthContext/AuthContext';
 
 const MessageForm = () => {
-    const [message, setMessage] = useState('');
+    const [messageContent, setMessageContent] = useState(''); // Renommé pour éviter la confusion avec l'état 'message'
     const [error, setError] = useState(null);
+    const [message, setMessage] = useState(null);
     const { user } = useContext(AuthContext);
-    
-    const expediteur = user.data.email; // C'est juste un exemple, vous devez définir la valeur appropriée
-    const destinataire = user.data.role === 'admin' ? "admin@admin" : null; // à définir selon votre logique
-    
+
+    const expediteur = user.data.email;
+    const destinataire = user.data.role === 'admin' ? "admin@admin" : null;
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         const formData = {
             expediteur: expediteur,
             destinataire: destinataire || "admin@admin",
-            texte: message,
-            // Vous pouvez également ajouter le champ datetime si nécessaire
+            texte: messageContent,
         };
 
-        // ... (la même logique pour envoyer les données via axios)
-
+        try {
+            const response = await axios.post("http://localhost:5000/message", formData, { withCredentials: true });
+            if (response.data.success) {
+                setMessageContent('');
+                setMessage('Message envoyé avec succès !');
+                setTimeout(() => {
+                    setMessage(null);
+                }, 2500);
+            } else {
+                setError(response.data.message || "Erreur lors de l'envoi du message.");
+            }
+        } catch (err) {
+            setError("Erreur lors de l'envoi du message. Veuillez réessayer.");
+        }
     };
 
     return (
@@ -57,8 +69,8 @@ const MessageForm = () => {
                             name="texte"
                             rows="4"
                             required
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
+                            value={messageContent}
+                            onChange={(e) => setMessageContent(e.target.value)}
                         ></textarea>
                     </div>
                     {error && <div className="alert alert-danger">{error}</div>}
@@ -66,6 +78,17 @@ const MessageForm = () => {
                     <a href="/messagebox/received" className="btn btn-info fw-bold mt-2">Boite de messagerie</a>
                 </form>
             </div>
+            {message && (
+                <div className="modal show d-block">
+                    <div className="">
+                        <div className="modal-content" style={{ backgroundColor: "rgba(0, 0, 0, 0.80)" }}>
+                            <div className="fw-lighter fst-italic text-warning text-center fs-1">
+                                {message}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
