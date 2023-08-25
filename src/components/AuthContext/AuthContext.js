@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
+import axios from 'axios';
 
 export const AuthContext = createContext();
 
@@ -6,34 +7,46 @@ export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
 
+  
   useEffect(() => {
-    fetch("http://localhost:5000/check-session", {
-      credentials: "include"
+    axios.get("http://localhost:5000/login", {
+        withCredentials: true   
     })
-    .then(res => res.json())
-    .then(data => {
-      if (data.isLoggedIn) {
-        setIsLoggedIn(true);
-        setUser(data.user);
-      }
+    .then(response => {
+        const data = response.data;
+        if (data.success) {
+            setIsLoggedIn(true);
+            setUser({ data: data.data }); 
+        } else {
+            setIsLoggedIn(false);
+            setUser(null);
+        }
+        // console.log("Data from login (session check):", data);  
+    })
+    .catch(error => {
+        console.error("Erreur lors de la vérification de la session:", error);
     });
-  }, []);
+}, []);
 
+
+
+  // Fonction pour gérer la connexion
   const login = (email, password) => { 
-    return fetch("http://localhost:5000/login", {
-      method: "POST",
-      credentials: "include",
-      body: JSON.stringify({ email, password }),
-      headers: { "Content-Type": "application/json" },
+    return axios.post("http://localhost:5000/login", {
+        email: email,
+        password: password
+      }, {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true
     })
-      .then((response) => response.json())
-      .then((data) => {
+    .then((response) => {
+        const data = response.data;
         setIsLoggedIn(true);
         setUser(data);
-        console.log("React User Data:", data);
-      });
+    });
   };
 
+  // Fonction pour gérer la déconnexion
   const logout = () => {
     setIsLoggedIn(false);
     setUser(null);
@@ -45,5 +58,3 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
-
-export default AuthContext;

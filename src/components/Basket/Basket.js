@@ -247,7 +247,7 @@ const Basket = () => {
 
             <form onSubmit={handleSubmit} className="mb-3">
                         <div className="mb-3">
-                            {isLoggedIn ? (
+                            {isLoggedIn && user && user.data ? (
                                 <>
                                     <p className="fs-4">
                                         <strong>Votre email : </strong>
@@ -255,7 +255,7 @@ const Basket = () => {
                                     </p>
                                     <input type="hidden" name="email" value={user.data.email} />
                                 </>
-                            ) : (
+                              )  : (
                                 <>
                                     <label htmlFor="email" className="form-label">
                                         Votre email :

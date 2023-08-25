@@ -9,7 +9,7 @@ import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
 import { AuthProvider } from "./components/AuthContext/AuthContext";
 import MessageForm from "./components/MessageForm/MessageForm.js";
-import Basket from "./components/Basket/Baskect";
+import Basket from "./components/Basket/Basket";
 import Order from "./components/Order/Order";
 import PayementSuccess from "./components/PayementSuccess/PayementSuccess";
 import NotFound from "./components/NotFound/NotFound";
