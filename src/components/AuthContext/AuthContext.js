@@ -1,10 +1,23 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/check-session", {
+      credentials: "include"
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.isLoggedIn) {
+        setIsLoggedIn(true);
+        setUser(data.user);
+      }
+    });
+  }, []);
 
   const login = (email, password) => { 
     return fetch("http://localhost:5000/login", {
