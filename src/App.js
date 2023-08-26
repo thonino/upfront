@@ -10,6 +10,7 @@ import Login from "./components/Login/Login";
 import { AuthProvider } from "./components/AuthContext/AuthContext";
 import MessageForm from "./components/MessageForm/MessageForm";
 import MessageReceived from "./components/MessageReceived/MessageReceived";
+import MessageSent from "./components/MessageSent/MessageSent";
 import Basket from "./components/Basket/Basket";
 import Order from "./components/Order/Order";
 import PayementSuccess from "./components/PayementSuccess/PayementSuccess";
@@ -28,11 +29,14 @@ function App() {
           <Route path="/product/delete/:id" element={<DeleteProduct />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/messagereceived" element={<MessageReceived />} />
           <Route path="/basket" element={<Basket />} />
           <Route path="/order/:basketId" element={<Order />}  />
           <Route path="/payementsuccess/:invoiceid" element={<PayementSuccess/>}  />
           <Route path="/messageform" element={<PrivateRoute><MessageForm /></PrivateRoute>} />
+          <Route path="/messagereceived" element={<PrivateRoute><MessageReceived/></PrivateRoute>} />
+          <Route path="/messageform" element={<PrivateRoute><MessageForm /></PrivateRoute>} />
+          <Route path="/messagereceived" element={<PrivateRoute><MessageReceived/></PrivateRoute>} />
+          <Route path="/messagesent" element={<PrivateRoute><MessageSent/></PrivateRoute>} />
           <Route path="*" element={<NotFound />} />
       </Routes>
       </AuthProvider>
