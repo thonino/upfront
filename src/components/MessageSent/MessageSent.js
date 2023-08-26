@@ -8,7 +8,7 @@ function MessageReceived() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/messagereceived", { withCredentials: true })
+      .get("http://localhost:5000/messagesent", { withCredentials: true })
       .then((response) => {
         const data = response.data;
         setMessages(data.messages.reverse());
@@ -26,17 +26,17 @@ function MessageReceived() {
   return (
     <div className="container text-center mt-5">
       <h1 className="fw-bold mt-2">
-        Reçus par:{" "}
+        Envoyé par:{" "}
         <span className="fw-light  fst-italic text-success">
           {isUserAdmin ? "admin@admin" : user.prenom}
         </span>
       </h1>
       <div className="d-flex justify-content-center gap-2">
-        <div className="fst-italic fw-bold">
-            <Link to="/messagereceived" className="btn btn-success text-white"> Messages reçus </Link>
+      <div className="fst-italic fw-bold">
+            <Link to="/messagereceived" className="btn btn-lihgt text-success fw-bold"> Messages reçus </Link>
         </div>
         <div className="fst-italic fw-bold">
-            <Link to="/messagesent" className=" btn btn-lihgt text-success fw-bold "> Messages envoyés </Link>
+            <Link to="/messagesent" className="btn btn-success text-white"> Messages envoyés </Link>
         </div>
       </div>
       <div className="d-flex justify-content-center text-center gap-2"></div>
@@ -69,23 +69,11 @@ function MessageReceived() {
               </div>
               <p className="card-text fs-4">{message.texte}</p>
               <div className="d-flex justify-content-center align-items-center gap-2">
-                {isUserAdmin ? (
-                  <Link
-                    to={`/messageform/?destinataire=${message.expediteur}&expediteur=admin@admin`}
-                    className="btn btn-success"
-                  >
-                    Répondre
-                  </Link>
-                ) : (
-                  <Link
-                    to={`/messageform/?destinataire=${message.expediteur}`}
-                    className="btn btn-success"
-                  >
-                    Répondre
-                  </Link>
-                )}
+                <Link to={`/edit-message/${message._id}`} className="btn btn-success">
+                <i className="bi bi-pencil-square"></i>
+                </Link>
                 <form
-                  action={`/delete-message/received/${message._id}?_method=DELETE`}
+                  action={`/delete-message/sent/${message._id}?_method=DELETE`}
                   method="POST"
                 >
                   <input type="hidden" name="email" value={user.email} />

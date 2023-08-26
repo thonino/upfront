@@ -8,9 +8,7 @@ const MessageForm = () => {
     const [error, setError] = useState(null);
     const [message, setMessage] = useState(null);
     const { user } = useContext(AuthContext);
-
     const location = useLocation();
-
     const getQueryParams = () => {
         const searchParams = new URLSearchParams(location.search);
         return {
@@ -18,18 +16,14 @@ const MessageForm = () => {
             destinataire: searchParams.get('destinataire') || (user.data.role === 'admin' ? "admin@admin" : "admin@admin")
         };
     };
-
     const { expediteur, destinataire } = getQueryParams();
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const formData = {
             expediteur: expediteur,
             destinataire: destinataire,
             texte: messageContent,
         };
-
         try {
             const response = await axios.post("http://localhost:5000/message", formData, { withCredentials: true });
             if (response.data.success) {
