@@ -53,6 +53,11 @@ const Nav = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
+                  <Link className="nav-link " to="/messagereceived" >
+                    Liste-Messages
+                  </Link>
+                </li>
+                <li className="nav-item">
                   <Link className="nav-link text-danger" to="#" onClick={handleLogout}>
                     Logout 
                     

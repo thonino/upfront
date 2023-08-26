@@ -1,22 +1,32 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../AuthContext/AuthContext';
+import { useLocation } from 'react-router-dom';
 
 const MessageForm = () => {
-    const [messageContent, setMessageContent] = useState(''); // Renommé pour éviter la confusion avec l'état 'message'
+    const [messageContent, setMessageContent] = useState(''); 
     const [error, setError] = useState(null);
     const [message, setMessage] = useState(null);
     const { user } = useContext(AuthContext);
 
-    const expediteur = user.data.email;
-    const destinataire = user.data.role === 'admin' ? "admin@admin" : null;
+    const location = useLocation();
+
+    const getQueryParams = () => {
+        const searchParams = new URLSearchParams(location.search);
+        return {
+            expediteur: searchParams.get('expediteur') || user.data.email,
+            destinataire: searchParams.get('destinataire') || (user.data.role === 'admin' ? "admin@admin" : "admin@admin")
+        };
+    };
+
+    const { expediteur, destinataire } = getQueryParams();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const formData = {
             expediteur: expediteur,
-            destinataire: destinataire || "admin@admin",
+            destinataire: destinataire,
             texte: messageContent,
         };
 
@@ -35,7 +45,6 @@ const MessageForm = () => {
             setError("Erreur lors de l'envoi du message. Veuillez réessayer.");
         }
     };
-
     return (
         <div className="d-flex flex-column align-items-center">
             <div className="container col-6">

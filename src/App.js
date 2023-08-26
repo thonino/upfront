@@ -8,11 +8,13 @@ import DeleteProduct from "./components/DeleteProduct/DeleteProduct";
 import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
 import { AuthProvider } from "./components/AuthContext/AuthContext";
-import MessageForm from "./components/MessageForm/MessageForm.js";
+import MessageForm from "./components/MessageForm/MessageForm";
+import MessageReceived from "./components/MessageReceived/MessageReceived";
 import Basket from "./components/Basket/Basket";
 import Order from "./components/Order/Order";
 import PayementSuccess from "./components/PayementSuccess/PayementSuccess";
 import NotFound from "./components/NotFound/NotFound";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 function App() {
   return (
@@ -26,12 +28,13 @@ function App() {
           <Route path="/product/delete/:id" element={<DeleteProduct />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/messageform" element={<MessageForm />} />
+          <Route path="/messagereceived" element={<MessageReceived />} />
           <Route path="/basket" element={<Basket />} />
           <Route path="/order/:basketId" element={<Order />}  />
           <Route path="/payementsuccess/:invoiceid" element={<PayementSuccess/>}  />
+          <Route path="/messageform" element={<PrivateRoute><MessageForm /></PrivateRoute>} />
           <Route path="*" element={<NotFound />} />
-        </Routes>
+      </Routes>
       </AuthProvider>
     </div>
   );
