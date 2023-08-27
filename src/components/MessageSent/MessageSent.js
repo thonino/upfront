@@ -22,10 +22,6 @@ function MessageSent() {
       });
   }, []);
 
-  if (!user) return null;
-
-  const isUserAdmin = user.role === "admin";
-
   const handleDelete = (id) => {
     fetch(`http://localhost:5000/delete-message/sent/${id}`, {
       method: "DELETE",
@@ -57,8 +53,11 @@ function MessageSent() {
     setNewText("");
   };
 
+  if (!user) return null;
+  const isUserAdmin = user.role === "admin";
+
   return (
-    <div className="container text-center mt-5">
+    <div className="container text-center">
       <h1 className="fw-bold mt-2">
         Envoyé par:{" "}
         <span className="fw-light  fst-italic text-success">

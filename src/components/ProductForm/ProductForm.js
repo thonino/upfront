@@ -45,7 +45,7 @@ const ProductForm = () => {
     })
       .then((response) => {
         if (response.ok) {
-          navigate("/");
+          navigate("/products");
         } else {
           throw new Error("Erreur lors de l'envoi du formulaire");
         }

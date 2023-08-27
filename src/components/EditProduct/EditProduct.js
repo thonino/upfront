@@ -59,7 +59,7 @@ const EditProduct = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        navigate("/");
+        navigate("/products");
       })
       .catch((error) => {
         console.error(error);

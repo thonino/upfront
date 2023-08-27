@@ -31,6 +31,7 @@ const MessageForm = ({ expediteur, destinataire, closeDialog }) => {
 
   return (
     <div className="p-3">
+      <h1>Nous-contacter ! </h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="expediteur" className="form-label">Expéditeur</label>

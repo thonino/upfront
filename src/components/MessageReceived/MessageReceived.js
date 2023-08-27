@@ -6,28 +6,24 @@ import MessageForm from "../MessageForm/MessageForm";
 
 function MessageReceived() {
   const [messages, setMessages] = useState([]);
-  const { user } = useContext(AuthContext);
+  const [user, setUser] = useState(null);
   const [messageToDelete, setMessageToDelete] = useState(null);
   const [showReplyModal, setShowReplyModal] = useState(false);
   const [messageToReply, setMessageToReply] = useState(null);
 
   useEffect(() => {
-    if (user) {
-      axios
-        .get("http://localhost:5000/messagereceived", { withCredentials: true })
-        .then((response) => {
-          const data = response.data;
-          setMessages(data.messages.reverse());
-        })
-        .catch((error) => {
-          console.error("Erreur lors de la récupération des messages:", error);
-        });
-    }
-  }, [user]);
+    axios
+      .get("http://localhost:5000/messagesent", { withCredentials: true })
+      .then((response) => {
+        const data = response.data;
+        setMessages(data.messages.reverse());
+        setUser(data.user);
+      })
+      .catch((error) => {
+        console.error("Erreur lors de la récupération des messages:", error);
+      });
+  }, []);
 
-  if (!user) return null;
-
-  const isUserAdmin = user.role === "admin";
 
   const handleDelete = (id) => {
     fetch(`http://localhost:5000/deletemessage/${id}`, {
@@ -47,6 +43,9 @@ function MessageReceived() {
     setMessageToReply(message);
     setShowReplyModal(true);
   };
+
+  if (!user) return null;
+  const isUserAdmin = user.role === "admin";
 
   return (
     <div className="container text-center">

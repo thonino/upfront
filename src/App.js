@@ -1,6 +1,9 @@
 import "./App.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Nav/Nav";
+import Home from "./components/Home/Home";
 import Products from "./components/Products/Products";
 import ProductForm from "./components/ProductForm/ProductForm";
 import EditProduct from "./components/EditProduct/EditProduct";
@@ -22,7 +25,8 @@ function App() {
       <AuthProvider>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Products />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/Products" element={<Products />} />
           <Route path="/product/new" element={<ProductForm />} />
           <Route path="/product/edit/:id" element={<EditProduct />} />
           <Route path="/register" element={<Register />} />

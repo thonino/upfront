@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthContext/AuthContext";
 
 const Nav = () => {
-  const { isLoggedIn, logout, user } = useContext(AuthContext);  
+  const { isLoggedIn, logout, user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -21,63 +21,58 @@ const Nav = () => {
   };
 
   return (
-    
-    <nav className="navbar navbar-expand-sm navbar-light bg-light">
-      <div className="container">
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link className="nav-link text-success fw-bold" to="/">
-                UPPERCASE
-              </Link>
-            </li>
-            <li className="nav-item">
-                <Link className="nav-link" to="/basket">
-                  Panier
-                </Link>
-              </li>
-            {user && user.data && user.data.role === 'admin' ? (
-                <li className="nav-item">
-                <Link className="nav-link" to="/product/new">
-                  Ajouter Produit
-                </Link>
-              </li>
-              ) : null}
-            
-            {isLoggedIn ? (
-              <div className="d-flex">
-                {user.data.role !== "admin" ?(
-                  <li className="nav-item">
-                    <Link className="nav-link " to="/messageform" >
-                      Nous-contacter
-                    </Link>
-                  </li>
-                ) : null
-                }
-                
-                <li className="nav-item">
-                  <Link className="nav-link " to="/messagereceived" >
-                    Liste-Messages
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link text-danger" to="#" onClick={handleLogout}>
-                    Logout 
-                    
-                  </Link>
-                </li>
-              </div>
-            ) : (
+    <div>
+      <nav className="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+        <div className="container-fluid">
+          <Link className="navbar-brand" to="/">UPPERCASE</Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav ml-auto">
               <li className="nav-item">
-                <Link className="nav-link" to="/login">
-                  Login
-                </Link>
+                <Link className="nav-link" to="/products">Produits</Link>
               </li>
-            )}
-          </ul>
+              <li className="nav-item">
+                <Link className="nav-link" to="/basket">Panier</Link>
+              </li>
+              {user && user.data && user.data.role === 'admin' && (
+                <li className="nav-item">
+                  <Link className="nav-link" to="/product/new">Ajouter Produit</Link>
+                </li>
+              )}
+              {isLoggedIn ? (
+                <div className="d-sm-flex d-flex-column d-sm-row">
+                  {user.data.role !== "admin" && (
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/messageform">Nous-contacter</Link>
+                    </li>
+                  )}
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/messagereceived">Liste-Messages</Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link text-danger" to="#" onClick={handleLogout}>Logout</Link>
+                  </li>
+                </div>
+              ) : (
+                <li className="nav-item">
+                  <Link className="nav-link" to="/login">Login</Link>
+                </li>
+              )}
+            </ul>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
   );
 };
 
