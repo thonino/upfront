@@ -4,7 +4,6 @@ import Navbar from "./components/Nav/Nav";
 import Products from "./components/Products/Products";
 import ProductForm from "./components/ProductForm/ProductForm";
 import EditProduct from "./components/EditProduct/EditProduct";
-import DeleteProduct from "./components/DeleteProduct/DeleteProduct";
 import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
 import { AuthProvider } from "./components/AuthContext/AuthContext";
@@ -26,7 +25,6 @@ function App() {
           <Route path="/" element={<Products />} />
           <Route path="/product/new" element={<ProductForm />} />
           <Route path="/product/edit/:id" element={<EditProduct />} />
-          <Route path="/product/delete/:id" element={<DeleteProduct />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/basket" element={<Basket />} />

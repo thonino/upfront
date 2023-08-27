@@ -110,7 +110,7 @@ const Basket = () => {
       setError("Erreur lors de la suppression.");
     }
   };
- // Vider le panier
+  // Vider le panier
   const clearBasket = async (e) => {
     e.preventDefault();
     try {
@@ -131,18 +131,24 @@ const Basket = () => {
     e.preventDefault();
     const data = {
       email: isLoggedIn ? user.data.email : e.target.email.value,
-      prix_total: totalPrice
+      prix_total: totalPrice,
     };
-    
+
     try {
-      const response = await axios.post("http://localhost:5000/validateBasket", data, {
-        withCredentials: true
-      });
-  
+      const response = await axios.post(
+        "http://localhost:5000/validateBasket",
+        data,
+        {
+          withCredentials: true,
+        }
+      );
+
       if (response.data.success) {
         window.location.href = `/order/${response.data.basketId}`;
       } else {
-        setError(response.data.message || "Erreur lors de la validation du panier.");
+        setError(
+          response.data.message || "Erreur lors de la validation du panier."
+        );
       }
     } catch (err) {
       setError("Erreur lors de la validation du panier.");
@@ -244,37 +250,41 @@ const Basket = () => {
               Prix total:{" "}
               <span className="fw-bold text-success">{totalPrice} €</span>
             </p>
-
             <form onSubmit={handleSubmit} className="mb-3">
-                        <div className="mb-3">
-                            {isLoggedIn && user && user.data ? (
-                                <>
-                                    <p className="fs-4">
-                                        <strong>Votre email : </strong>
-                                        <span className="text-success">{user.data.email}</span>
-                                    </p>
-                                    <input type="hidden" name="email" value={user.data.email} />
-                                </>
-                              )  : (
-                                <>
-                                    <label htmlFor="email" className="form-label">
-                                        Votre email :
-                                    </label>
-                                    <input type="email" name="email" className="form-control" required />
-                                </>
-                            )}
-                        </div>
-                        <Link className="btn btn-warning" to="/">
-                            <i className="bi bi-plus-lg"> Ajouter</i>
-                        </Link>
-                        <button className="btn btn-danger mx-2" onClick={clearBasket}>
-                            <i className="bi bi-trash"> Vider panier</i>
-                        </button>
-                        <input type="hidden" name="prix_total" value={totalPrice} />
-                        <button type="submit" className="btn btn-success">
-                            Valider le panier
-                        </button>
-                    </form>
+              <div className="mb-3">
+                {isLoggedIn && user && user.data ? (
+                  <>
+                    <p className="fs-4">
+                      <strong>Votre email : </strong>
+                      <span className="text-success">{user.data.email}</span>
+                    </p>
+                    <input type="hidden" name="email" value={user.data.email} />
+                  </>
+                ) : (
+                  <>
+                    <label htmlFor="email" className="form-label">
+                      Votre email :
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      className="form-control"
+                      required
+                    />
+                  </>
+                )}
+              </div>
+              <Link className="btn btn-warning" to="/">
+                <i className="bi bi-plus-lg"> Ajouter</i>
+              </Link>
+              <button className="btn btn-danger mx-2" onClick={clearBasket}>
+                <i className="bi bi-trash"> Vider panier</i>
+              </button>
+              <input type="hidden" name="prix_total" value={totalPrice} />
+              <button type="submit" className="btn btn-success">
+                Valider le panier
+              </button>
+            </form>
           </>
         ) : (
           <p>Votre panier est vide.</p>
