@@ -32,11 +32,9 @@ function App() {
           <Route path="/basket" element={<Basket />} />
           <Route path="/order/:basketId" element={<Order />}  />
           <Route path="/payementsuccess/:invoiceid" element={<PayementSuccess/>}  />
-          <Route path="/messageform" element={<PrivateRoute><MessageForm /></PrivateRoute>} />
+          <Route path="/messageform" element={<PrivateRoute><MessageForm /></PrivateRoute>} /> 
           <Route path="/messagereceived" element={<PrivateRoute><MessageReceived/></PrivateRoute>} />
-          <Route path="/messageform" element={<PrivateRoute><MessageForm /></PrivateRoute>} />
-          <Route path="/messagereceived" element={<PrivateRoute><MessageReceived/></PrivateRoute>} />
-          <Route path="/messagesent" element={<PrivateRoute><MessageSent/></PrivateRoute>} />
+          <Route path="/messagesent" element={<PrivateRoute><MessageSent/></PrivateRoute>} /> 
           <Route path="*" element={<NotFound />} />
       </Routes>
       </AuthProvider>

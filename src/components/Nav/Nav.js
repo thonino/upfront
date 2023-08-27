@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthContext/AuthContext";
 
 const Nav = () => {
-  const { isLoggedIn, logout, user } = useContext(AuthContext);  // Extract user from AuthContext
+  const { isLoggedIn, logout, user } = useContext(AuthContext);  
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -16,7 +16,7 @@ const Nav = () => {
         navigate("/");
       })
       .catch(() => {
-        throw new Error("Erreur lors de la déconnexion");
+        console.error("Erreur lors de la déconnexion");
       });
   };
 
@@ -44,14 +44,17 @@ const Nav = () => {
               </li>
               ) : null}
             
-
             {isLoggedIn ? (
               <div className="d-flex">
-                <li className="nav-item">
-                  <Link className="nav-link " to="/messageform" >
-                    Nous-contacter
-                  </Link>
-                </li>
+                {user.data.role !== "admin" ?(
+                  <li className="nav-item">
+                    <Link className="nav-link " to="/messageform" >
+                      Nous-contacter
+                    </Link>
+                  </li>
+                ) : null
+                }
+                
                 <li className="nav-item">
                   <Link className="nav-link " to="/messagereceived" >
                     Liste-Messages

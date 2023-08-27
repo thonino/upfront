@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import "./products.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthContext/AuthContext"; 
 
 export function Products() {
@@ -9,8 +9,10 @@ export function Products() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [message, setMessage] = useState(null);
+  const [productToDelete, setProductToDelete] = useState(null);
 
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -43,8 +45,17 @@ export function Products() {
       });
   };
 
-
-
+  const handleDelete = (id) => {
+    axios.delete(`http://localhost:5000/product/delete/${id}`)
+      .then(() => {
+        setProducts(products.filter((product) => product._id !== id));
+        setProductToDelete(null);
+      })
+      .catch((error) => {
+        console.error(error);
+        setProductToDelete(null);
+      });
+  };
 
   return (
     <div>
@@ -73,12 +84,9 @@ export function Products() {
                   >
                     Modifier
                   </Link>
-                  <Link
-                    to={`/product/delete/${product._id}`}
-                    className="btn btn-danger mb-2"
-                  >
+                  <button onClick={() => setProductToDelete(product._id)} className="btn btn-danger mb-2">
                     Supprimer
-                  </Link>
+                  </button>
                 </div>
               ) : (
                 <button
@@ -95,10 +103,30 @@ export function Products() {
   
       {message && (
         <div className="modal show d-block">
-          <div className="">
+          <div className="modal-dialog-centered">
             <div className="modal-content" style={{ backgroundColor: "rgba(0, 0, 0, 0.80)" }}>
               <div className="fw-lighter  fst-italic  text-warning text-center fs-1">
                 {message}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {productToDelete && (
+        <div className="modal show d-block" style={{backgroundColor: 'rgba(0, 0, 0, 0.5)'}}>
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Confirmation</h5>
+                <button onClick={() => setProductToDelete(null)} type="button" className="btn-close" aria-label="Close"></button>
+              </div>
+              <div className="modal-body">
+                <p>Voulez-vous vraiment supprimer ce produit ?</p>
+              </div>
+              <div className="modal-footer">
+                <button onClick={() => setProductToDelete(null)} type="button" className="btn btn-secondary">Annuler</button>
+                <button onClick={() => handleDelete(productToDelete)} type="button" className="btn btn-danger">Supprimer</button>
               </div>
             </div>
           </div>

@@ -6,31 +6,38 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  
   useEffect(() => {
-    axios.get("http://localhost:5000/login", {
-        withCredentials: true   
-    })
-    .then(response => {
-        const data = response.data;
-        if (data.success) {
-            setIsLoggedIn(true);
-            setUser({ data: data.data }); 
-        } else {
-            setIsLoggedIn(false);
-            setUser(null);
-        }
-        // console.log("Data from login (session check):", data);  
-    })
-    .catch(error => {
-        console.error("Erreur lors de la vérification de la session:", error);
-    });
-}, []);
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      setIsLoggedIn(true);
+      setUser(user);
+      setLoading(false);
+    } else {
+      axios.get("http://localhost:5000/login", {
+          withCredentials: true   
+      })
+      .then(response => {
+          const data = response.data;
+          if (data.success) {
+              setIsLoggedIn(true);
+              setUser({ data: data.data }); 
+              localStorage.setItem('user', JSON.stringify(data.data));
+          } else {
+              setIsLoggedIn(false);
+              setUser(null);
+          }
+          setLoading(false);
+          // console.log("Data from login (session check):", data);  
+      })
+      .catch(error => {
+          console.error("Erreur lors de la vérification de la session:", error);
+          setLoading(false);
+      });
+    }
+  }, []);
 
-
-
-  // Fonction pour gérer la connexion
   const login = (email, password) => { 
     return axios.post("http://localhost:5000/login", {
         email: email,
@@ -43,17 +50,29 @@ export const AuthProvider = ({ children }) => {
         const data = response.data;
         setIsLoggedIn(true);
         setUser(data);
+        localStorage.setItem('user', JSON.stringify(data));
     });
   };
 
-  // Fonction pour gérer la déconnexion
   const logout = () => {
-    setIsLoggedIn(false);
-    setUser(null);
+    axios.post("http://localhost:5000/logout", {}, {
+        withCredentials: true
+    })
+    .then((response) => {
+        setIsLoggedIn(false);
+        setUser(null);
+        localStorage.removeItem('user');
+    })
+    .catch((error) => {
+        console.error("Erreur lors de la déconnexion:", error);
+        setIsLoggedIn(false);
+        setUser(null);
+        localStorage.removeItem('user');
+    });
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout, user }}>
+    <AuthContext.Provider value={{ isLoggedIn, login, logout, user, loading }}>
       {children}
     </AuthContext.Provider>
   );

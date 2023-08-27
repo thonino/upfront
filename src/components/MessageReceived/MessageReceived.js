@@ -1,30 +1,47 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../AuthContext/AuthContext';
 
 function MessageReceived() {
   const [messages, setMessages] = useState([]);
-  const [user, setUser] = useState(null);
+  const { user } = useContext(AuthContext);
+  const [messageToDelete, setMessageToDelete] = useState(null);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/messagereceived", { withCredentials: true })
-      .then((response) => {
-        const data = response.data;
-        setMessages(data.messages.reverse());
-        setUser(data.user);
-      })
-      .catch((error) => {
-        console.error("Erreur lors de la récupération des messages:", error);
-      });
-  }, []);
-
+    if (user) {
+      axios
+        .get("http://localhost:5000/messagereceived", { withCredentials: true })
+        .then((response) => {
+          const data = response.data;
+          setMessages(data.messages.reverse());
+        })
+        .catch((error) => {
+          console.error("Erreur lors de la récupération des messages:", error);
+        });
+    }
+  }, [user]);
+  
   if (!user) return null;
-
+  
   const isUserAdmin = user.role === "admin";
 
+  const handleDelete = (id) => {
+    fetch(`http://localhost:5000/deletemessage/${id}`, {
+      method: "DELETE",
+    })
+      .then(() => {
+        setMessages(messages.filter((message) => message._id !== id));
+        setMessageToDelete(null);
+      })
+      .catch((error) => {
+        console.error(error);
+        setMessageToDelete(null);
+      });
+  };
+
   return (
-    <div className="container text-center mt-5">
+    <div className="container text-center">
       <h1 className="fw-bold mt-2">
         Reçus par:{" "}
         <span className="fw-light  fst-italic text-success">
@@ -84,15 +101,12 @@ function MessageReceived() {
                     Répondre
                   </Link>
                 )}
-                <form
-                  action={`/delete-message/received/${message._id}?_method=DELETE`}
-                  method="POST"
+                <button
+                  onClick={() => setMessageToDelete(message._id)}
+                  className="btn btn-danger"
                 >
-                  <input type="hidden" name="email" value={user.email} />
-                  <button type="submit" className="btn btn-danger">
-                    <i className="bi bi-trash"></i>
-                  </button>
-                </form>
+                  Supprimer
+                </button>
               </div>
             </div>
           </div>
@@ -103,6 +117,26 @@ function MessageReceived() {
           <i className="bi bi-arrow-up"></i>
         </a>
       </div>
+
+      {messageToDelete && (
+        <div className="modal show d-block" style={{backgroundColor: 'rgba(0, 0, 0, 0.5)'}}>
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Confirmation</h5>
+                <button onClick={() => setMessageToDelete(null)} type="button" className="btn-close" aria-label="Close"></button>
+              </div>
+              <div className="modal-body">
+                <p>Voulez-vous vraiment supprimer ce message ?</p>
+              </div>
+              <div className="modal-footer">
+                <button onClick={() => setMessageToDelete(null)} type="button" className="btn btn-secondary">Annuler</button>
+                <button onClick={() => handleDelete(messageToDelete)} type="button" className="btn btn-danger">Supprimer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

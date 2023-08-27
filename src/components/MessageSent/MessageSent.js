@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
 
-function MessageReceived() {
+function MessageSent() {
   const [messages, setMessages] = useState([]);
   const [user, setUser] = useState(null);
+  const [messageToDelete, setMessageToDelete] = useState(null);
 
   useEffect(() => {
     axios
@@ -23,6 +24,20 @@ function MessageReceived() {
 
   const isUserAdmin = user.role === "admin";
 
+  const handleDelete = (id) => {
+    fetch(`http://localhost:5000/delete-message/sent/${id}`, {
+      method: "DELETE",
+    })
+      .then(() => {
+        setMessages(messages.filter((message) => message._id !== id));
+        setMessageToDelete(null);
+      })
+      .catch((error) => {
+        console.error(error);
+        setMessageToDelete(null);
+      });
+  };
+
   return (
     <div className="container text-center mt-5">
       <h1 className="fw-bold mt-2">
@@ -32,11 +47,11 @@ function MessageReceived() {
         </span>
       </h1>
       <div className="d-flex justify-content-center gap-2">
-      <div className="fst-italic fw-bold">
-            <Link to="/messagereceived" className="btn btn-lihgt text-success fw-bold"> Messages reçus </Link>
+        <div className="fst-italic fw-bold">
+          <Link to="/messagereceived" className="btn btn-lihgt text-success fw-bold"> Messages reçus </Link>
         </div>
         <div className="fst-italic fw-bold">
-            <Link to="/messagesent" className="btn btn-success text-white"> Messages envoyés </Link>
+          <Link to="/messagesent" className="btn btn-success text-white"> Messages envoyés </Link>
         </div>
       </div>
       <div className="d-flex justify-content-center text-center gap-2"></div>
@@ -70,17 +85,11 @@ function MessageReceived() {
               <p className="card-text fs-4">{message.texte}</p>
               <div className="d-flex justify-content-center align-items-center gap-2">
                 <Link to={`/edit-message/${message._id}`} className="btn btn-success">
-                <i className="bi bi-pencil-square"></i>
+                  <i className="bi bi-pencil-square"></i>
                 </Link>
-                <form
-                  action={`/delete-message/sent/${message._id}?_method=DELETE`}
-                  method="POST"
-                >
-                  <input type="hidden" name="email" value={user.email} />
-                  <button type="submit" className="btn btn-danger">
-                    <i className="bi bi-trash"></i>
-                  </button>
-                </form>
+                <button onClick={() => setMessageToDelete(message._id)} className="btn btn-danger">
+                  <i className="bi bi-trash"></i>
+                </button>
               </div>
             </div>
           </div>
@@ -91,8 +100,28 @@ function MessageReceived() {
           <i className="bi bi-arrow-up"></i>
         </a>
       </div>
+
+      {messageToDelete && (
+        <div className="modal show d-block" style={{backgroundColor: 'rgba(0, 0, 0, 0.5)'}}>
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Confirmation</h5>
+                <button onClick={() => setMessageToDelete(null)} type="button" className="btn-close" aria-label="Close"></button>
+              </div>
+              <div className="modal-body">
+                <p>Voulez-vous vraiment supprimer ce message ?</p>
+              </div>
+              <div className="modal-footer">
+                <button onClick={() => setMessageToDelete(null)} type="button" className="btn btn-secondary">Annuler</button>
+                <button onClick={() => handleDelete(messageToDelete)} type="button" className="btn btn-danger">Supprimer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
-export default MessageReceived;
+export default MessageSent;
