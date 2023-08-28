@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import "./products.css";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthContext/AuthContext"; 
 
@@ -73,8 +72,8 @@ export function Products() {
               />
               <p className="fw-bold fs-4">{product.prix}€</p>
               <h3 className="text-capitalize fw-bold">{product.nom}</h3>
-              <p>{product.categorie}</p>
-              <p>{product.description}</p>
+              {/* <p>{product.categorie}</p>
+              <p>{product.description}</p> */}
   
               {user && user.data && user.data.role === 'admin' ? (
                 <div>

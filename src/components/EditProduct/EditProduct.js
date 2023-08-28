@@ -16,7 +16,6 @@ const EditProduct = () => {
     fetch(`http://localhost:5000/product/edit/${id}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setCategorie(data.categorie);
         setNom(data.nom);
         setPrix(data.prix);

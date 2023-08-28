@@ -22,7 +22,7 @@ const Nav = () => {
 
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+      <nav className="navbar navbar-expand-md navbar-light bg-body-tertiary fixed-top">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">UPPERCASE</Link>
           <button
@@ -50,7 +50,7 @@ const Nav = () => {
                 </li>
               )}
               {isLoggedIn ? (
-                <div className="d-sm-flex d-flex-column d-sm-row">
+                <div className="d-md-flex d-flex-column d-md-row">
                   {user.data.role !== "admin" && (
                     <li className="nav-item">
                       <Link className="nav-link" to="/messageform">Nous-contacter</Link>
@@ -60,12 +60,12 @@ const Nav = () => {
                     <Link className="nav-link" to="/messagereceived">Liste-Messages</Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link text-danger" to="#" onClick={handleLogout}>Logout</Link>
+                    <Link className="nav-link text-danger" to="#" onClick={handleLogout}>Déconnexion</Link>
                   </li>
                 </div>
               ) : (
                 <li className="nav-item">
-                  <Link className="nav-link" to="/login">Login</Link>
+                  <Link className="nav-link text-primary" to="/login">Connexion</Link>
                 </li>
               )}
             </ul>

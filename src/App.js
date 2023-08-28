@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Nav/Nav";
+import Footer from './components/Footer/Footer';
 import Home from "./components/Home/Home";
 import Products from "./components/Products/Products";
 import ProductForm from "./components/ProductForm/ProductForm";
@@ -21,24 +22,25 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 function App() {
   return (
-    <div className="App">
+    <div className="my-container">
       <AuthProvider>
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Products" element={<Products />} />
-          <Route path="/product/new" element={<ProductForm />} />
-          <Route path="/product/edit/:id" element={<EditProduct />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/basket" element={<Basket />} />
-          <Route path="/order/:basketId" element={<Order />}  />
-          <Route path="/payementsuccess/:invoiceid" element={<PayementSuccess/>}  />
-          <Route path="/messageform" element={<PrivateRoute><MessageForm /></PrivateRoute>} /> 
-          <Route path="/messagereceived" element={<PrivateRoute><MessageReceived/></PrivateRoute>} />
-          <Route path="/messagesent" element={<PrivateRoute><MessageSent/></PrivateRoute>} /> 
-          <Route path="*" element={<NotFound />} />
-      </Routes>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/Products" element={<Products />} />
+            <Route path="/product/new" element={<ProductForm />} />
+            <Route path="/product/edit/:id" element={<EditProduct />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/basket" element={<Basket />} />
+            <Route path="/order/:basketId" element={<Order />}  />
+            <Route path="/payementsuccess/:invoiceid" element={<PayementSuccess/>}  />
+            <Route path="/messageform" element={<PrivateRoute><MessageForm /></PrivateRoute>} /> 
+            <Route path="/messagereceived" element={<PrivateRoute><MessageReceived/></PrivateRoute>} />
+            <Route path="/messagesent" element={<PrivateRoute><MessageSent/></PrivateRoute>} /> 
+            <Route path="*" element={<NotFound />} />
+        </Routes>
+      <Footer/>
       </AuthProvider>
     </div>
   );

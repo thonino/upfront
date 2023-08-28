@@ -23,7 +23,7 @@ function MessageSent() {
   }, []);
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/delete-message/sent/${id}`, {
+    fetch(`http://localhost:5000/deletemessage/${id}`, {
       method: "DELETE",
     })
       .then(() => {
@@ -66,7 +66,7 @@ function MessageSent() {
       </h1>
       <div className="d-flex justify-content-center gap-2">
         <div className="fst-italic fw-bold">
-          <Link to="/messagereceived" className="btn btn-lihgt text-success fw-bold"> 
+          <Link to="/messagereceived" className="btn btn-light text-success fw-bold"> 
             <i className="bi bi-envelope-fill"> Messages reçus</i> 
           </Link>
         </div>
@@ -75,6 +75,17 @@ function MessageSent() {
             <i className="bi bi-send"> Messages envoyés </i>
           </Link>
         </div>
+        <p>
+          <button 
+            className="btn btn-secondary" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#collapseWidthExample" 
+            aria-expanded="false" aria-controls="collapseWidthExample"
+          >
+            <i className="bi bi-gear"></i>
+          </button>
+        </p>
       </div>
       <div className="d-flex justify-content-center text-center gap-2"></div>
       <div className="mt-3">
@@ -109,9 +120,14 @@ function MessageSent() {
                 <button onClick={() => handleEdit(message._id, message.texte)} className="btn btn-success">
                   <i className="bi bi-pencil-square"> Modifier</i>
                 </button>
-                <button onClick={() => setMessageToDelete(message._id)} className="btn btn-danger">
-                  <i className="bi bi-trash"> Supprimer</i>
-                </button>
+                <div className="collapse " id="collapseWidthExample">
+                  <button
+                    onClick={() => setMessageToDelete(message._id)}
+                    className="btn btn-danger"
+                  >
+                    <i className="bi bi-trash"> Supprimer</i>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -136,7 +152,7 @@ function MessageSent() {
               </div>
               <div className="modal-footer">
                 <button onClick={() => setMessageToEdit(null)} type="button" className="btn btn-secondary">Annuler</button>
-                <button onClick={() => handleSaveEdit(messageToEdit)} type="button" className="btn btn-success">Sauvegarder</button>
+                <button onClick={() => handleSaveEdit(messageToEdit)} type="button" className="btn btn-success">E</button>
               </div>
             </div>
           </div>

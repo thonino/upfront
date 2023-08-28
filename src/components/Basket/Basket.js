@@ -274,7 +274,7 @@ const Basket = () => {
                   </>
                 )}
               </div>
-              <Link className="btn btn-warning" to="/">
+              <Link className="btn btn-warning" to="/products">
                 <i className="bi bi-plus-lg"> Ajouter</i>
               </Link>
               <button className="btn btn-danger mx-2" onClick={clearBasket}>

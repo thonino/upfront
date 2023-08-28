@@ -6,24 +6,24 @@ import MessageForm from "../MessageForm/MessageForm";
 
 function MessageReceived() {
   const [messages, setMessages] = useState([]);
-  const [user, setUser] = useState(null);
+  const { user } = useContext(AuthContext);
   const [messageToDelete, setMessageToDelete] = useState(null);
   const [showReplyModal, setShowReplyModal] = useState(false);
   const [messageToReply, setMessageToReply] = useState(null);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/messagesent", { withCredentials: true })
-      .then((response) => {
-        const data = response.data;
-        setMessages(data.messages.reverse());
-        setUser(data.user);
-      })
-      .catch((error) => {
-        console.error("Erreur lors de la récupération des messages:", error);
-      });
-  }, []);
-
+    if (user) {
+      axios
+        .get("http://localhost:5000/messagereceived", { withCredentials: true })
+        .then((response) => {
+          const data = response.data;
+          setMessages(data.messages.reverse());
+        })
+        .catch((error) => {
+          console.error("Erreur lors de la récupération des messages:", error);
+        });
+    }
+  }, [user]);
 
   const handleDelete = (id) => {
     fetch(`http://localhost:5000/deletemessage/${id}`, {
@@ -43,7 +43,7 @@ function MessageReceived() {
     setMessageToReply(message);
     setShowReplyModal(true);
   };
-
+  
   if (!user) return null;
   const isUserAdmin = user.role === "admin";
 
@@ -52,7 +52,7 @@ function MessageReceived() {
       <h1 className="fw-bold mt-2">
         Reçus par:{" "}
         <span className="fw-light  fst-italic text-success">
-          {isUserAdmin ? "admin@admin" : user.prenom}
+        {isUserAdmin ? "admin@admin" : user.prenom}
         </span>
       </h1>
       <div className="d-flex justify-content-center gap-2">
@@ -69,6 +69,17 @@ function MessageReceived() {
             <i className="bi bi-send"> Messages envoyés </i>
           </Link>
         </div>
+        <p>
+          <button 
+            className="btn btn-secondary" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#collapseWidthExample" 
+            aria-expanded="false" aria-controls="collapseWidthExample"
+          >
+            <i className="bi bi-gear"></i>
+          </button>
+        </p>
       </div>
       <div className="d-flex justify-content-center text-center gap-2"></div>
       <div className="mt-3">
@@ -106,12 +117,14 @@ function MessageReceived() {
                 >
                   <i className="bi bi-chat-dots"> Répondre</i>
                 </button>
-                <button
-                  onClick={() => setMessageToDelete(message._id)}
-                  className="btn btn-danger"
-                >
-                  <i className="bi bi-trash"> Supprimer</i>
-                </button>
+                <div className="collapse " id="collapseWidthExample">
+                  <button
+                    onClick={() => setMessageToDelete(message._id)}
+                    className="btn btn-danger"
+                  >
+                    <i className="bi bi-trash"> Supprimer</i>
+                  </button>
+                </div>
               </div>
             </div>
           </div>

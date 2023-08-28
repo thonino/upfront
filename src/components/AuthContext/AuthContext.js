@@ -10,33 +10,29 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
-    if (user) {
-      setIsLoggedIn(true);
-      setUser(user);
-      setLoading(false);
-    } else {
-      axios.get("http://localhost:5000/login", {
-          withCredentials: true   
-      })
-      .then(response => {
+    if (user) { setIsLoggedIn(true); setUser(user); setLoading(false); } 
+    else {
+      axios.get("http://localhost:5000/login", { withCredentials: true })
+        .then(response => {
           const data = response.data;
           if (data.success) {
-              setIsLoggedIn(true);
-              setUser({ data: data.data }); 
-              localStorage.setItem('user', JSON.stringify(data.data));
+            setIsLoggedIn(true);
+            setUser({ data: data.data });
+            localStorage.setItem('user', JSON.stringify(data.data));
           } else {
-              setIsLoggedIn(false);
-              setUser(null);
+            setIsLoggedIn(false);
+            setUser(null);
           }
           setLoading(false);
-          // console.log("Data from login (session check):", data);  
-      })
-      .catch(error => {
+        })
+        .catch(error => {
           console.error("Erreur lors de la vérification de la session:", error);
           setLoading(false);
-      });
+        });
     }
   }, []);
+  
+  
 
   const login = (email, password) => { 
     return axios.post("http://localhost:5000/login", {
