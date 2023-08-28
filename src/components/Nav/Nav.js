@@ -21,9 +21,9 @@ const Nav = () => {
   };
 
   return (
-    <div>
+    <div >
       <nav className="navbar navbar-expand-md navbar-light bg-body-tertiary fixed-top">
-        <div className="container-fluid">
+        <div className="container-fluid ">
           <Link className="navbar-brand" to="/">UPPERCASE</Link>
           <button
             className="navbar-toggler"

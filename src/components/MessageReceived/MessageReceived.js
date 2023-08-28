@@ -177,7 +177,7 @@ function MessageReceived() {
       )}
 
       {showReplyModal && (
-        <div className="modal show d-block bg-secondary">
+        <div className="modal show d-block"style={{backgroundColor: 'rgba(0, 0, 0, 0.5)'}}>
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
