@@ -102,7 +102,7 @@ export function Products() {
   
       {message && (
         <div className="modal show d-block">
-          <div className="modal-dialog-centered">
+          <div className="">
             <div className="modal-content" style={{ backgroundColor: "rgba(0, 0, 0, 0.80)" }}>
               <div className="fw-lighter  fst-italic  text-warning text-center fs-1">
                 {message}

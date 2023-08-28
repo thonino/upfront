@@ -2,12 +2,13 @@ import React, { useState, useContext } from 'react';
 import { AuthContext } from '../AuthContext/AuthContext';
 import axios from 'axios';
 
-const MessageForm = ({ expediteur, destinataire, closeDialog }) => {
+const MessageForm = ({ expediteur, destinataire }) => {
   const [messageContent, setMessageContent] = useState('');
+  const [messageSent, setMessageSent] = useState(null);
   const { user } = useContext(AuthContext);
-  
+
   const expediteurEmail = expediteur || (user && user.data && user.data.email);
-  const destinataireEmail = destinataire || "admin@admin";
+  const destinataireEmail = destinataire || "admin@admin.com";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,11 +22,18 @@ const MessageForm = ({ expediteur, destinataire, closeDialog }) => {
       .then((response) => {
         if (response.data.success) {
           setMessageContent('');
-          closeDialog();
+          setMessageSent('Le message a été envoyé !');
+          setTimeout(() => {
+            setMessageSent(null);
+          }, 2500);
         }
       })
       .catch((error) => {
         console.error("Il y a eu une erreur lors de l'envoi du message!", error);
+        setMessageSent("Erreur lors de l'envoi du message.");
+        setTimeout(() => {
+          setMessageSent(null);
+        }, 3000);
       });
   };
 
@@ -52,6 +60,18 @@ const MessageForm = ({ expediteur, destinataire, closeDialog }) => {
         </div>
         <button type="submit" className="btn btn-primary">Envoyer</button>
       </form>
+
+      {messageSent && (
+        <div className="modal show d-block">
+          <div className="">
+            <div className="modal-content" style={{ backgroundColor: "rgba(0, 0, 0, 0.80)" }}>
+              <div className="fw-lighter  fst-italic  text-warning text-center fs-1">
+                {messageSent}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
