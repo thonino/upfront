@@ -26,30 +26,42 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="d-flex flex-column">
-      <div className="text-center">
-        <img src="http://localhost:5000/img/hero3.png" className="w-100" alt="Hero 1" />
+<div className="d-flex flex-column align-items-center">
+  <div className="text-center mb-4">
+    <img src="http://localhost:5000/img/hero3.png" className="w-100" alt="Hero 1" />
+  </div>
+  {loading ? (
+    "Chargement..."
+  ) : (
+    <div className="text-center container">
+      <h1>Les Catégories</h1>
+      <div className="d-flex flex-wrap justify-content-center gap-4 mt-3">
+        {Object.keys(categoriesWithImages).map((category) => (
+          <Link
+            to={`/category/${category}`}
+            key={category}
+            className="card text-decoration-none shadow-sm category-card"
+            style={{ width: "300px" }}
+          >
+            <img
+              src={`http://localhost:5000/uploads/${categoriesWithImages[category]}`}
+              className="card-img-top"
+              alt={category}
+            />
+            <div className="card-body text-center">
+              <h3 className="card-title text-capitalize fw-bold">{category}</h3>
+            </div>
+          </Link>
+        ))}
       </div>
-      {loading ? (
-        "Chargement..."
-      ) : (
-        <div><h1 className="text-center"> Nos Catégories</h1>
-        <h1 className="text-center"></h1>
-        <div className="d-flex flex-wrap justify-content-center gap-2 rounded mt-3">
-          {Object.keys(categoriesWithImages).map((category) => (
-            <Link to={`/category/${category}`} key={category} className="card text-decoration-none">
-              <img
-                src={`http://localhost:5000/uploads/${categoriesWithImages[category]}`}
-                width="600px"
-                alt={category}
-              />
-              <h3 className="text-capitalize fw-bold text-center">{category}</h3>
-            </Link>
-          ))}
-        </div>
     </div>
-      )}
-    </div>
+  )}
+</div>
+
+
+
+
+
   );
 
 };

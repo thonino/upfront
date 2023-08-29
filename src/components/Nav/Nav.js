@@ -21,10 +21,12 @@ const Nav = () => {
   };
 
   return (
-    <div >
+    <div className="tutu">
       <nav className="navbar navbar-expand-md navbar-light bg-body-tertiary fixed-top">
-        <div className="container-fluid ">
-          <Link className="navbar-brand" to="/">UPPERCASE</Link>
+        <div className="container-fluid">
+        <Link className="navbar-brand" to="/">
+            Accueil
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -36,7 +38,7 @@ const Nav = () => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
+          <div className="collapse navbar-collapse " id="navbarNav">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
                 <Link className="nav-link" to="/products">Produits</Link>
