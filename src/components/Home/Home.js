@@ -40,7 +40,7 @@ const Home = () => {
           <Link
             to={`/category/${category}`}
             key={category}
-            className="card text-decoration-none shadow-sm category-card"
+            className="card text-decoration-none  category-card"
             style={{ width: "300px" }}
           >
             <img
@@ -49,7 +49,7 @@ const Home = () => {
               alt={category}
             />
             <div className="card-body text-center">
-              <h3 className="card-title text-capitalize fw-bold">{category}</h3>
+              <p className="card-title text-capitalize fw-light fs-4">{category}</p>
             </div>
           </Link>
         ))}

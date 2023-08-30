@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
-
+import { useNavigate, useParams, Link } from "react-router-dom";
 
 const EditProduct = () => {
   const [categorie, setCategorie] = useState("");
@@ -9,6 +7,8 @@ const EditProduct = () => {
   const [prix, setPrix] = useState("");
   const [description, setDescription] = useState("");
   const [photo, setPhoto] = useState(null);
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -41,6 +41,7 @@ const EditProduct = () => {
   const handlePhotoChange = (e) => {
     setPhoto(e.target.files[0]);
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -64,6 +65,21 @@ const EditProduct = () => {
         console.error(error);
       });
   };
+
+  const handleDeleteConfirmation = () => {
+    setShowDeleteConfirmation(true);
+  };
+
+  const handleDeleteCancel = () => {
+    setShowDeleteConfirmation(false);
+  };
+
+  const handleDelete = () => {
+    // Ajoutez ici le code pour supprimer le produit
+    console.log("Produit supprimé !");
+    navigate("/products");
+  };
+
   return (
     <div className="container">
       <h1 className="mb-4">Modifier un produit</h1>
@@ -77,7 +93,7 @@ const EditProduct = () => {
             className="form-control"
             id="categorie"
             name="categorie"
-            defaultValue={categorie}
+            value={categorie}
             onChange={handleCategorieChange}
             required
           />
@@ -91,7 +107,7 @@ const EditProduct = () => {
             className="form-control"
             id="nom"
             name="nom"
-            defaultValue={nom}
+            value={nom}
             onChange={handleNomChange}
             required
           />
@@ -105,7 +121,7 @@ const EditProduct = () => {
             className="form-control"
             id="prix"
             name="prix"
-            defaultValue={prix}
+            value={prix}
             onChange={handlePrixChange}
             required
           />
@@ -119,7 +135,7 @@ const EditProduct = () => {
             id="description"
             name="description"
             rows="3"
-            defaultValue={description}
+            value={description}
             onChange={handleDescriptionChange}
             required
           ></textarea>
@@ -139,13 +155,29 @@ const EditProduct = () => {
         <button type="submit" className="btn btn-success me-2">
           Enregistrer
         </button>
-        <Link
-          to={`/product/delete/${id}`}
-          className="btn btn-danger"
-        >
+        <button onClick={handleDeleteConfirmation} className="btn btn-danger">
           Supprimer
-        </Link>
+        </button>
       </form>
+      {showDeleteConfirmation && (
+        <div className="modal show d-block" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Confirmation</h5>
+                <button onClick={handleDeleteCancel} type="button" className="btn-close"></button>
+              </div>
+              <div className="modal-body">
+                <p>Êtes-vous sûr de vouloir supprimer ce produit ?</p>
+              </div>
+              <div className="modal-footer">
+                <button onClick={handleDeleteCancel} type="button" className="btn btn-secondary">Annuler</button>
+                <button onClick={handleDelete} type="button" className="btn btn-danger">Supprimer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
