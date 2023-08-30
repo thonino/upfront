@@ -21,14 +21,17 @@ const Nav = () => {
   };
 
   return (
-    <div className="tutu">
-      <nav className="navbar navbar-expand-md navbar-light bg-body-tertiary fixed-top">
-        <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
-            Accueil
+    <div>
+      <nav className="d-flex flex-column justify-content-center text-center navbar navbar-expand-md navbar-light bg-body-tertiary fixed-top">
+        <div className="d-flex">
+          <Link className="" to="/">
+            <img src={`http://localhost:5000/img/logo1.png`} className="w-75" style={{ marginLeft: "-50px"}}/>
           </Link>
+          <Link className="nav-link" to="/basket"><i class="bi  bi-cart-fill fs-2 panier-hover"> Panier</i></Link>
+        </div>
+        <div className="d-flex flex-column">
           <button
-            className="navbar-toggler"
+            className="navbar-toggler mx-2"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNav"
@@ -38,36 +41,34 @@ const Nav = () => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse " id="navbarNav">
-            <ul className="navbar-nav ml-auto">
+          <div className="collapse navbar-collapse mx-2 " id="navbarNav">
+            <ul className="navbar-nav">
               <li className="nav-item">
-                <Link className="nav-link" to="/products">Produits</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/basket">Panier</Link>
+                <Link className="nav-link txt-hover" to="/products">Nos Produits</Link>
               </li>
               {user && user.data && user.data.role === 'admin' && (
                 <li className="nav-item">
-                  <Link className="nav-link" to="/product/new">Ajouter Produit</Link>
+                  <Link className="nav-link txt-hover" to="/product/new">Ajouter Produit</Link>
                 </li>
               )}
               {isLoggedIn ? (
                 <div className="d-md-flex d-flex-column d-md-row">
                   {user.data.role !== "admin" && (
                     <li className="nav-item">
-                      <Link className="nav-link" to="/messageform">Nous-contacter</Link>
+                      <Link className="nav-link txt-hover" to="/messageform">Nous contacter</Link>
                     </li>
                   )}
                   <li className="nav-item">
-                    <Link className="nav-link" to="/messagereceived">Liste-Messages</Link>
+                    <Link className="nav-link txt-hover" to="/messagereceived">Liste Messages</Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link text-danger" to="#" onClick={handleLogout}>Déconnexion</Link>
+                    <Link className="nav-link text-danger txt-hover" to="#" onClick={handleLogout}>Déconnexion</Link>
                   </li>
                 </div>
               ) : (
-                <li className="nav-item">
-                  <Link className="nav-link text-primary" to="/login">Connexion</Link>
+                <li className="nav-item d-flex">
+                  <Link className="nav-link text-success txt-hover" to="/register">Inscription</Link>
+                  <Link className="nav-link text-success txt-hover" to="/login">Connexion</Link>
                 </li>
               )}
             </ul>

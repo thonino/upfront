@@ -28,7 +28,7 @@ const Home = () => {
   return (
 <div className="d-flex flex-column align-items-center">
   <div className="text-center mb-4">
-    <img src="http://localhost:5000/img/hero3.png" className="w-100" alt="Hero 1" />
+    <img src="http://localhost:5000/img/hero1.png" className="w-100" alt="Hero 1" />
   </div>
   {loading ? (
     "Chargement..."

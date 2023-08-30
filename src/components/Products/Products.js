@@ -85,9 +85,9 @@ function Products() {
   return (
     <div className="container">
       <h1 className="text-center mt-2">Nos Produits</h1>
-      <div className="mb-4 col-4 mx-auto">
+      <div className="mb-4 col-6  mx-auto">
         <select
-          className="form-select"
+          className="form-select text-center"
           aria-label="Default select example"
           onChange={handleChange}
           value={category || "Choisir une catégorie"}
@@ -121,7 +121,7 @@ function Products() {
       {loading ? (
         <p className="text-center">Chargement...</p>
       ) : (
-        <div className="row g-3">
+        <div className="row g-4">
           {products.map((product) => (
             <div className="col d-flex justify-content-center " key={product._id}>
               <div className="card h-100 category-card" style={{ width: "300px" }}>
