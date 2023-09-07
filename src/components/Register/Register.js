@@ -21,17 +21,30 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("email", email);
-    formData.append("prenom", prenom);
-    formData.append("password", password);
-
-    fetch("http://localhost:5000/register", {
-      method: "POST", body: formData,
+    const data = {
+      email: email,
+      prenom: prenom,
+      password: password,
+      role: "client"
+    };
+  
+    fetch("http://localhost:5000/register/new", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
     })
-      .then(() => {navigate("/login")})
-      .catch(() => {throw new Error("Erreur de l'envoie"); });
+      .then(response => response.json())
+      .then(data => {
+        // console.log(data);
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.error("Erreur lors de l'envoi :", error);
+      });
   };
+  
 
   return (
     <div className="container">
@@ -67,9 +80,9 @@ const Register = () => {
             Password
           </label>
           <input
-            type="string"
+            type="password"
             className="form-control"
-            name="Password"
+            name="password"
             value={password}
             onChange={handlePasswordChange}
           />

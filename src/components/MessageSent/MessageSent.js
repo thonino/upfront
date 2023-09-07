@@ -117,10 +117,10 @@ function MessageSent() {
               </div>
               <p className="card-text fs-4">{message.texte}</p>
               <div className="d-flex justify-content-center align-items-center gap-2">
-                <button onClick={() => handleEdit(message._id, message.texte)} className="btn btn-success">
+                <div className="collapse " id="collapseWidthExample">
+                <button onClick={() => handleEdit(message._id, message.texte)} className="btn btn-success mx-2">
                   <i className="bi bi-pencil-square"> Modifier</i>
                 </button>
-                <div className="collapse " id="collapseWidthExample">
                   <button
                     onClick={() => setMessageToDelete(message._id)}
                     className="btn btn-danger"

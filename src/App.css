@@ -10,17 +10,19 @@
 }
 
 .panier-hover:hover {
-  color: #f8b400;
+  transition: 0.4s;
+  color: #ff8e3a;
   transform: translateX(3px); 
 }
 
 .txt-hover {
-  transition: 1s; 
+  transition: 0.4s; 
 }
 
 .txt-hover:hover {
+  transition: 0.4s;
   text-decoration: underline;
   text-decoration-thickness: 5px;
   text-underline-offset: 5px;
-  text-decoration-color: #6c757d;
+  text-decoration-color: #ff8e3a;
 }

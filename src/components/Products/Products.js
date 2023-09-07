@@ -125,35 +125,33 @@ function Products() {
           {products.map((product) => (
             <div className="col d-flex justify-content-center " key={product._id}>
               <div className="card h-100 category-card" style={{ width: "300px" }}>
+              <Link onClick={() => openProductDetails(product)}>
+                    
                 <img
                   src={`http://localhost:5000/uploads/${product.photo}`}
                   className="card-img-top"
                   alt={product.photo}
                 />
+                </Link>
                 <div className="card-body">
-                  <p className="text-center text-dark fw-bold fs-4 m-0">{product.prix}€</p>
+                  <p className="text-center text-dark fw-bold fs-4 m-0 ">{product.prix}€</p>
                   <h3 className="card-title text-capitalize fw-light text-center">{product.nom}</h3>
                 </div>
                 <div className="card-footer">
-                  <div className="d-flex justify-content-between align-items-center mt-2">
+                  <div className="d-flex row justify-content-center px-1">
                     <button
-                      className="btn btn-warning"
+                      className="btn btn-warning text-center"
                       onClick={() => addToCart(product._id)}
                     >
                       Ajouter au Panier
                     </button>
-                    <button
-                      className="btn btn-info"
-                      onClick={() => openProductDetails(product)}
-                    >
-                      Description
-                    </button>
+                    
                   </div>
                   {user && user.data && user.data.role === 'admin' && (
-                    <div className="mt-2 text-center">
+                    <div className="mt-2 d-flex justify-content-around">
                       <Link
                         to={`/product/edit/${product._id}`}
-                        className="btn btn-warning me-2"
+                        className="btn btn-warning"
                       >
                         Modifier
                       </Link>

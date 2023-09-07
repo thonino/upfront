@@ -27,7 +27,7 @@ const Nav = () => {
           <Link className="" to="/">
             <img src={`http://localhost:5000/img/logo1.png`} className="w-75" style={{ marginLeft: "-50px"}}/>
           </Link>
-          <Link className="nav-link" to="/basket"><i class="bi  bi-cart-fill fs-2 panier-hover"> Panier</i></Link>
+          <Link className="nav-link" to="/basket"><i className="bi  bi-cart-fill fs-2 panier-hover"> Panier</i></Link>
         </div>
         <div className="d-flex flex-column">
           <button

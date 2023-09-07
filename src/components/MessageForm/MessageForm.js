@@ -8,7 +8,7 @@ const MessageForm = ({ expediteur, destinataire }) => {
   const { user } = useContext(AuthContext);
 
   const expediteurEmail = expediteur || (user && user.data && user.data.email);
-  const destinataireEmail = destinataire || "admin@admin.com";
+  const destinataireEmail = destinataire || "admin@admin";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -62,16 +62,24 @@ const MessageForm = ({ expediteur, destinataire }) => {
       </form>
 
       {messageSent && (
-        <div className="modal show d-block">
-          <div className="">
-            <div className="modal-content" style={{ backgroundColor: "rgba(0, 0, 0, 0.80)" }}>
-              <div className="fw-lighter  fst-italic  text-warning text-center fs-1">
-                {messageSent}
+      <div className="modal show d-block" style={{backgroundColor: 'rgba(0, 0, 0, 0.5)'}}>
+          <div className="modal-dialog">
+              <div className="modal-content">
+                  <div className="modal-header">
+                      <h5 className="modal-title">Confirmation</h5>
+                      <button onClick={() => setMessageSent(null)} type="button" className="btn-close"></button>
+                  </div>
+                  <div className="modal-body">
+                      <p>{messageSent}</p>
+                  </div>
+                  <div className="modal-footer">
+                      <button onClick={() => setMessageSent(null)} type="button" className="btn btn-secondary">OK</button>
+                  </div>
               </div>
-            </div>
           </div>
-        </div>
-      )}
+      </div>
+  )}
+
     </div>
   );
 };

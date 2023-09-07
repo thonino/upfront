@@ -34,7 +34,7 @@ const Home = () => {
     "Chargement..."
   ) : (
     <div className="text-center container">
-      <h1>Les Catégories</h1>
+      <h1 className="text-dark">Plongez dans nos catégories variées</h1>
       <div className="d-flex flex-wrap justify-content-center gap-4 mt-3">
         {Object.keys(categoriesWithImages).map((category) => (
           <Link
