@@ -38,7 +38,7 @@ const MessageForm = ({ expediteur, destinataire }) => {
   };
 
   return (
-    <div className="p-3">
+    <div className="p-3 container">
       <h1>Nous-contacter ! </h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">

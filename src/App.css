@@ -1,9 +1,4 @@
 
-.my-container {
-  padding-top: 100px; 
-  padding-bottom: 50px; 
-}
-
 .panier-hover {
   transition: color 0.1s, transform 0.1s;
   color: #6c757d;
@@ -26,3 +21,4 @@
   text-underline-offset: 5px;
   text-decoration-color: #ff8e3a;
 }
+

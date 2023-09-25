@@ -268,9 +268,14 @@ const Basket = () => {
                     <input
                       type="email"
                       name="email"
+                      placeholder="Renseignez votre email où connectez vous"
                       className="form-control"
                       required
-                    />
+                      onInvalid={(e) => {
+                          e.target.setCustomValidity("Renseignez votre email où connectez vous !");
+                      }}
+                      onChange={(e) => e.target.setCustomValidity('')} 
+                  />
                   </>
                 )}
               </div>

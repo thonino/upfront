@@ -22,12 +22,18 @@ const Nav = () => {
 
   return (
     <div>
-      <nav className="d-flex flex-column justify-content-center text-center navbar navbar-expand-md navbar-light bg-body-tertiary fixed-top">
+      <nav className="d-flex flex-column justify-content-center text-center navbar navbar-expand-sm navbar-light bg-body-tertiaryé">
+        <div className="d-flex gap-2">
+        <Link className="" to="/"><i className="bi bi-facebook fs-2"></i></Link>
+        <Link className="" to="/"><i className="bi bi-instagram fs-2" style={{color: '#FF007F'}}></i></Link>
+        <Link className="" to="/"><i className="bi bi-pinterest text-danger fs-2"></i></Link>
+        <Link className="" to="/"><i className="bi bi-youtube text-danger fs-2"></i></Link>
+        </div>
         <div className="d-flex">
           <Link className="" to="/">
             <img src={`http://localhost:5000/img/logo1.png`} className="w-75" style={{ marginLeft: "-50px"}}/>
           </Link>
-          <Link className="nav-link" to="/basket"><i className="bi  bi-cart-fill fs-2 panier-hover"> Panier</i></Link>
+          <Link className="nav-link" to="/basket"><i className="bi  bi-cart-fill fs-2 panier-hover"> Votre panier</i></Link>
         </div>
         <div className="d-flex flex-column">
           <button
