@@ -22,3 +22,27 @@
   text-decoration-color: #ff8e3a;
 }
 
+.square{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background-color:  #ff8e3a;
+  color: #303030;
+  border-radius:50%;
+  width: 270px;
+  height: 270px;
+  transition: 0.7s;
+
+}
+.square:hover{
+  background-color:  #b25f20;
+  color: white;
+  transition: 0.7s;
+  width: 300px;
+  height: 300px;
+}
+.text-orange{
+  color:#ff8e3a;
+}
+

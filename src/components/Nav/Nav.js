@@ -22,7 +22,7 @@ const Nav = () => {
 
   return (
     <div>
-      <nav className="d-flex flex-column justify-content-center text-center navbar navbar-expand-sm navbar-light bg-body-tertiaryé">
+      <nav className="d-flex flex-column justify-content-center text-center navbar navbar-expand-sm navbar-light ">
         <div className="d-flex gap-2">
         <Link className="" to="/"><i className="bi bi-facebook fs-2"></i></Link>
         <Link className="" to="/"><i className="bi bi-instagram fs-2" style={{color: '#FF007F'}}></i></Link>
@@ -52,20 +52,26 @@ const Nav = () => {
               <li className="nav-item">
                 <Link className="nav-link txt-hover" to="/products">Nos Produits</Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link txt-hover" to="/about">Notre Histoire</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link txt-hover" to="/">Nos Valeurs</Link>
+              </li>
               {user && user.data && user.data.role === 'admin' && (
                 <li className="nav-item">
                   <Link className="nav-link txt-hover" to="/product/new">Ajouter Produit</Link>
                 </li>
               )}
               {isLoggedIn ? (
-                <div className="d-md-flex d-flex-column d-md-row">
+                <div className="d-sm-flex d-flex-column">
                   {user.data.role !== "admin" && (
                     <li className="nav-item">
-                      <Link className="nav-link txt-hover" to="/messageform">Nous contacter</Link>
+                      <Link className="nav-link txt-hover" to="/messageform">Nous-contacter</Link>
                     </li>
                   )}
                   <li className="nav-item">
-                    <Link className="nav-link txt-hover" to="/messagereceived">Liste Messages</Link>
+                    <Link className="nav-link txt-hover" to="/messagereceived">Liste-Messages</Link>
                   </li>
                   <li className="nav-item">
                     <Link className="nav-link text-danger txt-hover" to="#" onClick={handleLogout}>Déconnexion</Link>

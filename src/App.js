@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Nav/Nav";
 import Footer from './components/Footer/Footer';
 import Home from "./components/Home/Home";
+import About from "./components/About/About";
 import Products from "./components/Products/Products";
 import ProductForm from "./components/ProductForm/ProductForm";
 import EditProduct from "./components/EditProduct/EditProduct";
@@ -27,7 +28,8 @@ function App() {
         <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/Products" element={<Products />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/products" element={<Products />} />
             <Route path="/product/new" element={<ProductForm />} />
             <Route path="/product/edit/:id" element={<EditProduct />} />
             <Route path="/category/:category" element={<Products />} />
