@@ -27,10 +27,10 @@ function About() {
         Le "Click-and-Collect" vous permet de passer commande en ligne et de récupérer vos achats 
         à la boulangerie au moment qui vous convient le mieux.
       </p>
-      <h2>Pourquoi <Link className="text-success text-decoration-none" to="/products">Uppercase.com</Link> ?</h2>
+      <h2>Pourquoi <Link className="text-success text-decoration-none" to="/">Uppercase.com</Link> ?</h2>
       <p>
         Pour mettre en place ce service, nous avons choisi de collaborer avec
-        <Link className="fw-bold text-success text-decoration-none" to="/products"> Uppercase.com</Link>, 
+        <Link className="fw-bold text-success text-decoration-none" to="/"> Uppercase.com</Link>, 
         une entreprise reconnue pour son expertise dans l'installation de services "click-and-collect".
         Uppercase nous a accompagnés pas à pas dans ce projet, en fournissant une solution clé en main, 
         simple d'utilisation et parfaitement adaptée à nos besoins.

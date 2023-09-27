@@ -1,16 +1,10 @@
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html{
+background-color: #f8f9fa;
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.sb-fix{
+background-color: #f8f9fa;
+margin-bottom: 80px ;
 }
-
 .category-card {
   transition: transform 0.3s, box-shadow 0.3s;
   border: none;

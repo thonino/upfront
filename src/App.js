@@ -23,7 +23,7 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 function App() {
   return (
-    <div className="my-container">
+    <div className="my-container sb-fix">
       <AuthProvider>
         <Navbar />
           <Routes>

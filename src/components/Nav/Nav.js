@@ -33,7 +33,7 @@ const Nav = () => {
           <Link className="" to="/">
             <img src={`http://localhost:5000/img/logo1.png`} className="w-75" style={{ marginLeft: "-50px"}}/>
           </Link>
-          <Link className="nav-link" to="/basket"><i className="bi  bi-cart-fill fs-2 panier-hover"> Votre panier</i></Link>
+          <Link className="nav-link" to="/basket"><i className="bi  bi-cart-fill fs-2 panier-hover"> Panier</i></Link>
         </div>
         <div className="d-flex flex-column">
           <button
@@ -54,9 +54,6 @@ const Nav = () => {
               </li>
               <li className="nav-item">
                 <Link className="nav-link txt-hover" to="/about">Notre Histoire</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link txt-hover" to="/">Nos Valeurs</Link>
               </li>
               {user && user.data && user.data.role === 'admin' && (
                 <li className="nav-item">
