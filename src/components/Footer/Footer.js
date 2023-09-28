@@ -10,7 +10,7 @@ const Footer = () => {
         <Link className=" fst-italic text-orange me-1" to="/legalMentions">
           Mentions légales
         </Link>
-        <Link className=" fst-italic text-orange" to="/Confidentiality">
+        <Link className=" fst-italic text-warning" to="/Confidentiality">
           Politique de confidentialité
         </Link>
         <Link className=" me-1 fst-italic text-orange" to="/cgv">
