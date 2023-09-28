@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Nav/Nav";
+import CookieConsent from "./components/CookieConsent/CookieConsent";
 import Footer from './components/Footer/Footer';
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
@@ -19,6 +20,9 @@ import Basket from "./components/Basket/Basket";
 import Order from "./components/Order/Order";
 import PayementSuccess from "./components/PayementSuccess/PayementSuccess";
 import NotFound from "./components/NotFound/NotFound";
+import LegalMentions from "./components/LegalMentions/LegalMentions";
+import Confidentiality from "./components/Confidentiality/Confidentiality";
+import CGV from "./components/CGV/CGV";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 function App() {
@@ -26,6 +30,7 @@ function App() {
     <div className="my-container sb-fix">
       <AuthProvider>
         <Navbar />
+        <CookieConsent />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -41,6 +46,9 @@ function App() {
             <Route path="/messageform" element={<PrivateRoute><MessageForm /></PrivateRoute>} /> 
             <Route path="/messagereceived" element={<PrivateRoute><MessageReceived/></PrivateRoute>} />
             <Route path="/messagesent" element={<PrivateRoute><MessageSent/></PrivateRoute>} /> 
+            <Route path="/legalMentions" element={<LegalMentions/>} /> 
+            <Route path="/confidentiality" element={<Confidentiality/>} /> 
+            <Route path="/cgv" element={<CGV/>} /> 
             <Route path="*" element={<NotFound />} />
         </Routes>
       <Footer/>

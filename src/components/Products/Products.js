@@ -90,7 +90,7 @@ function Products() {
           className="form-select text-center"
           aria-label="Default select example"
           onChange={handleChange}
-          value={category || "Choisir une catégorie"}
+          value={category}
         >
           <option value="Choisir une catégorie">Choisir une catégorie</option>
           {categories.map((cat) => (

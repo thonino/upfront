@@ -18,7 +18,6 @@ const Home = () => {
           {' '}(version Mobile)
         </span>
       </h1>
-
         <h2 className="text-success">
           Achetez en ligne et récupérez en magasin !
         </h2>
