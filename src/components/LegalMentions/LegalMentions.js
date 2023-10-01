@@ -7,7 +7,7 @@ const LegalMentions = () => {
     <div className="container">
       <div className="text-center">
         <h1>Mentions Légales</h1>
-        <p className=""><strong>En vigueur au 01/10/2023</strong></p>
+        <p className="text-info"><strong>En vigueur au 01/10/2023</strong></p>
 
         <p>Conformément aux dispositions des Articles 6-III et 19 de la Loi n°2004-575 du 21 juin 2004 
         pour la Confiance dans l’économie numérique, dite L.C.E.N., il est porté à la connaissance 

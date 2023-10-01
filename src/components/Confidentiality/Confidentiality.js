@@ -5,7 +5,7 @@ const Confidentiality = () => {
     <div className="container">
       <div className="text-center">
         <h1>Politique de confidentialité</h1>
-        <p className=""><strong>En vigueur au 01/10/2023</strong></p>
+        <p className="text-info"><strong>En vigueur au 01/10/2023</strong></p>
       </div>
 
       <h2>ARTICLE 1 : COLLECTE DE VOS INFORMATIONS</h2>

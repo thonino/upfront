@@ -5,7 +5,7 @@ const CGV = () => {
     <div className="container">
       <div className="text-center">
         <h1>Conditions Générales de Vente</h1>
-        <p className=""><strong>En vigueur au 01/10/2023</strong></p>
+        <p className="text-info"><strong>En vigueur au 01/10/2023</strong></p>
       </div>
 
       <h2>ARTICLE 1 : CHAMP D'APPLICATION</h2>
