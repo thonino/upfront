@@ -18,7 +18,7 @@ function Products() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/products")
+      .get("https://uppercase-back-1eec3e8a2cf1.herokuapp.com/products")
       .then((response) => {
         const filteredProducts = category
           ? response.data.filter((product) => product.categorie === category)
@@ -46,7 +46,7 @@ function Products() {
 
   const addToCart = (productId) => {
     axios
-      .post(`http://localhost:5000/add-to-cart/${productId}`, {}, { withCredentials: true })
+      .post(`https://uppercase-back-1eec3e8a2cf1.herokuapp.com/add-to-cart/${productId}`, {}, { withCredentials: true })
       .then((response) => {
         setMessage("Bravo, le produit a été ajouté au panier !");
         setTimeout(() => {
@@ -63,7 +63,7 @@ function Products() {
 
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:5000/product/delete/${id}`)
+      .delete(`https://uppercase-back-1eec3e8a2cf1.herokuapp.com/product/delete/${id}`)
       .then(() => {
         setProducts(products.filter((product) => product._id !== id));
         setProductToDelete(null);
@@ -123,12 +123,12 @@ function Products() {
       ) : (
         <div className="row g-4">
           {products.map((product) => (
-            <div className="col d-flex justify-content-center " key={product._id}>
+            <div className="col d-flex justify-content-center" key={product._id}>
               <div className="card h-100 category-card" style={{ width: "300px" }}>
               <Link onClick={() => openProductDetails(product)}>
                     
                 <img
-                  src={`http://localhost:5000/uploads/${product.photo}`}
+                  src={`https://uppercase-back-1eec3e8a2cf1.herokuapp.com/uploads/${product.photo}`}
                   className="card-img-top"
                   alt={product.photo}
                 />
@@ -198,7 +198,7 @@ function Products() {
               </div>
               <div className="modal-body">
                 <img
-                  src={`http://localhost:5000/uploads/${selectedProduct.photo}`}
+                  src={`https://uppercase-back-1eec3e8a2cf1.herokuapp.com/uploads/${selectedProduct.photo}`}
                   className="img-fluid mb-3"
                   alt={selectedProduct.photo}
                 />

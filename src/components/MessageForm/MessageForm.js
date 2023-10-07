@@ -18,7 +18,7 @@ const MessageForm = ({ expediteur, destinataire }) => {
       texte: messageContent,
     };
 
-    axios.post("http://localhost:5000/message", formData, { withCredentials: true })
+    axios.post("https://uppercase-back-1eec3e8a2cf1.herokuapp.com/message", formData, { withCredentials: true })
       .then((response) => {
         if (response.data.success) {
           setMessageContent('');
