@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../AuthContext/AuthContext.js";
-import MessageForm from "../MessageForm/MessageForm.js";
+import { AuthContext } from "../AuthContext/AuthContext";
+import MessageForm from "../MessageForm/MessageForm";
 
 function MessageReceived() {
   const [messages, setMessages] = useState([]);
@@ -14,7 +14,7 @@ function MessageReceived() {
   useEffect(() => {
     if (user) {
       axios
-        .get("https://uppercase-back-1eec3e8a2cf1.herokuapp.com/messagereceived.js", { withCredentials: true })
+        .get("https://uppercase-back-1eec3e8a2cf1.herokuapp.com/messagereceived", { withCredentials: true })
         .then((response) => {
           const data = response.data;
           setMessages(data.messages.reverse());
