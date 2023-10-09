@@ -27,7 +27,7 @@ const Home = () => {
       <div className="text-center container">
         <div className="mt-4">
           <img
-            src="https://uppercase-back-1eec3e8a2cf1.herokuapp.com/img/cac.png"
+            src="http://localhost:5000/img/cac.png"
             width="300px"
             alt="buy"
           />

@@ -13,7 +13,7 @@ const EditProduct = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(`https://uppercase-back-1eec3e8a2cf1.herokuapp.com/product/edit/${id}`)
+    fetch(`http://localhost:5000/product/edit/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setCategorie(data.categorie);
@@ -52,7 +52,7 @@ const EditProduct = () => {
     formData.append("description", description);
     formData.append("photo", photo);
 
-    fetch(`https://uppercase-back-1eec3e8a2cf1.herokuapp.com/product/edit/${id}`, {
+    fetch(`http://localhost:5000/product/edit/${id}`, {
       method: "POST",
       body: formData,
     })

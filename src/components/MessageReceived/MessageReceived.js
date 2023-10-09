@@ -14,7 +14,7 @@ function MessageReceived() {
   useEffect(() => {
     if (user) {
       axios
-        .get("https://uppercase-back-1eec3e8a2cf1.herokuapp.com/messagereceived", { withCredentials: true })
+        .get("http://localhost:5000/messagereceived", { withCredentials: true })
         .then((response) => {
           const data = response.data;
           setMessages(data.messages.reverse());
@@ -26,7 +26,7 @@ function MessageReceived() {
   }, [user]);
 
   const handleDelete = (id) => {
-    fetch(`https://uppercase-back-1eec3e8a2cf1.herokuapp.com/deletemessage/${id}`, {
+    fetch(`http://localhost:5000/deletemessage/${id}`, {
       method: "DELETE",
     })
       .then(() => {
