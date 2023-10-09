@@ -8,7 +8,7 @@ const Category = () => {
 
   useEffect(() => {
     axios
-      .get("https://uppercase-back-1eec3e8a2cf1.herokuapp.com/products")
+      .get("https://uppercase-back-1eec3e8a2cf1.herokuapp.com/products", { withCredentials: true })
       .then((response) => {
         const categoriesWithImages = {};
         response.data.forEach((product) => {
