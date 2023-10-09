@@ -47,13 +47,13 @@ const Home = () => {
           <Link to="/about" className="square">
             <h2>Notre histoire</h2>
           </Link>
-          <Link to="/" className="square">
+          <Link to="/#" className="square">
             <h2>Nos valeurs</h2>
           </Link>
-          <Link to="/" className="square">
+          <Link to="/#" className="square">
             <h2>Nos partenaires</h2>
           </Link>
-          <Link to="/" className="square">
+          <Link to="/#" className="square">
             <h2>Démarche Qualité</h2>
           </Link>
         </div>
