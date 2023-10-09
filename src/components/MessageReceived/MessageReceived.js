@@ -14,7 +14,7 @@ function MessageReceived() {
   useEffect(() => {
     if (user) {
       axios
-        .get("https://uppercase-back-1eec3e8a2cf1.herokuapp.com/messagereceived", { withCredentials: true })
+        .get("https://uppercase-back-1eec3e8a2cf1.herokuapp.com/messagereceived.js", { withCredentials: true })
         .then((response) => {
           const data = response.data;
           setMessages(data.messages.reverse());
