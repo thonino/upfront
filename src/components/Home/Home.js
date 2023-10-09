@@ -42,7 +42,7 @@ const Home = () => {
       </div>
 
       <div className="about-page text-center mt-4 px-2">
-        <h1 className="text-orange mb-4">Notre Enseigne :</h1>
+        <h1 className="text-orange mb-4">A PROPOS : </h1>
         <div className="d-flex flex-wrap justify-content-around gap-3">
           <Link to="/about" className="square">
             <h2>Notre histoire</h2>
