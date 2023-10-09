@@ -5,28 +5,41 @@ import { Link } from 'react-router-dom';
 const Category = () => {
   const [categoriesWithImages, setCategoriesWithImages] = useState({});
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios
-      .get("https://uppercase-back-1eec3e8a2cf1.herokuapp.com/products", { withCredentials: true })
-      .then((response) => {
-        const categoriesWithImages = {};
-        response.data.forEach((product) => {
-          if (!categoriesWithImages[product.categorie]) {
-            categoriesWithImages[product.categorie] = product.photo;
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://uppercase-back-1eec3e8a2cf1.herokuapp.com/products",
+          { withCredentials: true }
+        );
+
+        const newCategoriesWithImages = response.data.reduce((acc, product) => {
+          if (!acc[product.categorie]) {
+            acc[product.categorie] = product.photo;
           }
-        });
-        setCategoriesWithImages(categoriesWithImages);
-        setLoading(false);
-      })
-      .catch((error) => {
+          return acc;
+        }, {});
+
+        setCategoriesWithImages(newCategoriesWithImages);
+      } catch (error) {
         console.error(error);
+        setError(error);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchData();
   }, []);
 
   if (loading) {
     return "Chargement...";
+  }
+
+  if (error) {
+    return "Une erreur est survenue.";
   }
 
   return (
@@ -35,7 +48,7 @@ const Category = () => {
         <Link
           to={`/category/${category}`}
           key={category}
-          className="card text-decoration-none category-card "
+          className="card text-decoration-none category-card"
           style={{ width: "300px" }}
         >
           <img

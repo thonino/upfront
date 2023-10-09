@@ -18,7 +18,7 @@ function Products() {
 
   useEffect(() => {
     axios
-      .get("https://uppercase-back-1eec3e8a2cf1.herokuapp.com/products")
+      .get("https://uppercase-back-1eec3e8a2cf1.herokuapp.com/products", { withCredentials: true })
       .then((response) => {
         const filteredProducts = category
           ? response.data.filter((product) => product.categorie === category)
@@ -63,7 +63,7 @@ function Products() {
 
   const handleDelete = (id) => {
     axios
-      .delete(`https://uppercase-back-1eec3e8a2cf1.herokuapp.com/product/delete/${id}`)
+      .delete(`https://uppercase-back-1eec3e8a2cf1.herokuapp.com/product/delete/${id}`, { withCredentials: true })
       .then(() => {
         setProducts(products.filter((product) => product._id !== id));
         setProductToDelete(null);
