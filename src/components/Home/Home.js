@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Accordion from "../Accordion/Accordion";
-import Carrousel from "../Carrousel/Carrousel";
-import Category from "../Category/Category";
+import Accordion from "../Accordion/Accordion.js";
+import Carrousel from "../Carrousel/Carrousel.js";
+import Category from "../Category/Category.js";
 
 const Home = () => {
   return (

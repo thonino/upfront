@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { AuthContext } from "../AuthContext/AuthContext";
+import { AuthContext } from "../AuthContext/AuthContext.js";
 
 function Products() {
   const [products, setProducts] = useState([]);

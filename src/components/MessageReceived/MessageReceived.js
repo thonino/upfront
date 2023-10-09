@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../AuthContext/AuthContext";
-import MessageForm from "../MessageForm/MessageForm";
+import { AuthContext } from "../AuthContext/AuthContext.js";
+import MessageForm from "../MessageForm/MessageForm.js";
 
 function MessageReceived() {
   const [messages, setMessages] = useState([]);

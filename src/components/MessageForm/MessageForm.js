@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { AuthContext } from '../AuthContext/AuthContext';
+import { AuthContext } from '../AuthContext/AuthContext.js';
 import axios from 'axios';
 
 const MessageForm = ({ expediteur, destinataire }) => {
