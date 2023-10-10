@@ -39,7 +39,7 @@ const ProductForm = () => {
     formData.append("description", description);
     formData.append("photo", photo);
 
-    fetch("https://uppercase-back-1eec3e8a2cf1.herokuapp.com/product/new", {
+    fetch("https://uppercase-app-back-efd9a0ca1970.herokuapp.com/product/new", {
       method: "POST",
       body: formData,
     })

@@ -21,7 +21,7 @@ const Basket = () => {
   // Récupérer les éléments du panier depuis l'API
   const fetchBasket = async () => {
     try {
-      const response = await axios.get("https://uppercase-back-1eec3e8a2cf1.herokuapp.com/basket", {
+      const response = await axios.get("https://uppercase-app-back-efd9a0ca1970.herokuapp.com/basket", {
         withCredentials: true,
       });
       setCartItems(response.data.cartItems);
@@ -72,7 +72,7 @@ const Basket = () => {
   const updateQuantities = async (quantities) => {
     try {
       const response = await axios.post(
-        "https://uppercase-back-1eec3e8a2cf1.herokuapp.com/update-quantities",
+        "https://uppercase-app-back-efd9a0ca1970.herokuapp.com/update-quantities",
         quantities,
         {
           withCredentials: true,
@@ -96,7 +96,7 @@ const Basket = () => {
     e.preventDefault();
     try {
       const response = await axios.get(
-        `https://uppercase-back-1eec3e8a2cf1.herokuapp.com/removeProduct/${productId}`,
+        `https://uppercase-app-back-efd9a0ca1970.herokuapp.com/removeProduct/${productId}`,
         {
           withCredentials: true,
         }
@@ -114,7 +114,7 @@ const Basket = () => {
   const clearBasket = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get("https://uppercase-back-1eec3e8a2cf1.herokuapp.com/clearBasket", {
+      const response = await axios.get("https://uppercase-app-back-efd9a0ca1970.herokuapp.com/clearBasket", {
         withCredentials: true,
       });
       if (response.data.success) {
@@ -136,7 +136,7 @@ const Basket = () => {
 
     try {
       const response = await axios.post(
-        "https://uppercase-back-1eec3e8a2cf1.herokuapp.com/validateBasket",
+        "https://uppercase-app-back-efd9a0ca1970.herokuapp.com/validateBasket",
         data,
         {
           withCredentials: true,

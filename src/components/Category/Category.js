@@ -11,7 +11,7 @@ const Category = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://uppercase-back-1eec3e8a2cf1.herokuapp.com/products",
+          "https://uppercase-app-back-efd9a0ca1970.herokuapp.com/products",
           { withCredentials: true }
         );
 
@@ -52,7 +52,7 @@ const Category = () => {
           style={{ width: "300px" }}
         >
           <img
-            src={`https://uppercase-back-1eec3e8a2cf1.herokuapp.com/uploads/${categoriesWithImages[category]}`}
+            src={`https://uppercase-app-back-efd9a0ca1970.herokuapp.com/uploads/${categoriesWithImages[category]}`}
             className="card-img-top"
             alt={category}
           />

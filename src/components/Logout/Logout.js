@@ -5,7 +5,6 @@ const Logout = () => {
   const { logout } = useContext(AuthContext);
 
   const handleLogout = () => {
-    // Logique de déconnexion, par exemple appel à une API, suppression des informations d'identification, etc.
     logout();
   };
 
