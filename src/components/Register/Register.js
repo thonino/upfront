@@ -7,18 +7,16 @@ const Register = () => {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
-    const handlePrenomChange = (e) => {
-      setPrenom(e.target.value);
-    };
 
+  const handlePrenomChange = (e) => {
+    setPrenom(e.target.value);
+  };
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
-
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
@@ -37,7 +35,6 @@ const Register = () => {
     })
       .then(response => response.json())
       .then(data => {
-        // console.log(data);
         navigate("/login");
       })
       .catch((error) => {
@@ -96,5 +93,4 @@ const Register = () => {
 };
 
 export default Register;
-
 

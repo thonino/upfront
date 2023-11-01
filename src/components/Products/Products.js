@@ -126,7 +126,6 @@ function Products() {
             <div className="col d-flex justify-content-center" key={product._id}>
               <div className="card h-100 category-card" style={{ width: "300px" }}>
               <Link onClick={() => openProductDetails(product)}>
-                    
                 <img
                   src={`https://uppercase-app-back-efd9a0ca1970.herokuapp.com/uploads/${product.photo}`}
                   className="card-img-top"

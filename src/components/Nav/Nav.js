@@ -62,13 +62,8 @@ const Nav = () => {
               )}
               {isLoggedIn ? (
                 <div className="d-sm-flex d-flex-column">
-                  {user.data.role !== "admin" && (
-                    <li className="nav-item">
-                      <Link className="nav-link txt-hover" to="/messageform">Nous-contacter</Link>
-                    </li>
-                  )}
                   <li className="nav-item">
-                    <Link className="nav-link txt-hover" to="/messagereceived">Liste-Messages</Link>
+                    <Link className="nav-link txt-hover" to="/messagereceived">Messages</Link>
                   </li>
                   <li className="nav-item">
                     <Link className="nav-link text-danger txt-hover" to="#" onClick={handleLogout}>Déconnexion</Link>

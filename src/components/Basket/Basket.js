@@ -68,28 +68,28 @@ const Basket = () => {
     setModifiedFields({});
   };
 
-  // Mettre à jour les quantités de produits dans l'API
-  const updateQuantities = async (quantities) => {
-    try {
-      const response = await axios.post(
-        "https://uppercase-app-back-efd9a0ca1970.herokuapp.com/update-quantities",
-        quantities,
-        {
-          withCredentials: true,
-        }
-      );
-      if (response.data.success) {
-        fetchBasket();
-      } else {
-        setError(
-          response.data.message || "Erreur inattendue lors de la mise à jour."
-        );
+// Mettre à jour les quantités de produits dans l'API
+const updateQuantities = async (quantities) => {
+  try {
+    const response = await axios.post(
+      "https://uppercase-app-back-efd9a0ca1970.herokuapp.com/update-quantities",
+      quantities,
+      {
+        withCredentials: true,
       }
-    } catch (err) {
-      setError("Erreur lors de la mise à jour.");
+    );
+    if (response.data.success) {
+      fetchBasket();
+    } else {
+      setError(
+        response.data.message || "Erreur inattendue lors de la mise à jour."
+      );
     }
-    document.activeElement.blur();
-  };
+  } catch (err) {
+    setError("Erreur lors de la mise à jour.");
+  }
+  document.activeElement.blur();
+};
 
   // Retirer un produit du panier
   const removeItem = async (e, productId) => {
@@ -164,8 +164,8 @@ const Basket = () => {
         <thead>
           <tr>
             <th scope="col">Produit</th>
-            <th scope="col">Prix</th>
-            <th scope="col" className="d-flex justify-content-end">
+            <th scope="col"  className="col-2 text-center">Prix</th>
+            <th scope="col" className="col-1 text-center">
               Quantité
             </th>
             <th scope="col"></th>
@@ -190,8 +190,8 @@ const Basket = () => {
                     handleApply(item.product.id);
                   }}
                 >
-                  <div className="d-flex">
-                    <div className="ms-auto col-5 ">
+                  <div className="d-flex justify-content-center">
+                    <div className=" d-flex justify-content-center">
                       <input
                         type="text"
                         name={`product-${item.product.id}`}
