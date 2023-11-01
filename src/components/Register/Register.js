@@ -7,18 +7,16 @@ const Register = () => {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
-    const handlePrenomChange = (e) => {
-      setPrenom(e.target.value);
-    };
 
+  const handlePrenomChange = (e) => {
+    setPrenom(e.target.value);
+  };
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
-
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {

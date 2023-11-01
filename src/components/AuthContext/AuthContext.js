@@ -31,8 +31,6 @@ export const AuthProvider = ({ children }) => {
         });
     }
   }, []);
-  
-  
 
   const login = (email, password) => { 
     return axios.post("http://localhost:5000/login", {

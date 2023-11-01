@@ -1,29 +1,29 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../AuthContext/AuthContext";
 import MessageForm from "../MessageForm/MessageForm";
 
 function MessageReceived() {
   const [messages, setMessages] = useState([]);
-  const { user } = useContext(AuthContext);
+  const [user, setUser] = useState(null);
   const [messageToDelete, setMessageToDelete] = useState(null);
   const [showReplyModal, setShowReplyModal] = useState(false);
   const [messageToReply, setMessageToReply] = useState(null);
 
   useEffect(() => {
-    if (user) {
+    
       axios
         .get("http://localhost:5000/messagereceived", { withCredentials: true })
         .then((response) => {
           const data = response.data;
           setMessages(data.messages.reverse());
+          setUser(data.user);
         })
         .catch((error) => {
           console.error("Erreur lors de la récupération des messages:", error);
         });
     }
-  }, [user]);
+  , []);
 
   const handleDelete = (id) => {
     fetch(`http://localhost:5000/deletemessage/${id}`, {
@@ -46,9 +46,9 @@ function MessageReceived() {
   
   if (!user) return null;
   const isUserAdmin = user.role === "admin";
-
   return (
     <div className="container text-center">
+      {isUserAdmin ? " " : <Link className="btn btn-primary" to="/messageform">Nous-contacter</Link>}
       <h1 className="fw-bold mt-2">
         Reçus par:{" "}
         <span className="fw-light  fst-italic text-success">

@@ -58,6 +58,7 @@ function MessageSent() {
 
   return (
     <div className="container text-center">
+      {isUserAdmin ? " " : <Link className="btn btn-primary" to="/messageform">Nous-contacter</Link>}
       <h1 className="fw-bold mt-2">
         Envoyé par:{" "}
         <span className="fw-light  fst-italic text-success">
