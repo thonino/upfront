@@ -10,7 +10,7 @@ const Home = () => {
       <Carrousel />
       <div className="text-center px-4">
         <h1 className="mx-4">
-          My-Backery
+          My-Bakery
           <span className="fs-4 fw-bold text-success d-none d-lg-inline">
             {" "}(Desktop)
           </span>
