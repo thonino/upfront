@@ -31,7 +31,7 @@ const Nav = () => {
         </div>
         <div className="d-flex">
           <Link className="" to="/">
-            <img src={`https://uppercase-app-back-efd9a0ca1970.herokuapp.com/img/logo1.png`} className="w-75" style={{ marginLeft: "-50px"}}/>
+            <img src={`https://uppercase-app-back-efd9a0ca1970.herokuapp.com/img/logo1.png`} className="w-75"/>
           </Link>
           <Link className="nav-link" to="/basket"><i className="bi  bi-cart-fill fs-2 panier-hover"> Panier</i></Link>
         </div>
