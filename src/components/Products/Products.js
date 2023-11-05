@@ -1,218 +1,129 @@
-import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { AuthContext } from "../AuthContext/AuthContext.js";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function Products() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [message, setMessage] = useState(null);
-  const [productToDelete, setProductToDelete] = useState(null);
-  const [categories, setCategories] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState(null);
+const ProductForm = () => {
+  const [categorie, setCategorie] = useState("");
+  const [nom, setNom] = useState("");
+  const [prix, setPrix] = useState("");
+  const [description, setDescription] = useState("");
+  const [photo, setPhoto] = useState(null);
 
-  const { user } = useContext(AuthContext);
-  const { category } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    axios
-      .get("https://uppercase-app-back-efd9a0ca1970.herokuapp.com/products", { withCredentials: true })
-      .then((response) => {
-        const filteredProducts = category
-          ? response.data.filter((product) => product.categorie === category)
-          : response.data;
-        setProducts(filteredProducts);
-        setError("");
-        setLoading(false);
-
-        const uniqueCategories = [
-          ...new Set(response.data.map((product) => product.categorie)),
-        ];
-        setCategories(uniqueCategories);
-      })
-      .catch((error) => {
-        setError("Erreur lors du chargement des produits.");
-        setLoading(false);
-        setProducts([]);
-      });
-  }, [category]);
-
-  const handleChange = (event) => {
-    const selectedCategory = event.target.value;
-    navigate(`/category/${selectedCategory}`);
+  const handleCategorieChange = (e) => {
+    setCategorie(e.target.value);
   };
 
-  const addToCart = (productId) => {
-    axios
-      .post(`https://uppercase-app-back-efd9a0ca1970.herokuapp.com/add-to-cart/${productId}`, {}, { withCredentials: true })
-      .then((response) => {
-        setMessage("Bravo, le produit a été ajouté au panier !");
-        setTimeout(() => {
-          setMessage(null);
-        }, 2500);
-      })
-      .catch((error) => {
-        setMessage("Erreur lors de l'ajout au panier.");
-        setTimeout(() => {
-          setMessage(null);
-        }, 3000);
-      });
+  const handleNomChange = (e) => {
+    setNom(e.target.value);
   };
 
-  const handleDelete = (id) => {
-    axios
-      .delete(`https://uppercase-app-back-efd9a0ca1970.herokuapp.com/product/delete/${id}`, { withCredentials: true })
-      .then(() => {
-        setProducts(products.filter((product) => product._id !== id));
-        setProductToDelete(null);
+  const handlePrixChange = (e) => {
+    setPrix(e.target.value);
+  };
+
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
+  };
+
+  const handlePhotoChange = (e) => {
+    setPhoto(e.target.files[0]);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("categorie", categorie);
+    formData.append("nom", nom);
+    formData.append("prix", prix);
+    formData.append("description", description);
+    formData.append("photo", photo);
+
+    fetch("https://uppercase-app-back-efd9a0ca1970.herokuapp.com/product/new", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => {
+        if (response.ok) {
+          navigate("/products");
+        } else {
+          throw new Error("Erreur lors de l'envoi du formulaire");
+        }
       })
       .catch((error) => {
         console.error(error);
-        setProductToDelete(null);
       });
-  };
-
-  const openProductDetails = (product) => {
-    setSelectedProduct(product);
-  };
-
-  const closeProductDetails = () => {
-    setSelectedProduct(null);
   };
 
   return (
     <div className="container">
-      <h1 className="text-center mt-2">Nos Produits</h1>
-      <div className="mb-4 col-6  mx-auto">
-        <select
-          className="form-select text-center"
-          aria-label="Default select example"
-          onChange={handleChange}
-          value={category}
-        >
-          <option value="Choisir une catégorie">Choisir une catégorie</option>
-          {categories.map((cat) => (
-            <option key={cat} value={cat}>
-              {cat}
-            </option>
-          ))}
-        </select>
-      </div>
-      {message && (
-        <div className="modal show d-block" style={{backgroundColor: 'rgba(0, 0, 0, 0.5)'}}>
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">Confirmation</h5>
-                <button onClick={() => setMessage(null)} type="button" className="btn-close"></button>
-              </div>
-              <div className="modal-body">
-                <p>{message}</p>
-              </div>
-              <div className="modal-footer">
-                <button onClick={() => setMessage(null)} type="button" className="btn btn-secondary">OK</button>
-              </div>
-            </div>
-          </div>
+      <h1 className="mb-4">Ajouter un produit</h1>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
+        <div className="mb-3">
+          <label htmlFor="categorie" className="form-label">
+            Catégorie
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            name="categorie"
+            value={categorie}
+            onChange={handleCategorieChange}
+          />
         </div>
-      )}
-      {loading ? (
-        <p className="text-center">Chargement...</p>
-      ) : (
-        <div className="row g-4">
-          {products.map((product) => (
-            <div className="col d-flex justify-content-center" key={product._id}>
-              <div className="card h-100 category-card" style={{ width: "300px" }}>
-              <Link onClick={() => openProductDetails(product)}>
-                <img
-                  src={`https://uppercase-app-back-efd9a0ca1970.herokuapp.com/uploads/${product.photo}`}
-                  className="card-img-top"
-                  alt={product.photo}
-                />
-                </Link>
-                <div className="card-body">
-                  <p className="text-center text-dark fw-bold fs-4 m-0 ">{product.prix}€</p>
-                  <h3 className="card-title text-capitalize fw-light text-center">{product.nom}</h3>
-                </div>
-                <div className="card-footer">
-                  <div className="d-flex row justify-content-center px-1">
-                    <button
-                      className="btn btn-warning text-center"
-                      onClick={() => addToCart(product._id)}
-                    >
-                      Ajouter au Panier
-                    </button>
-                    
-                  </div>
-                  {user && user.data && user.data.role === 'admin' && (
-                    <div className="mt-2 d-flex justify-content-around">
-                      <Link
-                        to={`/product/edit/${product._id}`}
-                        className="btn btn-warning"
-                      >
-                        Modifier
-                      </Link>
-                      <button
-                        onClick={() => setProductToDelete(product._id)}
-                        className="btn btn-danger"
-                      >
-                        Supprimer
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          ))}
+        <div className="mb-3">
+          <label htmlFor="nom" className="form-label">
+            Nom
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            name="nom"
+            value={nom}
+            onChange={handleNomChange}
+          />
         </div>
-      )}
-      {productToDelete && (
-        <div className="modal show d-block" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">Confirmation</h5>
-                <button onClick={() => setProductToDelete(null)} type="button" className="btn-close"></button>
-              </div>
-              <div className="modal-body">
-                <p>Êtes-vous sûr de vouloir supprimer ce produit ?</p>
-              </div>
-              <div className="modal-footer">
-                <button onClick={() => setProductToDelete(null)} type="button" className="btn btn-secondary">Annuler</button>
-                <button onClick={() => handleDelete(productToDelete)} type="button" className="btn btn-danger">Supprimer</button>
-              </div>
-            </div>
-          </div>
+        <div className="mb-3">
+          <label htmlFor="prix" className="form-label">
+            Prix
+          </label>
+          <input
+            type="string"
+            className="form-control"
+            name="prix"
+            value={prix}
+            onChange={handlePrixChange}
+          />
         </div>
-      )}
-      {selectedProduct && (
-        <div className="modal show d-block" style={{backgroundColor: 'rgba(0, 0, 0, 0.5)'}}>
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">{selectedProduct.nom}</h5>
-                <button onClick={closeProductDetails} type="button" className="btn-close"></button>
-              </div>
-              <div className="modal-body">
-                <img
-                  src={`https://uppercase-app-back-efd9a0ca1970.herokuapp.com/uploads/${selectedProduct.photo}`}
-                  className="img-fluid mb-3"
-                  alt={selectedProduct.photo}
-                />
-                <p><strong>Catégorie:</strong> {selectedProduct.categorie}</p>
-                <p><strong>Description:</strong> {selectedProduct.description}</p>
-              </div>
-              <div className="modal-footer">
-                <button onClick={closeProductDetails} type="button" className="btn btn-secondary">Fermer</button>
-              </div>
-            </div>
-          </div>
+        <div className="mb-3">
+          <label htmlFor="description" className="form-label">
+            Description
+          </label>
+          <textarea
+            className="form-control"
+            name="description"
+            rows="3"
+            value={description}
+            onChange={handleDescriptionChange}
+          ></textarea>
         </div>
-      )}
+        <div className="mb-3">
+          <label htmlFor="photo" className="form-label">
+            Photo
+          </label>
+          <input
+            type="file"
+            className="form-control"
+            name="photo"
+            onChange={handlePhotoChange}
+          />
+        </div>
+        <button type="submit" className="btn btn-primary">
+          Ajouter
+        </button>
+      </form>
     </div>
   );
-}
+};
 
-export default Products;
+export default ProductForm;

@@ -2,10 +2,11 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../AuthContext/AuthContext.js";
 import { Link } from "react-router-dom";
+import { CartContext } from "../CartContext/CartContext.js";
 
 const Basket = () => {
-  // Initialiser les états locaux
-  const { isLoggedIn, logout, user } = useContext(AuthContext);
+  const { checkCart } = useContext(CartContext); // Check nb article
+  const { isLoggedIn,  user } = useContext(AuthContext);
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [error, setError] = useState(null);
@@ -155,94 +156,86 @@ const updateQuantities = async (quantities) => {
     }
   };
 
+  checkCart();
   return (
     <div className="container mt-4">
       <h1 className="mb-3 text-center">Votre panier</h1>
       {error && <div className="alert alert-danger mb-3">{error}</div>}
-
       <table className="table">
         <thead>
-          <tr>
-            <th scope="col">Produit</th>
-            <th scope="col"  className="col-2 text-center">Prix</th>
-            <th scope="col" className="col-1 text-center">
-              Quantité
-            </th>
-            <th scope="col"></th>
-            <th scope="col" className="text-warning fw-bold fst-italic">
-              Action
-            </th>
-            <th scope="col">Total</th>
-            <th scope="col" className="text-danger fw-bold fst-italic">
-              Retirer
-            </th>
-          </tr>
+            <tr>
+                <th scope="col" className="align-middle">Produit</th>
+                <th scope="col" className="align-middle">Prix</th>
+                <th scope="col" className="col-1 text-center align-middle">Quantité</th>
+                <th scope="col" className="text-center align-middle">Total</th>
+                <th scope="col" className="text-danger fw-bold fst-italic align-middle">
+                    Retirer
+                </th>
+                {cartItems.some(item => modifiedFields[item.product.id]) && (
+                    <th scope="col" className="text-warning fw-bold fst-italic align-middle">
+                        Action
+                    </th>
+                )}
+            </tr>
         </thead>
         <tbody>
-          {cartItems.map((item) => (
-            <tr key={item.product.id}>
-              <td className="text-capitalize">{item.product.nom}</td>
-              <td>{item.product.prix} €</td>
-              <td>
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    handleApply(item.product.id);
-                  }}
-                >
-                  <div className="d-flex justify-content-center">
-                    <div className=" d-flex justify-content-center">
-                      <input
-                        type="text"
-                        name={`product-${item.product.id}`}
-                        pattern="^[1-9][0-9]*$"
-                        defaultValue={
-                          inputValues[item.product.id] ||
-                          (item.quantite ? item.quantite.toString() : "1")
-                        }
-                        onChange={(e) => handleInputChange(e, item.product.id)}
-                        className="form-control text-end"
-                      />
-                    </div>
-                  </div>
-                </form>
-              </td>
-              <td className="">
-                <span className="text-danger fst-italic fw-bold">
-                  {inputErrors[item.product.id]}
-                </span>
-              </td>
-              <td>
-                <button
-                  type="button"
-                  className={`btn fst-italic btn-warning ${
-                    modifiedFields[item.product.id] ? "" : "d-none"
-                  }`}
-                  onClick={() => handleApply(item.product.id)}
-                  disabled={
-                    !inputValues[item.product.id] ||
-                    parseInt(inputValues[item.product.id], 10) < 1
-                  }
-                >
-                  Appliquer
-                </button>
-              </td>
-              <td>
-                {item.total ? item.total : item.product.prix * item.quantite} €
-              </td>
-              <td>
-                <button
-                  type="button"
-                  className="btn btn-danger btn-sm"
-                  onClick={(e) => removeItem(e, item.product.id)}
-                >
-                  <i className="bi bi-dash-circle"></i>
-                </button>
-              </td>
-            </tr>
-          ))}
+            {cartItems.map((item) => (
+                <tr key={item.product.id}>
+                    <td className="text-capitalize align-middle">{item.product.nom}</td>
+                    <td className="align-middle">{item.product.prix} €</td>
+                    <td className="align-middle">
+                        <form
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                handleApply(item.product.id);
+                            }}
+                        >
+                            <div className="d-flex justify-content-center">
+                                <input
+                                    type="text"
+                                    name={`product-${item.product.id}`}
+                                    pattern="^[1-9][0-9]*$"
+                                    defaultValue={
+                                        inputValues[item.product.id] ||
+                                        (item.quantite ? item.quantite.toString() : "1")
+                                    }
+                                    onChange={(e) => handleInputChange(e, item.product.id)}
+                                    className="form-control text-end"
+                                />
+                            </div>
+                        </form>
+                    </td>
+                    <td className="align-middle text-center">
+                        {item.total ? item.total : item.product.prix * item.quantite} €
+                    </td>
+                    <td className="align-middle">
+                        <button
+                            type="button"
+                            className="btn btn-danger btn-sm"
+                            onClick={(e) => removeItem(e, item.product.id)}
+                        >
+                            <i className="bi bi-dash-circle"></i>
+                        </button>
+                    </td>
+                    {cartItems.some(item => modifiedFields[item.product.id]) && (
+                        <td className="align-middle">
+                            <button 
+                                type="button" 
+                                className={`btn fst-italic btn-warning ${modifiedFields[item.product.id] ? "" : "d-none"}`}
+                                onClick={() => handleApply(item.product.id)}
+                                disabled={ !inputValues[item.product.id] || parseInt(inputValues[item.product.id], 10) < 1}
+                            >
+                                Appliquer
+                            </button>
+                        </td>
+                    )}
+                </tr>
+            ))}
         </tbody>
-      </table>
+    </table>
+
+
+      
       <div className="text-end mt-3">
         {cartItems.length > 0 ? (
           <>

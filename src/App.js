@@ -13,6 +13,7 @@ import EditProduct from "./components/EditProduct/EditProduct.js";
 import Register from "./components/Register/Register.js";
 import Login from "./components/Login/Login.js";
 import { AuthProvider } from "./components/AuthContext/AuthContext.js";
+import { CartProvider } from "./components/CartContext/CartContext.js";
 import MessageForm from "./components/MessageForm/MessageForm.js";
 import MessageReceived from "./components/MessageReceived/MessageReceived.js";
 import MessageSent from "./components/MessageSent/MessageSent.js";
@@ -29,32 +30,33 @@ function App() {
   return (
     <div className="my-container sb-fix">
       <AuthProvider>
-        <Navbar />
-        <CookieConsent />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/product/new" element={<ProductForm />} />
-            <Route path="/product/edit/:id" element={<EditProduct />} />
-            <Route path="/category/:category" element={<Products />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/basket" element={<Basket />} />
-            <Route path="/order/:basketId" element={<Order />}  />
-            <Route path="/payementsuccess/:invoiceid" element={<PayementSuccess/>}  />
-            <Route path="/messageform" element={<PrivateRoute><MessageForm /></PrivateRoute>} /> 
-            <Route path="/messagereceived" element={<PrivateRoute><MessageReceived/></PrivateRoute>} />
-            <Route path="/messagesent" element={<PrivateRoute><MessageSent/></PrivateRoute>} /> 
-            <Route path="/legalMentions" element={<LegalMentions/>} /> 
-            <Route path="/confidentiality" element={<Confidentiality/>} /> 
-            <Route path="/cgv" element={<CGV/>} /> 
-            <Route path="*" element={<NotFound />} />
-        </Routes>
-      <Footer/>
+        <CartProvider>
+          <Navbar />
+          <CookieConsent />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/product/new" element={<ProductForm />} />
+              <Route path="/product/edit/:id" element={<EditProduct />} />
+              <Route path="/category/:category" element={<Products />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/basket" element={<Basket />} />
+              <Route path="/order/:basketId" element={<Order />}  />
+              <Route path="/payementsuccess/:invoiceid" element={<PayementSuccess/>}  />
+              <Route path="/messageform" element={<PrivateRoute><MessageForm /></PrivateRoute>} /> 
+              <Route path="/messagereceived" element={<PrivateRoute><MessageReceived/></PrivateRoute>} />
+              <Route path="/messagesent" element={<PrivateRoute><MessageSent/></PrivateRoute>} /> 
+              <Route path="/legalMentions" element={<LegalMentions/>} /> 
+              <Route path="/confidentiality" element={<Confidentiality/>} /> 
+              <Route path="/cgv" element={<CGV/>} /> 
+              <Route path="*" element={<NotFound />} />
+          </Routes>
+          <Footer/>
+        </CartProvider>
       </AuthProvider>
     </div>
   );
 }
-
 export default App;

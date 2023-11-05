@@ -14,12 +14,14 @@ const Category = () => {
           "https://uppercase-app-back-efd9a0ca1970.herokuapp.com/products",
           { withCredentials: true }
         );
+
         const newCategoriesWithImages = response.data.reduce((acc, product) => {
           if (!acc[product.categorie]) {
             acc[product.categorie] = product.photo;
           }
           return acc;
         }, {});
+
         setCategoriesWithImages(newCategoriesWithImages);
       } catch (error) {
         console.error(error);
@@ -32,8 +34,13 @@ const Category = () => {
     fetchData();
   }, []);
 
-  if (loading) {return "Chargement...";}
-  if (error) {return "Une erreur est survenue.";}
+  if (loading) {
+    return "Chargement...";
+  }
+
+  if (error) {
+    return "Une erreur est survenue.";
+  }
 
   return (
     <div className="justify-content-center gap-4 mt-3 px-2
@@ -44,10 +51,9 @@ const Category = () => {
               row-cols-xl-5 
                 ">
       {Object.keys(categoriesWithImages).map((category) => (
-        <div className="col d-flex justify-content-center">
+        <div className="col d-flex justify-content-center" key={category}>
           <Link
             to={`/category/${category}`}
-            key={category}
             className="card text-decoration-none category-card"
             style={{ width: "270px" }}
           >
@@ -65,6 +71,7 @@ const Category = () => {
         </div>
       ))}
     </div>
+
   );
 };
 
