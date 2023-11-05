@@ -2,8 +2,10 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../AuthContext/AuthContext.js";
+import { CartContext } from "../CartContext/CartContext.js";
 
 function Products() {
+  const { checkCart } = useContext(CartContext);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -48,6 +50,7 @@ function Products() {
     axios
       .post(`http://localhost:5000/add-to-cart/${productId}`, {}, { withCredentials: true })
       .then((response) => {
+        checkCart();
         setMessage("Bravo, le produit a été ajouté au panier !");
         setTimeout(() => {
           setMessage(null);
@@ -59,6 +62,7 @@ function Products() {
           setMessage(null);
         }, 3000);
       });
+      
   };
 
   const handleDelete = (id) => {

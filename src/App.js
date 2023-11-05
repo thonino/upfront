@@ -13,6 +13,7 @@ import EditProduct from "./components/EditProduct/EditProduct.js";
 import Register from "./components/Register/Register.js";
 import Login from "./components/Login/Login.js";
 import { AuthProvider } from "./components/AuthContext/AuthContext.js";
+import { CartProvider } from "./components/CartContext/CartContext.js";
 import MessageForm from "./components/MessageForm/MessageForm.js";
 import MessageReceived from "./components/MessageReceived/MessageReceived.js";
 import MessageSent from "./components/MessageSent/MessageSent.js";
@@ -29,6 +30,7 @@ function App() {
   return (
     <div className="my-container sb-fix">
       <AuthProvider>
+      <CartProvider>
         <Navbar />
         <CookieConsent />
           <Routes>
@@ -51,7 +53,8 @@ function App() {
             <Route path="/cgv" element={<CGV/>} /> 
             <Route path="*" element={<NotFound />} />
         </Routes>
-      <Footer/>
+        <Footer/>
+      </CartProvider>
       </AuthProvider>
     </div>
   );

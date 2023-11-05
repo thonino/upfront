@@ -1,10 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthContext/AuthContext.js";
+import { CartContext } from "../CartContext/CartContext.js";
+
+
+import axios from "axios";
+
 
 const Nav = () => {
+  const { cartItemCount } = useContext(CartContext);
   const { isLoggedIn, logout, user } = useContext(AuthContext);
   const navigate = useNavigate();
+
+
+
+
+
+
+
 
   const handleLogout = () => {
     fetch("http://localhost:5000/logout", {
@@ -31,9 +44,13 @@ const Nav = () => {
         </div>
         <div className="d-flex">
           <Link className="" to="/">
-            <img src={`http://localhost:5000/img/logo1.png`} className="w-75" style={{ marginLeft: "-50px"}}/>
+            <img src={`http://localhost:5000/img/logo1.png`} alt="" className="w-75" style={{ marginLeft: "-50px"}}/>
           </Link>
-          <Link className="nav-link" to="/basket"><i className="bi  bi-cart-fill fs-2 panier-hover"> Panier</i></Link>
+          <Link className="nav-link" to="/basket">
+            <i className="bi bi-cart-fill fs-2 panier-hover "> 
+            {cartItemCount > 0 ? `(${cartItemCount})` : "(0)"}
+            </i>
+          </Link>
         </div>
         <div className="d-flex flex-column">
           <button

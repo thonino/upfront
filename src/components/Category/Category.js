@@ -51,10 +51,9 @@ const Category = () => {
               row-cols-xl-5 
                 ">
       {Object.keys(categoriesWithImages).map((category) => (
-        <div className="col d-flex justify-content-center">
+        <div className="col d-flex justify-content-center" key={category}>
           <Link
             to={`/category/${category}`}
-            key={category}
             className="card text-decoration-none category-card"
             style={{ width: "270px" }}
           >
