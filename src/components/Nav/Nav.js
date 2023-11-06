@@ -3,24 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthContext/AuthContext.js";
 import { CartContext } from "../CartContext/CartContext.js";
 
-
-import axios from "axios";
-
-
 const Nav = () => {
   const { cartItemCount } = useContext(CartContext);
   const { isLoggedIn, logout, user } = useContext(AuthContext);
   const navigate = useNavigate();
 
-
-
-
-
-
-
-
   const handleLogout = () => {
-    fetch("http://localhost:5000/logout", {
+    fetch("https://uppercase-app-back-efd9a0ca1970.herokuapp.com/logout", {
       method: "POST",
       credentials: "include",
     })
@@ -44,7 +33,7 @@ const Nav = () => {
         </div>
         <div className="d-flex p-1">
           <Link className="mb-1" to="/">
-            <img src={`http://localhost:5000/img/logo1.png`} alt="" className="w-75" style={{ marginLeft: "-50px"}}/>
+            <img src={`https://uppercase-app-back-efd9a0ca1970.herokuapp.com/img/logo1.png`} alt="" className="w-75" style={{ marginLeft: "-50px"}}/>
           </Link>
           <Link className="nav-link" to="/basket">
             <i className="bi bi-cart-fill fs-2 panier-hover "> 
@@ -67,15 +56,15 @@ const Nav = () => {
           <div className="collapse navbar-collapse mx-2 " id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <Link className="nav-link txt-hover" to="/products">Nos Produits</Link>
+                <Link className="nav-link txt-hover" to="/products">Produits</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link txt-hover" to="/about">Notre Histoire</Link>
+                <Link className="nav-link txt-hover" to="/about">A propos</Link>
               </li>
               
               {user && user.data && user.data.role === 'admin' && (
                 <li className="nav-item">
-                  <Link className="nav-link txt-hover" to="/product/new">Ajouter Produit</Link>
+                  <Link className="nav-link txt-hover" to="/product/new">Ajout Produit</Link>
                 </li>
                 
               )}
@@ -86,6 +75,9 @@ const Nav = () => {
                   </li>
                   <li className="nav-item">
                     <Link className="nav-link text-danger txt-hover"onClick={handleLogout}>Déconnexion</Link>
+                  </li>
+                  <li className="nav-item ">
+                    <Link className="nav-link  txt-hover " to="/account">Compte</Link>
                   </li>
                 </div>
               ) : (
@@ -99,9 +91,6 @@ const Nav = () => {
                 </div>
               )}
             </ul>
-            <span className="nav-item ">
-              <Link className="nav-link  txt-hover " to="/account">Compte</Link>
-            </span>
           </div>
         </div>
       </nav>
