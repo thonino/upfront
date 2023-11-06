@@ -59,7 +59,7 @@ const Nav = () => {
                 <Link className="nav-link txt-hover" to="/products">Nos Produits</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link txt-hover" to="/about">Notre Histoire</Link>
+                <Link className="nav-link txt-hover" to="/about">A propos</Link>
               </li>
               
               {user && user.data && user.data.role === 'admin' && (
@@ -76,6 +76,9 @@ const Nav = () => {
                   <li className="nav-item">
                     <Link className="nav-link text-danger txt-hover"onClick={handleLogout}>Déconnexion</Link>
                   </li>
+                  <li className="nav-item ">
+                    <Link className="nav-link  txt-hover " to="/account">Compte</Link>
+                  </li>
                 </div>
               ) : (
                 <div className="text-center d-sm-flex">
@@ -88,9 +91,6 @@ const Nav = () => {
                 </div>
               )}
             </ul>
-            <span className="nav-item ">
-              <Link className="nav-link  txt-hover " to="/account">Compte</Link>
-            </span>
           </div>
         </div>
       </nav>
