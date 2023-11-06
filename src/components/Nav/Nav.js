@@ -31,8 +31,8 @@ const Nav = () => {
         <Link className="" to="/"><i className="bi bi-pinterest text-danger fs-2"></i></Link>
         <Link className="" to="/"><i className="bi bi-youtube text-danger fs-2"></i></Link>
         </div>
-        <div className="d-flex">
-          <Link className="" to="/">
+        <div className="d-flex p-1">
+          <Link className="mb-1" to="/">
             <img src={`https://uppercase-app-back-efd9a0ca1970.herokuapp.com/img/logo1.png`} alt="" className="w-75" style={{ marginLeft: "-50px"}}/>
           </Link>
           <Link className="nav-link" to="/basket">
@@ -61,10 +61,12 @@ const Nav = () => {
               <li className="nav-item">
                 <Link className="nav-link txt-hover" to="/about">Notre Histoire</Link>
               </li>
+              
               {user && user.data && user.data.role === 'admin' && (
                 <li className="nav-item">
                   <Link className="nav-link txt-hover" to="/product/new">Ajouter Produit</Link>
                 </li>
+                
               )}
               {isLoggedIn ? (
                 <div className="d-sm-flex d-flex-column">
@@ -72,16 +74,23 @@ const Nav = () => {
                     <Link className="nav-link txt-hover" to="/messagereceived">Messages</Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link text-danger txt-hover" to="#" onClick={handleLogout}>Déconnexion</Link>
+                    <Link className="nav-link text-danger txt-hover"onClick={handleLogout}>Déconnexion</Link>
                   </li>
                 </div>
               ) : (
-                <li className="nav-item d-flex">
-                  <Link className="nav-link text-success txt-hover" to="/register">Inscription</Link>
-                  <Link className="nav-link text-success txt-hover" to="/login">Connexion</Link>
-                </li>
+                <div className="text-center d-sm-flex">
+                  <li className="nav-item">
+                    <Link className="nav-link text-success txt-hover" to="/register">Inscription</Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link text-success txt-hover" to="/login">Connexion</Link>
+                  </li>
+                </div>
               )}
             </ul>
+            <span className="nav-item ">
+              <Link className="nav-link  txt-hover " to="/account">Compte</Link>
+            </span>
           </div>
         </div>
       </nav>

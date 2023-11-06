@@ -14,10 +14,8 @@ const Basket = () => {
   const [modifiedFields, setModifiedFields] = useState({});
   const [inputErrors, setInputErrors] = useState({});
 
-  // Récupérer les éléments du panier au chargement du composant
-  useEffect(() => {
-    fetchBasket();
-  }, []);
+  // Récupérer éléments du panier au chargement 
+  useEffect(() => {fetchBasket();}, []);
 
   // Récupérer les éléments du panier depuis l'API
   const fetchBasket = async () => {
@@ -157,6 +155,7 @@ const updateQuantities = async (quantities) => {
   };
 
   checkCart();
+  
   return (
     <div className="container mt-4">
       <h1 className="mb-3 text-center">Votre panier</h1>
