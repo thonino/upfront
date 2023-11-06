@@ -56,7 +56,7 @@ const Nav = () => {
           <div className="collapse navbar-collapse mx-2 " id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <Link className="nav-link txt-hover" to="/products">Nos Produits</Link>
+                <Link className="nav-link txt-hover" to="/products">Produits</Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link txt-hover" to="/about">A propos</Link>
@@ -64,7 +64,7 @@ const Nav = () => {
               
               {user && user.data && user.data.role === 'admin' && (
                 <li className="nav-item">
-                  <Link className="nav-link txt-hover" to="/product/new">Ajouter Produit</Link>
+                  <Link className="nav-link txt-hover" to="/product/new">Ajout Produit</Link>
                 </li>
                 
               )}
