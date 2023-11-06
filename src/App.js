@@ -25,6 +25,8 @@ import LegalMentions from "./components/LegalMentions/LegalMentions.js";
 import Confidentiality from "./components/Confidentiality/Confidentiality.js";
 import CGV from "./components/CGV/CGV.js";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute.js";
+import Account from "./components/Account/Account.js";
+import AccountEdit from "./components/AccountEdit/AccountEdit.js";
 
 function App() {
   return (
@@ -34,6 +36,8 @@ function App() {
         <Navbar />
         <CookieConsent />
           <Routes>
+            <Route path="/account" element={<Account />} />
+            <Route path="/account/edit/:id" element={<AccountEdit />} />
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/products" element={<Products />} />

@@ -75,7 +75,6 @@ const EditProduct = () => {
   };
 
   const handleDelete = () => {
-    // Ajoutez ici le code pour supprimer le produit
     console.log("Produit supprimé !");
     navigate("/products");
   };
