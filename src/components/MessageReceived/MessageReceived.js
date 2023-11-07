@@ -59,7 +59,7 @@ function MessageReceived() {
       });
   };
 
-  const isUserAdmin = user.role === 'admin';
+  const isUserAdmin = user.data.role === 'admin';
 
   return (
     <div className="container text-center">
@@ -67,7 +67,7 @@ function MessageReceived() {
       <h1 className="fw-bold mt-2">
         Reçus par:{" "}
         <span className="fw-light fst-italic text-success">
-          {isUserAdmin ? "admin@admin" : user.prenom}
+          {isUserAdmin ? "admin@admin" : user.data.prenom}
         </span>
       </h1>
       <div className="d-flex justify-content-center gap-2">
@@ -155,6 +155,7 @@ function MessageReceived() {
           <i className="bi bi-arrow-up"></i>
         </a>
       </div>
+
       {messageToDelete && (
         <div
           className="modal show d-block"
