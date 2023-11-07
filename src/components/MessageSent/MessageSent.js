@@ -60,7 +60,7 @@ function MessageSent() {
       });
   };
 
-  const isUserAdmin = user && user.role === 'admin';
+  const isUserAdmin = user && user.data.role === 'admin';
 
   return (
     <div className="container text-center">
@@ -68,7 +68,7 @@ function MessageSent() {
       <h1 className="fw-bold mt-2">
         Envoyé par:{" "}
         <span className="fw-light  fst-italic text-success">
-          {isUserAdmin ? "admin@admin" : user.prenom}
+          {isUserAdmin ? "admin@admin" : user.data.prenom}
         </span>
       </h1>
       <div className="d-flex justify-content-center gap-2">
