@@ -42,15 +42,22 @@ function MessageSent() {
   };
 
   const handleSaveEdit = (id) => {
-    const newMessages = messages.map(message => {
-      if (message._id === id) {
-        message.texte = newText;
-      }
-      return message;
-    });
-    setMessages(newMessages);
-    setMessageToEdit(null);
-    setNewText("");
+    const updatedMessageData = { texte: newText };
+    axios.put(`https://uppercase-app-back-efd9a0ca1970.herokuapp.com/editmessage/${id}`, updatedMessageData)
+      .then(response => {
+        const updatedMessages = messages.map(message => {
+          if (message._id === id) {
+            return { ...message, texte: newText };
+          }
+          return message;
+        });
+        setMessages(updatedMessages);
+        setMessageToEdit(null);
+        setNewText("");
+      })
+      .catch(error => {
+        console.error("Erreur lors de la mise à jour du message:", error);
+      });
   };
 
   if (!user) return null;
@@ -112,9 +119,6 @@ function MessageSent() {
                   Le:{" "}
                   <span className="text-muted fw-light">{message.date}</span>
                 </h5>
-                <p className="card-text text-success">
-                  Objet: <span className="text-muted fw-light">unnamed</span>
-                </p>
               </div>
               <p className="card-text fs-4">{message.texte}</p>
               <div className="d-flex justify-content-center align-items-center gap-2">

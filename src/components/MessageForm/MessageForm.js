@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { AuthContext } from '../AuthContext/AuthContext.js';
 import axios from 'axios';
 
-const MessageForm = ({ expediteur, destinataire }) => {
+const MessageForm = ({ expediteur, destinataire, closeDialog }) => {
   const [messageContent, setMessageContent] = useState('');
   const [messageSent, setMessageSent] = useState(null);
   const { user } = useContext(AuthContext);
@@ -17,7 +17,7 @@ const MessageForm = ({ expediteur, destinataire }) => {
       destinataire: destinataireEmail,
       texte: messageContent,
     };
-
+  
     axios.post("https://uppercase-app-back-efd9a0ca1970.herokuapp.com/message", formData, { withCredentials: true })
       .then((response) => {
         if (response.data.success) {
@@ -25,6 +25,7 @@ const MessageForm = ({ expediteur, destinataire }) => {
           setMessageSent('Le message a été envoyé !');
           setTimeout(() => {
             setMessageSent(null);
+            closeDialog(); 
           }, 2500);
         }
       })
@@ -36,6 +37,7 @@ const MessageForm = ({ expediteur, destinataire }) => {
         }, 3000);
       });
   };
+  
 
   return (
     <div className="p-3 container">
