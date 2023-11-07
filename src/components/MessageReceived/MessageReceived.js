@@ -3,10 +3,11 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import MessageForm from '../MessageForm/MessageForm';
 import { MessageContext } from '../MessageContext/MessageContext'; 
+import { AuthContext } from "../AuthContext/AuthContext.js";
 
 function MessageReceived() {
   const { messages, setMessages, markMessageAsRead } = useContext(MessageContext);
-  const [user, setUser] = useState(null);
+  const { user } = useContext(AuthContext); 
   const [messageToDelete, setMessageToDelete] = useState(null);
   const [showReplyModal, setShowReplyModal] = useState(false);
   const [messageToReply, setMessageToReply] = useState(null);
@@ -17,7 +18,6 @@ function MessageReceived() {
       .then((response) => {
         const data = response.data;
         setMessages(data.messages.reverse());
-        setUser(data.user);
       })
       .catch((error) => {
         console.error('Erreur lors de la récupération des messages:', error);
@@ -59,8 +59,8 @@ function MessageReceived() {
       });
   };
 
-  if (!user) return null;
   const isUserAdmin = user.role === 'admin';
+
   return (
     <div className="container text-center">
       {isUserAdmin ? " " : <Link className="btn btn-primary" to="/messageform">Nous-contacter</Link>}
@@ -155,7 +155,6 @@ function MessageReceived() {
           <i className="bi bi-arrow-up"></i>
         </a>
       </div>
-
       {messageToDelete && (
         <div
           className="modal show d-block"
@@ -195,8 +194,6 @@ function MessageReceived() {
           </div>
         </div>
       )}
-
-
         {showReplyModal && (
           <div className="modal show d-block" style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
             <div className="modal-dialog">

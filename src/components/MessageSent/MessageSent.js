@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react"; 
 import axios from "axios";
 import { Link } from 'react-router-dom';
+import { AuthContext } from "../AuthContext/AuthContext"; 
 
 function MessageSent() {
   const [messages, setMessages] = useState([]);
-  const [user, setUser] = useState(null);
+  const { user } = useContext(AuthContext); 
   const [messageToDelete, setMessageToDelete] = useState(null);
   const [messageToEdit, setMessageToEdit] = useState(null);
   const [newText, setNewText] = useState("");
@@ -15,7 +16,6 @@ function MessageSent() {
       .then((response) => {
         const data = response.data;
         setMessages(data.messages.reverse());
-        setUser(data.user);
       })
       .catch((error) => {
         console.error("Erreur lors de la récupération des messages:", error);
@@ -23,15 +23,14 @@ function MessageSent() {
   }, []);
 
   const handleDelete = (id) => {
-    fetch(`https://uppercase-app-back-efd9a0ca1970.herokuapp.com/deletemessage/${id}`, {
-      method: "DELETE",
-    })
+    axios
+      .delete(`https://uppercase-app-back-efd9a0ca1970.herokuapp.com/deletemessage/${id}`, { withCredentials: true })
       .then(() => {
         setMessages(messages.filter((message) => message._id !== id));
         setMessageToDelete(null);
       })
       .catch((error) => {
-        console.error(error);
+        console.error("Erreur lors de la suppression du message:", error);
         setMessageToDelete(null);
       });
   };
@@ -43,7 +42,8 @@ function MessageSent() {
 
   const handleSaveEdit = (id) => {
     const updatedMessageData = { texte: newText };
-    axios.put(`https://uppercase-app-back-efd9a0ca1970.herokuapp.com/editmessage/${id}`, updatedMessageData)
+    axios
+      .put(`https://uppercase-app-back-efd9a0ca1970.herokuapp.com/editmessage/${id}`, updatedMessageData)
       .then(response => {
         const updatedMessages = messages.map(message => {
           if (message._id === id) {
@@ -60,8 +60,7 @@ function MessageSent() {
       });
   };
 
-  if (!user) return null;
-  const isUserAdmin = user.role === "admin";
+  const isUserAdmin = user && user.role === 'admin';
 
   return (
     <div className="container text-center">
@@ -143,7 +142,6 @@ function MessageSent() {
           <i className="bi bi-arrow-up"></i>
         </a>
       </div>
-
       {messageToEdit && (
         <div className="modal show d-block" style={{backgroundColor: 'rgba(0, 0, 0, 0.5)'}}>
           <div className="modal-dialog">
@@ -163,7 +161,6 @@ function MessageSent() {
           </div>
         </div>
       )}
-
       {messageToDelete && (
         <div className="modal show d-block" style={{backgroundColor: 'rgba(0, 0, 0, 0.5)'}}>
           <div className="modal-dialog">
