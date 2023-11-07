@@ -1,40 +1,38 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import MessageForm from "../MessageForm/MessageForm";
+import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import MessageForm from '../MessageForm/MessageForm';
+import { MessageContext } from '../MessageContext/MessageContext'; 
 
 function MessageReceived() {
-  const [messages, setMessages] = useState([]);
+  const { messages, setMessages, markMessageAsRead } = useContext(MessageContext);
   const [user, setUser] = useState(null);
   const [messageToDelete, setMessageToDelete] = useState(null);
   const [showReplyModal, setShowReplyModal] = useState(false);
   const [messageToReply, setMessageToReply] = useState(null);
 
   useEffect(() => {
-    
-      axios
-        .get("http://localhost:5000/messagereceived", { withCredentials: true })
-        .then((response) => {
-          const data = response.data;
-          setMessages(data.messages.reverse());
-          setUser(data.user);
-        })
-        .catch((error) => {
-          console.error("Erreur lors de la récupération des messages:", error);
-        });
-    }
-  , []);
+    axios
+      .get('http://localhost:5000/messagereceived', { withCredentials: true })
+      .then((response) => {
+        const data = response.data;
+        setMessages(data.messages.reverse());
+        setUser(data.user);
+      })
+      .catch((error) => {
+        console.error('Erreur lors de la récupération des messages:', error);
+      });
+  }, [setMessages]);
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/deletemessage/${id}`, {
-      method: "DELETE",
-    })
+    axios
+      .delete(`http://localhost:5000/deletemessage/${id}`, { withCredentials: true })
       .then(() => {
         setMessages(messages.filter((message) => message._id !== id));
         setMessageToDelete(null);
       })
       .catch((error) => {
-        console.error(error);
+        console.error('Erreur lors de la suppression du message:', error);
         setMessageToDelete(null);
       });
   };
@@ -43,16 +41,33 @@ function MessageReceived() {
     setMessageToReply(message);
     setShowReplyModal(true);
   };
-  
+
+  const markAsRead = (id) => {
+    markMessageAsRead(id)
+      .then(() => {
+        console.log('Message marqué comme lu dans la base de données');
+        const updatedMessages = messages.map((message) => {
+          if (message._id === id) {
+            return { ...message, lu: true };
+          }
+          return message;
+        });
+        setMessages(updatedMessages);
+      })
+      .catch((error) => {
+        console.error('Erreur lors de la mise à jour du statut de lecture:', error);
+      });
+  };
+
   if (!user) return null;
-  const isUserAdmin = user.role === "admin";
+  const isUserAdmin = user.role === 'admin';
   return (
     <div className="container text-center">
       {isUserAdmin ? " " : <Link className="btn btn-primary" to="/messageform">Nous-contacter</Link>}
       <h1 className="fw-bold mt-2">
         Reçus par:{" "}
-        <span className="fw-light  fst-italic text-success">
-        {isUserAdmin ? "admin@admin" : user.prenom}
+        <span className="fw-light fst-italic text-success">
+          {isUserAdmin ? "admin@admin" : user.prenom}
         </span>
       </h1>
       <div className="d-flex justify-content-center gap-2">
@@ -64,7 +79,7 @@ function MessageReceived() {
         <div className="fst-italic fw-bold">
           <Link
             to="/messagesent"
-            className=" btn btn-light text-success fw-bold "
+            className="btn btn-light text-success fw-bold"
           >
             <i className="bi bi-send"> Messages envoyés </i>
           </Link>
@@ -105,9 +120,6 @@ function MessageReceived() {
                   Le:{" "}
                   <span className="text-muted fw-light">{message.date}</span>
                 </h5>
-                <p className="card-text text-success">
-                  Objet: <span className="text-muted fw-light">unnamed</span>
-                </p>
               </div>
               <p className="card-text fs-4">{message.texte}</p>
               <div className="d-flex justify-content-center align-items-center gap-2">
@@ -117,14 +129,22 @@ function MessageReceived() {
                 >
                   <i className="bi bi-chat-dots"> Répondre</i>
                 </button>
-                <div className="collapse " id="collapseWidthExample">
+                {!message.lu && (
                   <button
-                    onClick={() => setMessageToDelete(message._id)}
-                    className="btn btn-danger"
+                    onClick={() => markAsRead(message._id)}
+                    className="btn btn-info"
                   >
-                    <i className="bi bi-trash"> Supprimer</i>
+                    <i className="bi bi-envelope-open"> Marquer comme lu</i>
                   </button>
-                </div>
+                )}
+                <div className="collapse" id="collapseWidthExample">
+                <button
+                  onClick={() => setMessageToDelete(message._id)}
+                  className="btn btn-danger"
+                >
+                  <i className="bi bi-trash"> Supprimer</i>
+                </button>
+                              </div>
               </div>
             </div>
           </div>
@@ -176,33 +196,31 @@ function MessageReceived() {
         </div>
       )}
 
-      {showReplyModal && (
-        <div className="modal show d-block"style={{backgroundColor: 'rgba(0, 0, 0, 0.5)'}}>
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">
-                  Répondre à {messageToReply.expediteur}
-                </h5>
-                <button
-                  onClick={() => setShowReplyModal(false)}
-                  type="button"
-                  className="btn-close"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div className="">
-                <MessageForm
-                  expediteur={messageToReply.destinataire}
-                  destinataire={messageToReply.expediteur}
-                  closeDialog={() => setShowReplyModal(false)}
-                />
+
+        {showReplyModal && (
+          <div className="modal show d-block" style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title">Répondre à {messageToReply.expediteur}</h5>
+                  <button
+                    onClick={() => setShowReplyModal(false)}
+                    type="button"
+                    className="btn-close"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div className="modal-body">
+                  <MessageForm
+                    expediteur={messageToReply.destinataire}
+                    destinataire={messageToReply.expediteur}
+                    closeDialog={() => setShowReplyModal(false)}
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
-
+        )}
     </div>
   );
 }

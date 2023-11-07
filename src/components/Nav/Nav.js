@@ -2,10 +2,12 @@ import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthContext/AuthContext.js";
 import { CartContext } from "../CartContext/CartContext.js";
+import { MessageContext } from '../MessageContext/MessageContext.js';
 
 const Nav = () => {
   const { cartItemCount } = useContext(CartContext);
   const { isLoggedIn, logout, user } = useContext(AuthContext);
+  const { unreadMessagesCount } = useContext(MessageContext); 
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -71,13 +73,15 @@ const Nav = () => {
               {isLoggedIn ? (
                 <div className="d-sm-flex d-flex-column">
                   <li className="nav-item">
-                    <Link className="nav-link txt-hover" to="/messagereceived">Messages</Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link text-danger txt-hover"onClick={handleLogout}>Déconnexion</Link>
+                  <Link className="nav-link txt-hover" to="/messagereceived">
+                    Messages{unreadMessagesCount > 0 ? ` (${unreadMessagesCount})` : ""}
+                  </Link>
                   </li>
                   <li className="nav-item ">
                     <Link className="nav-link  txt-hover " to="/account">Compte</Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link text-danger txt-hover"onClick={handleLogout}>Déconnexion</Link>
                   </li>
                 </div>
               ) : (
