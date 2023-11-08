@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { AuthContext } from "../AuthContext/AuthContext.js";
 import { Link } from "react-router-dom";
 
-
 const Account = () => {
   const { isLoggedIn, user } = useContext(AuthContext);  
   return (
@@ -17,6 +16,7 @@ const Account = () => {
                 <Link className="bouton-1 w200">Mes factures</Link>
                 <Link className="bouton-1 w200">Mes points de fidélité</Link>
                 <Link className="bouton-1 w200">Mon code promo</Link>
+
               </div>
               
           </div>
@@ -24,7 +24,9 @@ const Account = () => {
           <div className="container">
               <h2>Page membre</h2>
               <p>Veuillez vous connecter pour accéder à votre compte !</p>
+
               <Link className="bouton-1 btn-success" to="/login">Connexion</Link>
+
           </div>
       )}
     </div>

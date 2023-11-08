@@ -17,7 +17,7 @@ function Order() {
   useEffect(() => {
     const fetchOrderDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/order/${basketId}`, {
+        const response = await axios.get(`https://uppercase-app-back-efd9a0ca1970.herokuapp.com/order/${basketId}`, {
           withCredentials: true
         });
         setOrderDetails(response.data);
@@ -34,7 +34,7 @@ function Order() {
   // Gestion du paiement accepté
   const handlePaymentAccepted = async () => {
     try {
-      const response = await axios.post(`http://localhost:5000/createInvoice`, { basketId: basketId , basketEmail: orderDetails.email}, { withCredentials: true });
+      const response = await axios.post(`https://uppercase-app-back-efd9a0ca1970.herokuapp.com/createInvoice`, { basketId: basketId , basketEmail: orderDetails.email}, { withCredentials: true });
       if (response.data.success) {
         // Si le paiement est réussi, redirection vers la page de succès
         navigate(`/payementsuccess/${response.data.invoiceId}`, { state: { basketId: basketId, basketEmail: orderDetails.email } });

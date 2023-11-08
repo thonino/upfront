@@ -9,7 +9,7 @@ export const CartProvider = ({ children }) => {
 
     const checkCart = useCallback(async () => {
         try { 
-            const response = await axios.get("http://localhost:5000/basket", { withCredentials: true,});
+            const response = await axios.get("https://uppercase-app-back-efd9a0ca1970.herokuapp.com/basket", { withCredentials: true,});
             const itemsCount = response.data && response.data.cartItems ? response.data.cartItems.length : 0;
             setCartItemCount(itemsCount); 
         } 

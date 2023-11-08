@@ -20,7 +20,7 @@ const Basket = () => {
   // Récupérer les éléments du panier depuis l'API
   const fetchBasket = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/basket", {
+      const response = await axios.get("https://uppercase-app-back-efd9a0ca1970.herokuapp.com/basket", {
         withCredentials: true,
       });
       setCartItems(response.data.cartItems);
@@ -71,7 +71,7 @@ const Basket = () => {
 const updateQuantities = async (quantities) => {
   try {
     const response = await axios.post(
-      "http://localhost:5000/update-quantities",
+      "https://uppercase-app-back-efd9a0ca1970.herokuapp.com/update-quantities",
       quantities,
       {
         withCredentials: true,
@@ -95,7 +95,7 @@ const updateQuantities = async (quantities) => {
     e.preventDefault();
     try {
       const response = await axios.get(
-        `http://localhost:5000/removeProduct/${productId}`,
+        `https://uppercase-app-back-efd9a0ca1970.herokuapp.com/removeProduct/${productId}`,
         {
           withCredentials: true,
         }
@@ -113,7 +113,7 @@ const updateQuantities = async (quantities) => {
   const clearBasket = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get("http://localhost:5000/clearBasket", {
+      const response = await axios.get("https://uppercase-app-back-efd9a0ca1970.herokuapp.com/clearBasket", {
         withCredentials: true,
       });
       if (response.data.success) {
@@ -135,7 +135,7 @@ const updateQuantities = async (quantities) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/validateBasket",
+        "https://uppercase-app-back-efd9a0ca1970.herokuapp.com/validateBasket",
         data,
         {
           withCredentials: true,

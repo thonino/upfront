@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function About() {
   return (
     <div className="container text-center">
-      <img src="http://localhost:5000/img/qui.png" className="mt-4  " alt="buy" />
+      <img src="https://uppercase-app-back-efd9a0ca1970.herokuapp.com/img/qui.png" className="mt-4  " alt="buy" />
       <h1 className="c2 pacifico">Qui sommes-nous ?</h1>
       <p className="roboto">
         Nous sommes une petite entreprise familiale qui vend des articles de boulangeries et de patisseries 

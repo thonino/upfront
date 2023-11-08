@@ -8,7 +8,7 @@ function Carrousel(){
                 <div className="carousel-item active">
                   <Link to="/products">
                     <img
-                      src="http://localhost:5000/img/hero1.png"
+                      src="https://uppercase-app-back-efd9a0ca1970.herokuapp.com/img/hero1.png"
                       className="d-block w-100"
                       alt="..."
                     />
@@ -17,7 +17,7 @@ function Carrousel(){
                 <div className="carousel-item">
                   <Link to="/products">
                     <img
-                      src="http://localhost:5000/img/hero2.png"
+                      src="https://uppercase-app-back-efd9a0ca1970.herokuapp.com/img/hero2.png"
                       className="d-block w-100"
                       alt="..."
                     />

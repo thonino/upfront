@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
     const user = JSON.parse(localStorage.getItem('user'));
     if (user) { setIsLoggedIn(true); setUser(user); setLoading(false); } 
     else {
-      axios.get("http://localhost:5000/login", { withCredentials: true })
+      axios.get("https://uppercase-app-back-efd9a0ca1970.herokuapp.com/login", { withCredentials: true })
         .then(response => {
           const data = response.data;
           if (data.success) {
@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = (email, password) => { 
-    return axios.post("http://localhost:5000/login", {
+    return axios.post("https://uppercase-app-back-efd9a0ca1970.herokuapp.com/login", {
         email: email,
         password: password
       }, {
@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    axios.post("http://localhost:5000/logout", {}, {
+    axios.post("https://uppercase-app-back-efd9a0ca1970.herokuapp.com/logout", {}, {
         withCredentials: true
     })
     .then((response) => {

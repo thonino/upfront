@@ -11,7 +11,7 @@ const Category = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/products",
+          "https://uppercase-app-back-efd9a0ca1970.herokuapp.com/products",
           { withCredentials: true }
         );
 
@@ -51,7 +51,7 @@ const Category = () => {
             className="card-custom mb-2"
           >
             <img
-              src={`http://localhost:5000/uploads/${categoriesWithImages[category]}`}
+              src={`https://uppercase-app-back-efd9a0ca1970.herokuapp.com/uploads/${categoriesWithImages[category]}`}
               className="card-img-top rounded-top"
               alt={category}
             />

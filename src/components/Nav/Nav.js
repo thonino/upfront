@@ -11,7 +11,7 @@ const Nav = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    fetch("http://localhost:5000/logout", {
+    fetch("https://uppercase-app-back-efd9a0ca1970.herokuapp.com/logout", {
       method: "POST",
       credentials: "include",
     })
@@ -53,7 +53,7 @@ const Nav = () => {
         </div>
         <div className="d-flex p-1">
           <Link className="mb-1" to="/">
-            <img src={`http://localhost:5000/img/logo1.png`} alt="" className="w-75" style={{ marginLeft: "-50px"}}/>
+            <img src={`https://uppercase-app-back-efd9a0ca1970.herokuapp.com/img/logo1.png`} alt="" className="w-75" style={{ marginLeft: "-50px"}}/>
           </Link>
           <Link className="nav-link mt-2r" to="/basket" onMouseEnter={handleMouseEnter1}>
             <i className="bi bi-cart-fill fs-2 hover "> 

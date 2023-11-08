@@ -26,7 +26,7 @@ const Register = () => {
       role: "client"
     };
   
-    fetch("http://localhost:5000/register/new", {
+    fetch("https://uppercase-app-back-efd9a0ca1970.herokuapp.com/register/new", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

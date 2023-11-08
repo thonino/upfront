@@ -10,7 +10,7 @@ const AccountEdit = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/edit-user/${id}`)
+    fetch(`https://uppercase-app-back-efd9a0ca1970.herokuapp.com/edit-user/${id}`)
       .then((response) => response.json())
       .then((user) => {
         setPrenom(user.prenom);
@@ -40,7 +40,7 @@ const AccountEdit = () => {
       ...(password && { password: password }), 
     };
   
-    fetch(`http://localhost:5000/edit-user/${id}`, {
+    fetch(`https://uppercase-app-back-efd9a0ca1970.herokuapp.com/edit-user/${id}`, {
       method: "POST",
       headers: { 'Content-Type': 'application/json', },
       body: JSON.stringify(userData),

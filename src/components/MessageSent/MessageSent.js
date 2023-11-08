@@ -18,7 +18,7 @@ function MessageSent() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/messagesent", { withCredentials: true })
+      .get("https://uppercase-app-back-efd9a0ca1970.herokuapp.com/messagesent", { withCredentials: true })
       .then((response) => {
         const data = response.data;
         setMessages(data.messages.reverse());
@@ -30,7 +30,7 @@ function MessageSent() {
 
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:5000/deletemessage/${id}`, { withCredentials: true })
+      .delete(`https://uppercase-app-back-efd9a0ca1970.herokuapp.com/deletemessage/${id}`, { withCredentials: true })
       .then(() => {
         setMessages(messages.filter((message) => message._id !== id));
         setMessageToDelete(null);
@@ -49,7 +49,7 @@ function MessageSent() {
   const handleSaveEdit = (id) => {
     const updatedMessageData = { texte: newText };
     axios
-      .put(`http://localhost:5000/editmessage/${id}`, updatedMessageData)
+      .put(`https://uppercase-app-back-efd9a0ca1970.herokuapp.com/editmessage/${id}`, updatedMessageData)
       .then(response => {
         const updatedMessages = messages.map(message => {
           if (message._id === id) {
