@@ -29,7 +29,7 @@ export const MessageProvider = ({ children }) => {
 
 const markMessageAsRead = async (messageId) => {
   try {
-    const response = await axios.put(`https://uppercase-app-back-efd9a0ca1970.herokuapp.com/markasread/${messageId}`, {}, { withCredentials: true });
+    const response = await axios.put(`https://uppercase-app-back-efd9a0ca1970.herokuapp.com/markasread/${messageId}`, { withCredentials: true });
     console.log('Réponse du serveur', response);
     setMessages(prevMessages =>
       prevMessages.map(message =>
