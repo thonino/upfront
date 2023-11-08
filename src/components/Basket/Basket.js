@@ -158,17 +158,17 @@ const updateQuantities = async (quantities) => {
   
   return (
     <div className="container mt-4">
-      <h1 className="mb-3 text-center">Votre panier</h1>
+      <h1 className="mb-3 c1 pacifico text-center">Votre panier</h1>
       {error && <div className="alert alert-danger mb-3">{error}</div>}
-      <table className="table">
+      <table className="table ">
         <thead>
-            <tr>
+            <tr className="dancing fs-5">
                 <th scope="col" className="align-middle">Produit</th>
                 <th scope="col" className="align-middle">Prix</th>
                 <th scope="col" className="col-1 text-center align-middle">Quantité</th>
                 <th scope="col" className="text-center align-middle">Total</th>
-                <th scope="col" className="text-danger fw-bold fst-italic align-middle">
-                    Retirer
+                <th scope="col" className="fw-bold fst-italic align-middle">
+                    <span className="c2">Retirer</span>
                 </th>
                 {cartItems.some(item => modifiedFields[item.product.id]) && (
                     <th scope="col" className="text-warning fw-bold fst-italic align-middle">
@@ -177,10 +177,10 @@ const updateQuantities = async (quantities) => {
                 )}
             </tr>
         </thead>
-        <tbody>
+        <tbody className="roboto">
             {cartItems.map((item) => (
                 <tr key={item.product.id}>
-                    <td className="text-capitalize align-middle">{item.product.nom}</td>
+                    <td className="text-capitalize align-middle fst-italic">{item.product.nom}</td>
                     <td className="align-middle">{item.product.prix} €</td>
                     <td className="align-middle">
                         <form
@@ -210,21 +210,21 @@ const updateQuantities = async (quantities) => {
                     <td className="align-middle">
                         <button
                             type="button"
-                            className="btn btn-danger btn-sm"
+                            className="bouton-1 bg-3 btn-sm"
                             onClick={(e) => removeItem(e, item.product.id)}
                         >
-                            <i className="bi bi-dash-circle"></i>
+                            <i className="bi bi-dash-circle "></i>
                         </button>
                     </td>
                     {cartItems.some(item => modifiedFields[item.product.id]) && (
                         <td className="align-middle">
                             <button 
                                 type="button" 
-                                className={`btn fst-italic btn-warning ${modifiedFields[item.product.id] ? "" : "d-none"}`}
+                                className={`btn btn-warning fst-italic  ${modifiedFields[item.product.id] ? "" : "d-none"}`}
                                 onClick={() => handleApply(item.product.id)}
                                 disabled={ !inputValues[item.product.id] || parseInt(inputValues[item.product.id], 10) < 1}
                             >
-                                Appliquer
+                                <span className="margin-left">Appliquer</span>
                             </button>
                         </td>
                     )}
@@ -235,12 +235,12 @@ const updateQuantities = async (quantities) => {
 
 
       
-      <div className="text-end mt-3">
+      <div className="text-end mt-3 roboto">
         {cartItems.length > 0 ? (
           <>
-            <p className="text-end fs-4 fw-bold">
+            <p className="text-end fs-4 fw-bold ">
               Prix total:{" "}
-              <span className="fw-bold text-success">{totalPrice} €</span>
+              <span className="fw-bold c2">{totalPrice} €</span>
             </p>
             <form onSubmit={handleSubmit} className="mb-3">
               <div className="mb-3">
@@ -248,7 +248,7 @@ const updateQuantities = async (quantities) => {
                   <>
                     <p className="fs-4">
                       <strong>Votre email : </strong>
-                      <span className="text-success">{user.data.email}</span>
+                      <span className="c2">{user.data.email}</span>
                     </p>
                     <input type="hidden" name="email" value={user.data.email} />
                   </>
@@ -271,14 +271,14 @@ const updateQuantities = async (quantities) => {
                   </>
                 )}
               </div>
-              <Link className="btn btn-warning" to="/products">
+              <Link className="bouton-1" to="/products">
                 <i className="bi bi-plus-lg"> Ajouter</i>
               </Link>
-              <button className="btn btn-danger mx-2" onClick={clearBasket}>
+              <button className="bouton-2 mx-2" onClick={clearBasket}>
                 <i className="bi bi-trash"> Vider panier</i>
               </button>
               <input type="hidden" name="prix_total" value={totalPrice} />
-              <button type="submit" className="btn btn-success">
+              <button type="submit" className="bouton-1">
                 Valider le panier
               </button>
             </form>

@@ -22,10 +22,10 @@ const Login = () => {
 
   return (
     <div className="container col-6">
-      <h1 className="text-center">Se connecter !</h1>
+      <h1 className="text-center c1 pacifico">Se connecter !</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="email" className="fst-italic">
+          <label htmlFor="email" className="fst-italic roboto">
             Email
           </label>
           <input
@@ -37,7 +37,7 @@ const Login = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password" className="fst-italic">
+          <label htmlFor="password" className="fst-italic roboto">
             Mot de passe
           </label>
           <input
@@ -48,7 +48,7 @@ const Login = () => {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary mt-2">
+        <button type="submit" className="bouton-1  mt-3">
           Connexion
         </button>
       </form>

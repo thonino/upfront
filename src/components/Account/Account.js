@@ -8,14 +8,15 @@ const Account = () => {
     <div className="text-center">
       {isLoggedIn && user && user.data ? (
           <div className="">
-              <h1 className="text-center mt-2">Mon Compte</h1>
+              <h1 className="text-center c1 pacifico mt-2">Mon Compte</h1>
               <div className="d-flex flex-column align-items-center gap-2">
-                <Link to={`/account/edit/${user.data._id}`} className="btn btn-primary fxbtn">
+                <Link to={`/account/edit/${user.data._id}`} className="bouton-1 w200">
                   Modifier Informations
                 </Link>
-                <Link className="btn btn-primary fxbtn">Mes factures</Link>
-                <Link className="btn btn-primary fxbtn">Mes points de fidélité</Link>
-                <Link className="btn btn-primary fxbtn">Mon code promo</Link>
+                <Link className="bouton-1 w200">Mes factures</Link>
+                <Link className="bouton-1 w200">Mes points de fidélité</Link>
+                <Link className="bouton-1 w200">Mon code promo</Link>
+
               </div>
               
           </div>
@@ -23,7 +24,9 @@ const Account = () => {
           <div className="container">
               <h2>Page membre</h2>
               <p>Veuillez vous connecter pour accéder à votre compte !</p>
-              <Link className="btn btn-success" to="/login">Connexion</Link>
+
+              <Link className="bouton-1 btn-success" to="/login">Connexion</Link>
+
           </div>
       )}
     </div>

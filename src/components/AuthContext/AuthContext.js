@@ -31,8 +31,6 @@ export const AuthProvider = ({ children }) => {
         });
     }
   }, []);
-  
-  
 
   const login = (email, password) => { 
     return axios.post("https://uppercase-app-back-efd9a0ca1970.herokuapp.com/login", {

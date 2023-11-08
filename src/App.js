@@ -38,7 +38,7 @@ function App() {
             <Navbar />
             <CookieConsent />
               <Routes>
-              <Route path="/account" element={<Account />} />
+                <Route path="/account" element={<Account />} />
                 <Route path="/account/edit/:id" element={<AccountEdit />} />
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
@@ -66,4 +66,5 @@ function App() {
     </div>
   );
 }
+
 export default App;

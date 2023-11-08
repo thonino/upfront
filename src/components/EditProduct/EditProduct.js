@@ -80,11 +80,11 @@ const EditProduct = () => {
   };
 
   return (
-    <div className="container">
-      <h1 className="mb-4">Modifier un produit</h1>
+    <div className="container col-6">
+      <h1 className="mb-4 c1 pacifico text-center">Modifier un produit</h1>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <div className="mb-3">
-          <label htmlFor="categorie" className="form-label">
+          <label htmlFor="categorie" className="form-label roboto fst-italic">
             Catégorie
           </label>
           <input
@@ -98,7 +98,7 @@ const EditProduct = () => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="nom" className="form-label">
+          <label htmlFor="nom" className="form-label roboto fst-italic">
             Nom
           </label>
           <input
@@ -112,12 +112,12 @@ const EditProduct = () => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="prix" className="form-label">
+          <label htmlFor="prix" className="form-label roboto fst-italic">
             Prix
           </label>
           <input
             type="number"
-            className="form-control"
+            className="form-control fst-ialic"
             id="prix"
             name="prix"
             value={prix}
@@ -126,7 +126,7 @@ const EditProduct = () => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="description" className="form-label">
+          <label htmlFor="description" className="form-label roboto fst-italic">
             Description
           </label>
           <textarea
@@ -140,7 +140,7 @@ const EditProduct = () => {
           ></textarea>
         </div>
         <div className="mb-3">
-          <label htmlFor="photo" className="form-label">
+          <label htmlFor="photo" className="form-label roboto fst-italic">
             Photo
           </label>
           <input
@@ -151,10 +151,10 @@ const EditProduct = () => {
             onChange={handlePhotoChange}
           />
         </div>
-        <button type="submit" className="btn btn-success me-2">
+        <button type="submit" className="bouton-1 me-2">
           Enregistrer
         </button>
-        <button onClick={handleDeleteConfirmation} className="btn btn-danger">
+        <button onClick={handleDeleteConfirmation} className="bouton-2">
           Supprimer
         </button>
       </form>

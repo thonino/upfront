@@ -44,11 +44,11 @@ const Register = () => {
   
 
   return (
-    <div className="container">
-      <h1 className="mb-4">Inscription</h1>
+    <div className="container col-6">
+      <h1 className="text-center c1 pacifico">S'inscrire</h1>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
       <div className="mb-3">
-          <label htmlFor="Prenom" className="form-label">
+          <label htmlFor="Prenom" className="fst-italic form-label roboto">
             Prenom
           </label>
           <input
@@ -60,7 +60,7 @@ const Register = () => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="Email" className="form-label">
+          <label htmlFor="Email" className="fst-italic form-label roboto">
             Email
           </label>
           <input
@@ -73,7 +73,7 @@ const Register = () => {
         </div>
         
         <div className="mb-3">
-          <label htmlFor="Password" className="form-label">
+          <label htmlFor="Password" className="fst-italic form-label roboto">
             Password
           </label>
           <input
@@ -84,7 +84,7 @@ const Register = () => {
             onChange={handlePasswordChange}
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="bouton-1">
           Enregistrer
         </button>
       </form>
@@ -93,4 +93,5 @@ const Register = () => {
 };
 
 export default Register;
+
 

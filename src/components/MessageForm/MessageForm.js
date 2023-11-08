@@ -41,46 +41,64 @@ const MessageForm = ({ expediteur, destinataire, closeDialog }) => {
 
   return (
     <div className="p-3 container">
-      <h1>Nous-contacter ! </h1>
+      <h1 className="c1 pacifico text-center"> <i class="bi bi-vector-pen"></i> Ecrire ...</h1>
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="expediteur" className="form-label">Expéditeur</label>
-          <input type="email" className="form-control text-center fs-3" id="expediteur" value={expediteurEmail} disabled />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="destinataire" className="form-label">Destinataire</label>
           <input 
-            type="email" 
+            type="hidden" 
+            className="form-control text-center fs-3" 
+            id="expediteur" 
+            value={expediteurEmail} disabled 
+          />
+          <input 
+            type="hidden" 
             className="form-control text-center text-success fs-3" 
             id="destinataire" 
             value={destinataireEmail} disabled 
           />
-        </div>
         <div className="mb-3">
-          <label htmlFor="message" className="form-label fs-2"> Votre message :</label>
-          <textarea className="form-control" id="message" rows="5" value={messageContent} onChange={(e) => setMessageContent(e.target.value)} required></textarea>
+          <label htmlFor="message" className="form-label dancing fs-2"> 
+            Message de :
+            <span>{user.data.role === "admin" ?  " Admin" : ` ${user.data.prenom}`} </span>
+          </label>
+          <textarea 
+            className="form-control" 
+            id="message" 
+            rows="5" 
+            value={messageContent} 
+            onChange={(e) => setMessageContent(e.target.value)} required>
+          </textarea>
         </div>
-        <button type="submit" className="btn btn-primary">Envoyer</button>
+        <button type="submit" className="bouton-1">Envoyer</button>
       </form>
 
       {messageSent && (
-      <div className="modal show d-block" style={{backgroundColor: 'rgba(0, 0, 0, 0.5)'}}>
+        <div className="modal show d-block" style={{backgroundColor: 'rgba(0, 0, 0, 0.5)'}}>
           <div className="modal-dialog">
               <div className="modal-content">
                   <div className="modal-header">
                       <h5 className="modal-title">Confirmation</h5>
-                      <button onClick={() => setMessageSent(null)} type="button" className="btn-close"></button>
+                      <button 
+                        onClick={() => setMessageSent(null)} 
+                        type="button" 
+                        className="btn-close">
+                      </button>
                   </div>
                   <div className="modal-body">
                       <p>{messageSent}</p>
                   </div>
                   <div className="modal-footer">
-                      <button onClick={() => setMessageSent(null)} type="button" className="btn btn-secondary">OK</button>
+                      <button 
+                        onClick={() => setMessageSent(null)} 
+                        type="button" 
+                        className="btn btn-secondary"
+                      >
+                        OK
+                      </button>
                   </div>
               </div>
           </div>
-      </div>
-  )}
+        </div>
+      )}
 
     </div>
   );

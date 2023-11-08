@@ -70,11 +70,11 @@ const AccountEdit = () => {
   };
 
   return (
-    <div className="container">
-      <h1 className="mb-4 text-center">Modifier mon compte</h1>
+    <div className="container col-6">
+      <h1 className="mb-4 c1 pacifico text-center">Modifier mon compte</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label htmlFor="prenom" className="form-label">
+          <label htmlFor="prenom" className="form-label roboto fst-italic">
             Prénom
           </label>
           <input
@@ -88,7 +88,7 @@ const AccountEdit = () => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="email" className="form-label">
+          <label htmlFor="email" className="form-label roboto fst-italic">
             Email
           </label>
           <input
@@ -102,7 +102,7 @@ const AccountEdit = () => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="password" className="form-label">
+          <label htmlFor="password" className="form-label roboto fst-italic">
             password
           </label>
           <input
@@ -114,10 +114,10 @@ const AccountEdit = () => {
             onChange={handlePasswordChange}
           />
         </div>
-        <button type="submit" className="btn btn-success me-2">
+        <button type="submit" className="bouton-1 me-2 roboto">
           Enregistrer
         </button>
-        <button onClick={handleDeleteConfirmation} className="btn btn-danger">
+        <button onClick={handleDeleteConfirmation} className="bouton-2 roboto">
           Supprimer
         </button>
       </form>

@@ -1,55 +1,51 @@
 
-.panier-hover {
-  transition: color 0.1s, transform 0.1s;
-  color: #6c757d;
+.hover {
+  transition: color 0.2s;
+  color: #ac5b26;
+  transition: 0.2s;
 }
-
-.panier-hover:hover {
-  transition: 0.4s;
+.hover:hover {
+  transition: 0.2s;
   color: #ff8e3a;
-  transform: translateX(3px); 
+}
+.hover-2 {
+  transition: color 0.2s;
+  color: #593924;
+  transition: 0.2s;
+}
+.hover-2:hover {
+  transition: 0.2s;
+  color: #fbe2d0;
 }
 
-.txt-hover {
-  transition: 0.4s; 
-}
-
+.txt-hover { transition: 0.4s;}
 .txt-hover:hover {
-  transition: 0.4s;
+  transition: 0.5s;
   text-decoration: underline;
-  text-decoration-thickness: 5px;
-  text-underline-offset: 5px;
   text-decoration-color: #ff8e3a;
+  text-decoration-thickness: 8px;
+  text-underline-offset: 10px;
+  
 }
 
-.square{
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.card-custom {
+  background-color:#fbe2d0;; 
+  border-radius: 10px; 
   text-decoration: none;
-  background-color:  #ff8e3a;
-  color: #303030;
-  border-radius:50%;
-  width: 270px;
-  height: 270px;
-  transition: 0.7s;
-
-}
-.square:hover{
-  background-color:  #b25f20;
-  color: white;
-  transition: 0.7s;
+  color:black;
+  padding-bottom: 5px;
+  transition: transform 0.6s; 
+  transform: scale(0.9);
   width: 300px;
-  height: 300px;
 }
-.text-orange{
-  color:#ff8e3a;
-}
-
-.tdn{
-  text-decoration: none;;
+.card-custom:hover {
+  transition: transform 0.2s, box-shadow 0.3s;
+  transform: scale(1);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.fxbtn {
-  width: 250px;
+.sb-fix{
+  background-color: #f8f9fa;
+  margin-bottom: 80px ;
 }
+
