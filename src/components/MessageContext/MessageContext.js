@@ -27,22 +27,22 @@ export const MessageProvider = ({ children }) => {
     }
   }, [user]); 
 
-const markMessageAsRead = async (messageId) => {
-  try {
-    const response = await axios.put(`http://localhost:5000/markasread/${messageId}`, { withCredentials: true });
-    console.log('Réponse du serveur', response);
-    setMessages(prevMessages =>
-      prevMessages.map(message =>
-        message._id === messageId ? { ...message, read: true } : message
-      )
-    );
-    setUnreadMessagesCount(prevCount => prevCount > 0 ? prevCount - 1 : 0);
-    return response; 
-  } catch (error) {
-    console.error("Erreur lors de la mise à jour du message comme lu:", error);
-    throw error; 
-  }
-};
+  const markMessageAsRead = async (messageId) => {
+    try {
+      const response = await axios.put(`http://localhost:5000/markasread/${messageId}`, { withCredentials: true });
+      console.log('Réponse du serveur', response);
+      setMessages(prevMessages =>
+        prevMessages.map(message =>
+          message._id === messageId ? { ...message, lu: true } : message
+        )
+      );
+      setUnreadMessagesCount(prevCount => prevCount > 0 ? prevCount - 1 : 0);
+      return response; 
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour du message comme lu:", error);
+      throw error; 
+    }
+  };
 
   return (
   <MessageContext.Provider value={{

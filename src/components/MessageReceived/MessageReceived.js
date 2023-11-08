@@ -63,6 +63,7 @@ function MessageReceived() {
         console.error('Erreur lors de la mise à jour du statut de lecture:', error);
       });
   };
+  
 
   const isUserAdmin = user.data.role === 'admin';
 
