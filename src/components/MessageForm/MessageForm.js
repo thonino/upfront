@@ -41,7 +41,7 @@ const MessageForm = ({ expediteur, destinataire, closeDialog }) => {
 
   return (
     <div className="p-3 container">
-      <h1 className="c1 pacifico text-center"> <i class="bi bi-vector-pen"></i> Ecrire ...</h1>
+      <h1 className="c1 pacifico text-center"> <i classNme="bi bi-vector-pen"></i> Ecrire ...</h1>
       <form onSubmit={handleSubmit}>
           <input 
             type="hidden" 

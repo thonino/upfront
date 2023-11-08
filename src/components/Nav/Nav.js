@@ -88,7 +88,7 @@ const Nav = () => {
               {user && user.data && user.data.role === 'admin' && (
                 <li className="nav-item">
                   <Link className="nav-link txt-hover fs-4" to="/product/new">
-                  <i class="bi bi-plus hover"><i class="bi bi-box-seam-fill hover"></i></i>
+                  <i className="bi bi-plus hover"><i className="bi bi-box-seam-fill hover"></i></i>
                     
                   </Link>
                 </li>
@@ -105,12 +105,12 @@ const Nav = () => {
                   </li>
                   <li className="nav-item ">
                     <Link className="nav-link  txt-hover ms-10r" to="/account">
-                    <i class="bi bi-person-fill-gear hover fs-4"></i> 
+                    <i className="bi bi-person-fill-gear hover fs-4"></i> 
                     </Link>
                   </li>
                   <li className="nav-item">
                     <Link className="nav-link txt-hover  fs-4"onClick={handleLogout}>
-                    <i class="bi bi-box-arrow-up-right hover "></i>
+                    <i className="bi bi-box-arrow-up-right hover "></i>
                     </Link>
                   </li>
                 </div>
@@ -118,13 +118,13 @@ const Nav = () => {
                 <div className="text-center d-sm-flex">
                   <li className="nav-item">
                     <Link className="nav-link  txt-hover fs-4" to="/register">
-                      {/* <i class="bi bi-pencil-square  "></i>  */}
+                      {/* <i className="bi bi-pencil-square  "></i>  */}
                       Inscription
                     </Link>
                   </li>
                   <li className="nav-item">
                     <Link className="nav-link txt-hover fs-4" to="/login">
-                      Connexion <i class="bi bi-box-arrow-in-up-left hover icon-aligned"></i>
+                      Connexion <i className="bi bi-box-arrow-in-up-left hover icon-aligned"></i>
                     </Link>
                   </li>
                 </div>
