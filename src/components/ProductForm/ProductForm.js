@@ -56,11 +56,11 @@ const ProductForm = () => {
   };
 
   return (
-    <div className="container">
-      <h1 className="mb-4">Ajouter un produit</h1>
+    <div className="container col-6">
+      <h1 className="mb-4 c1 pacifico text-center">Ajouter un produit</h1>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <div className="mb-3">
-          <label htmlFor="categorie" className="form-label">
+          <label htmlFor="categorie" className="form-label roboto fst-italic">
             Catégorie
           </label>
           <input
@@ -72,7 +72,7 @@ const ProductForm = () => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="nom" className="form-label">
+          <label htmlFor="nom" className="form-label roboto fst-italic">
             Nom
           </label>
           <input
@@ -84,7 +84,7 @@ const ProductForm = () => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="prix" className="form-label">
+          <label htmlFor="prix" className="form-label roboto fst-italic">
             Prix
           </label>
           <input
@@ -96,7 +96,7 @@ const ProductForm = () => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="description" className="form-label">
+          <label htmlFor="description" className="form-label roboto fst-italic">
             Description
           </label>
           <textarea
@@ -108,7 +108,7 @@ const ProductForm = () => {
           ></textarea>
         </div>
         <div className="mb-3">
-          <label htmlFor="photo" className="form-label">
+          <label htmlFor="photo" className="form-label roboto fst-italic">
             Photo
           </label>
           <input
@@ -118,7 +118,7 @@ const ProductForm = () => {
             onChange={handlePhotoChange}
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="bouton-1">
           Ajouter
         </button>
       </form>

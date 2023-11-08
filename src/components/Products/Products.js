@@ -88,25 +88,26 @@ function Products() {
 
   return (
     <div className="container">
-      <h1 className="text-center mt-2">Nos Produits</h1>
+      <h1 className="text-center c1 pacifico mt-2">Nos Produits</h1>
       <div className="mb-4 col-6  mx-auto">
         <select
           className="form-select text-center"
-          aria-label="Default select example"
           onChange={handleChange}
           value={category}
         >
-          <option value="Choisir une catégorie">Choisir une catégorie</option>
+          <option value="Choisir une catégorie">
+            Choisir une catégorie
+          </option>
           {categories.map((cat) => (
             <option key={cat} value={cat}>
-              {cat}
+              <p className="pacifico">{cat}</p>
             </option>
           ))}
         </select>
       </div>
       {message && (
         <div className="modal show d-block" style={{backgroundColor: 'rgba(0, 0, 0, 0.5)'}}>
-          <div className="modal-dialog">
+          <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">Confirmation</h5>
@@ -128,39 +129,40 @@ function Products() {
         <div className="row g-4">
           {products.map((product) => (
             <div className="col d-flex justify-content-center" key={product._id}>
-              <div className="card h-100 category-card" style={{ width: "300px" }}>
+              <div className="card-custom" style={{ width: "300px" }}>
               <Link onClick={() => openProductDetails(product)}>
                 <img
                   src={`http://localhost:5000/uploads/${product.photo}`}
-                  className="card-img-top"
+                  className="card-img-top rounded-top"
                   alt={product.photo}
                 />
                 </Link>
                 <div className="card-body">
-                  <p className="text-center text-dark fw-bold fs-4 m-0 ">{product.prix}€</p>
-                  <h3 className="card-title text-capitalize fw-light text-center">{product.nom}</h3>
+                  <p className="text-center text-dark fw-bold fs-2 m-0 dancing ">{product.prix}€</p>
+                  <h3 className="card-title text-capitalize fw-light text-center roboto">{product.nom}</h3>
                 </div>
                 <div className="card-footer">
-                  <div className="d-flex row justify-content-center px-1">
-                    <button
-                      className="btn btn-warning text-center"
+                  <div className="d-flex row justify-content-center ">
+                    <Link
+                      className="tdn pacifico text-center fs-4 mb-2 hover"
                       onClick={() => addToCart(product._id)}
+                      
                     >
                       Ajouter au Panier
-                    </button>
+                    </Link>
                     
                   </div>
                   {user && user.data && user.data.role === 'admin' && (
-                    <div className="mt-2 d-flex justify-content-around">
+                    <div className="mt-2 d-flex justify-content-around mb-2">
                       <Link
                         to={`/product/edit/${product._id}`}
-                        className="btn btn-warning"
+                        className="bouton-1 w120 roboto fs-5"
                       >
                         Modifier
                       </Link>
                       <button
                         onClick={() => setProductToDelete(product._id)}
-                        className="btn btn-danger"
+                        className="bouton-2 w120 "
                       >
                         Supprimer
                       </button>

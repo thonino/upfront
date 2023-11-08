@@ -1,29 +1,181 @@
-html{
-background-color: #f8f9fa;
+html {
+  background-color: #f8f9fa;
 }
-.sb-fix{
-background-color: #f8f9fa;
-margin-bottom: 80px ;
+
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Pacifico&family=Roboto+Flex:opsz,wght@8..144,100&display=swap");
+/* 
+  font-family: 'Dancing Script', cursive;
+  font-family: 'Pacifico', cursive;
+  font-family: 'Roboto Flex', sans-serif; 
+*/
+
+.roboto {
+  font-family: "Roboto Flex";
 }
-.category-card {
-  transition: transform 0.3s, box-shadow 0.3s;
+.dancing {
+  font-family: "Dancing Script";
+}
+.pacifico {
+  font-family: "Pacifico";
+}
+
+.c1 {color: #593924;}
+.c2 {color: #ac5b26;}
+.c3 {color: #ff8e3a;}
+.c4 {color: #ffb787;}
+.c5 {color: #e29969;}
+.c6 {color: #ffffff;}
+.c7 {color: #fbe2d0;}
+
+.bg-1 {background-color: #593924;}
+.bg-2 {background-color: rgb(171, 91, 38);}
+.bg-3 {background-color: #ff8e3a;}
+.bg-4 {background-color: #ffb787;}
+.bg-5 {background-color: #e29969;}
+.bg-6 {background-color: #ffffff;}
+.bg-7 {background-color: #fbe2d0;}
+
+.accordion-button:hover {
+  background-color: rgba(255, 107, 9, 0.397) !important;
+  border: none !important;
+}
+.accordion-button:focus {
+  background-color: #ff8e3a !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  color: white;
+}
+
+.square {
+  color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 20px;
+  border-radius: 50%;
+  width: 180px;
+  height: 180px;
+}
+
+.square:hover {
+  color: white;
+  transition: 0.7s;
+}
+
+@keyframes bounce { 0%,100% 
+  {transform: translateY(0);}
+  40% {transform: translateY(-60px);}
+  50% {transform: translateY(0px);}
+  60% {transform: translateY(-35px);}
+  70% {transform: translateY(-0px);}
+  80% {transform: translateY(-15px);}
+  90% {transform: translateY(0px);}
+}
+.start-bounce{animation:bounce 1s;}
+.div-parent {
+  padding: -10px;
+  padding: 5px;
+}
+.div-enfant:hover {
+  box-shadow: 1px 4px 8px rgba(58, 37, 10, 0.205);
+}
+
+.bouton {
+  padding: 6px 15px;
+  background-color: #593924;
+  color: white;
   border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.bouton:hover {
+  color: #ff8e3a;
 }
 
-.category-card:hover {
-  transform: scale(1.08);
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.product-card {
-  width: 300px; 
-  transition: transform 0.3s, box-shadow 0.3s;
+.bouton-1 {
+  padding: 6px 15px;
+  background-color: #ac5b26;
+  color: white;
   border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.bouton-1:hover {
+  background-color: #ff8e3a;
+}
+.bouton-2 {
+  padding: 6px 15px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.bouton-2:hover {
+  background-color: #ff0019;
 }
 
-.product-card:hover {
-  transform: scale(1.08);
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+.w200 { width: 200px;}
+.w120 { width: 120px;}
+.w80 { width: 80px;}
+.margin-left { margin-left: -2px;}
+
+span h2 {font-family: "Roboto Flex";}
+
+span p, li {
+  font-family: "Roboto Flex";
+  font-size: 16px;
 }
 
+.me-10 { margin-right: 10px;}
+.ms-10r {
+  margin-left: -10px;
+  margin-right: -6px;
+}
+.mt-2r {margin-top: -2px;}
+.mt-10 {margin-top: 10px;}
+.mt-20 {margin-top: 20px;}
 
+@keyframes bounce2 {0%,100% 
+  {transform: translateY(0);}
+  40% {transform: translateY(-20px);}
+  50% {transform: translateY(0px);}
+  60% {transform: translateY(-10px);}
+  70% {transform: translateY(-0px);}
+  80% {transform: translateY(-5px);}
+  90% {transform: translateY(0px);}
+}
+.cible1.demarre1{animation:bounce2 1s;}
+.cible2.demarre2{animation:bounce2 1s;}
+
+.notif {
+  position: relative;
+  top: -12px;
+  background-color: #ff8e3a;
+  border-radius: 50%;
+  color: white;
+  padding-left: 6px;
+  padding-right: 8px;
+  font-size: 17px;
+  display:inline-block;
+}

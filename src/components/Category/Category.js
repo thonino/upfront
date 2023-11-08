@@ -43,23 +43,16 @@ const Category = () => {
   }
 
   return (
-    <div className="justify-content-center gap-4 mt-3 px-2
-      row row-cols-1 
-        row-cols-sm-2 
-          row-cols-md-3 
-            row-cols-lg-4 
-              row-cols-xl-5 
-                ">
+    <div className="row col-lg-10 justify-content-center mx-4 mt-3 ">
       {Object.keys(categoriesWithImages).map((category) => (
         <div className="col d-flex justify-content-center" key={category}>
           <Link
             to={`/category/${category}`}
-            className="card text-decoration-none category-card"
-            style={{ width: "270px" }}
+            className="card-custom mb-2"
           >
             <img
               src={`http://localhost:5000/uploads/${categoriesWithImages[category]}`}
-              className="card-img-top"
+              className="card-img-top rounded-top"
               alt={category}
             />
             <div className="card-body text-center ">

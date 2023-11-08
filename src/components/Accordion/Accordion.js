@@ -9,14 +9,14 @@ function Accordion() {
       <div className="accordion-item text-start">
         <h2 className="accordion-header">
           <button
-            className="accordion-button collapsed"
+            className="accordion-button collapsed "
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#collapseOne"
             aria-expanded="false"
             aria-controls="collapseOne"
           >
-            <span className="fs-5">Qu'est-ce que le Click and Collect ?</span>
+            <span className="fs-6 roboto fw-bold">Qu'est-ce que le Click and Collect ?</span>
           </button>
         </h2>
         <div
@@ -24,7 +24,7 @@ function Accordion() {
           className="accordion-collapse collapse"
           data-bs-parent="#clickAndCollectAccordion"
         >
-          <div className="accordion-body">
+          <div className="accordion-body roboto">
             <p>
               Le Click and Collect n'est pas seulement une tendance, c'est une
               réponse moderne aux besoins actuels des consommateurs. Plus de
@@ -45,7 +45,7 @@ function Accordion() {
             aria-expanded="false"
             aria-controls="collapseTwo"
           >
-            <span className="fs-5">En trois étapes simples !</span>
+            <span className="fs-6 roboto fw-bold">En trois étapes simples !</span>
           </button>
         </h2>
         <div
@@ -53,7 +53,7 @@ function Accordion() {
           className="accordion-collapse collapse"
           data-bs-parent="#clickAndCollectAccordion"
         >
-          <div className="accordion-body">
+          <div className="accordion-body roboto">
             <p>
               <strong>Choisissez</strong> vos articles en ligne, à votre rythme.
             </p>
@@ -78,7 +78,7 @@ function Accordion() {
             aria-expanded="false"
             aria-controls="collapseThree"
           >
-            <span className="fs-5">
+            <span className="fs-6 roboto fw-bold">
               Pourquoi opter pour le Click and Collect ?
             </span>
           </button>
@@ -88,7 +88,7 @@ function Accordion() {
           className="accordion-collapse collapse"
           data-bs-parent="#clickAndCollectAccordion"
         >
-          <div className="accordion-body">
+          <div className="accordion-body roboto">
             <p>
               <strong>Praticité</strong> : Faites vos choix confortablement
               depuis chez vous et passez en magasin uniquement pour la

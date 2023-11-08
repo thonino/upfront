@@ -28,17 +28,17 @@ const CookieConsent = () => {
         <div className="modal show d-block" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
           <div className="modal-dialog">
             <div className="modal-content">
-              <div className="modal-body">
+              <div className="modal-body roboto fs-5">
                 <p>
                   Nous utilisons des cookies pour améliorer votre expérience. 
                   En cliquant sur "j'accepte", vous consentez notre politique en matière de cookies.
                   </p>
               </div>
               <div className="modal-footer">
-                <button onClick={handleAcceptCookieConsent} type="button" className="btn btn-primary">
+                <button onClick={handleAcceptCookieConsent} type="button" className="bouton-1">
                   J'accepte
                 </button>
-                <button onClick={handleDeclineCookieConsent} type="button" className="btn btn-secondary">
+                <button onClick={handleDeclineCookieConsent} type="button" className="bouton-2">
                   Je n'accepte pas
                 </button>
               </div>
