@@ -134,7 +134,7 @@ function MessageReceived() {
                     onClick={() => markAsRead(message._id)}
                     className="roboto hover-2 fs-5 fw-bold fst-italic tdn"
                   >
-                    <i class="bi bi-check2-circle fs-3 icon-aligned"></i>
+                    <i className="bi bi-check2-circle fs-3 icon-aligned"></i>
                     J'ai lu !
                   </Link>
                 )}
