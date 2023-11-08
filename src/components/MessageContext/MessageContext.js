@@ -33,7 +33,7 @@ const markMessageAsRead = async (messageId) => {
     console.log('Réponse du serveur', response);
     setMessages(prevMessages =>
       prevMessages.map(message =>
-        message._id === messageId ? { ...message, read: true } : message
+        message._id === messageId ? { ...message, lu: true } : message
       )
     );
     setUnreadMessagesCount(prevCount => prevCount > 0 ? prevCount - 1 : 0);
