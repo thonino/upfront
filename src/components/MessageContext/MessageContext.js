@@ -27,26 +27,56 @@ export const MessageProvider = ({ children }) => {
     }
   }, [user]); 
 
-  const markMessageAsRead = async (messageId) => {
+  // const markMessageAsRead = async (messageId) => {
+  //   try {
+  //     const response = await axios.put(
+  //       `https://uppercase-app-back-efd9a0ca1970.herokuapp.com/markasread/${messageId}`,
+  //       { id: messageId }, 
+  //       { withCredentials: true }
+  //     );
+  //     console.log('Réponse du serveur', response);
+  //     setMessages(prevMessages =>
+  //       prevMessages.map(message =>
+  //         message._id === messageId ? { ...message, lu: true } : message
+  //       )
+  //     );
+  //     setUnreadMessagesCount(prevCount => prevCount > 0 ? prevCount - 1 : 0);
+  //     return response; 
+  //   } catch (error) {
+  //     console.error("Erreur lors de la mise à jour du message comme lu:", error);
+  //     throw error; 
+  //   }
+  // };
+
+  const markMessageAsRead = async (message) => {
     try {
       const response = await axios.put(
-        `https://uppercase-app-back-efd9a0ca1970.herokuapp.com/markasread/${messageId}`,
-        { id: messageId }, 
+        `https://uppercase-app-back-efd9a0ca1970.herokuapp.com/markasread/${message._id}`,
+        {
+          id: message._id,
+          destinataire: message.destinataire,
+          expediteur: message.expediteur,
+          texte: message.texte,
+          date: message.date,
+          lu: true,
+          
+        },
         { withCredentials: true }
       );
       console.log('Réponse du serveur', response);
       setMessages(prevMessages =>
-        prevMessages.map(message =>
-          message._id === messageId ? { ...message, lu: true } : message
+        prevMessages.map(msg =>
+          msg._id === message._id ? { ...msg, lu: true } : msg
         )
       );
       setUnreadMessagesCount(prevCount => prevCount > 0 ? prevCount - 1 : 0);
-      return response; 
+      return response;
     } catch (error) {
       console.error("Erreur lors de la mise à jour du message comme lu:", error);
-      throw error; 
+      throw error;
     }
   };
+  
 
   return (
   <MessageContext.Provider value={{
