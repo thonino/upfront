@@ -34,7 +34,7 @@ export const MessageProvider = ({ children }) => {
         { id: messageId }, 
         { withCredentials: true }
       );
-      console.log('Réponse du serveur', response);
+      // console.log('Réponse du serveur', response);
       setMessages(prevMessages =>
         prevMessages.map(message =>
           message._id === messageId ? { ...message, lu: true } : message
