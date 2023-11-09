@@ -48,10 +48,10 @@ export const MessageProvider = ({ children }) => {
   //   }
   // };
 
-  const markMessageAsRead = async (message) => {
+  const markMessageAsRead = async (messageId) => {
     try {
       const response = await axios.put(
-        `https://uppercase-app-back-efd9a0ca1970.herokuapp.com/markasread/${message._id}`,
+        `https://uppercase-app-back-efd9a0ca1970.herokuapp.com/markasread/${messageId}`,
         {
           id: message._id,
           destinataire: message.destinataire,
