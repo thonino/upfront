@@ -9,28 +9,34 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const verifyUserSession = async () => {
+      try {
+        const response = await axios.get("https://uppercase-app-back-efd9a0ca1970.herokuapp.com/login", { withCredentials: true });
+        const data = response.data;
+        if (data.success) {
+          setIsLoggedIn(true);
+          setUser(data.user);
+          localStorage.setItem('user', JSON.stringify(data.user));
+        } else {
+          setIsLoggedIn(false);
+          setUser(null);
+        }
+      } catch (error) {
+        console.error("Erreur lors de la vérification de la session:", error);
+      }
+      setLoading(false);
+    };
+  
     const user = JSON.parse(localStorage.getItem('user'));
-    if (user) { setIsLoggedIn(true); setUser(user); setLoading(false); } 
-    else {
-      axios.get("https://uppercase-app-back-efd9a0ca1970.herokuapp.com/login", { withCredentials: true })
-        .then(response => {
-          const data = response.data;
-          if (data.success) {
-            setIsLoggedIn(true);
-            setUser({ data: data.data });
-            localStorage.setItem('user', JSON.stringify(data.data));
-          } else {
-            setIsLoggedIn(false);
-            setUser(null);
-          }
-          setLoading(false);
-        })
-        .catch(error => {
-          console.error("Erreur lors de la vérification de la session:", error);
-          setLoading(false);
-        });
+    if (user) {
+      setIsLoggedIn(true);
+      setUser(user);
+      setLoading(false);
+    } else {
+      verifyUserSession();
     }
   }, []);
+  
 
   const login = (email, password) => { 
     return axios.post("https://uppercase-app-back-efd9a0ca1970.herokuapp.com/login", {
