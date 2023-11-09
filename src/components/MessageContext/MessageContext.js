@@ -25,7 +25,7 @@ export const MessageProvider = ({ children }) => {
       };
       fetchMessages();
     }
-  }, []); 
+  }, [user]); 
 
   const markMessageAsRead = async (messageId) => {
     try {
