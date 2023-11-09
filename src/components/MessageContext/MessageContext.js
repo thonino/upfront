@@ -14,7 +14,7 @@ export const MessageProvider = ({ children }) => {
     if (user) { 
       const fetchMessages = async () => {
         try {
-          const response = await axios.get('https://uppercase-app-back-efd9a0ca1970.herokuapp.com/messagereceived');
+          const response = await axios.get('https://uppercase-app-back-efd9a0ca1970.herokuapp.com/messagereceived', { withCredentials: true });
           const fetchedMessages = response.data.messages.reverse();
           setMessages(fetchedMessages);
           const unreadCount = fetchedMessages.filter(message => !message.lu).length;
@@ -29,7 +29,7 @@ export const MessageProvider = ({ children }) => {
 
   const markMessageAsRead = async (messageId) => {
     try {
-      const response = await axios.put(`https://uppercase-app-back-efd9a0ca1970.herokuapp.com/markasread/${messageId}`);
+      const response = await axios.put(`https://uppercase-app-back-efd9a0ca1970.herokuapp.com/markasread/${messageId}`, { withCredentials: true });
       console.log('Réponse du serveur', response);
       setMessages(prevMessages =>
         prevMessages.map(message =>
