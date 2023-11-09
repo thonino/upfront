@@ -53,7 +53,7 @@ function MessageSent() {
       .then(response => {
         const updatedMessages = messages.map(message => {
           if (message._id === id) {
-            return { ...message, texte: newText, lu: false};
+            return { ...message, texte: newText};
           }
           return message;
         });
