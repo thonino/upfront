@@ -47,15 +47,15 @@ function MessageReceived() {
     setShowReplyModal(true);
   };
 
-  const markAsRead = (message) => {
-    markMessageAsRead(message)
+  const markAsRead = (id) => {
+    markMessageAsRead(id)
       .then(() => {
         console.log('Message marqué comme lu dans la base de données');
-        const updatedMessages = messages.map((msg) => {
-          if (msg._id === message._id) {
-            return { ...msg, lu: true };
+        const updatedMessages = messages.map((message) => {
+          if (message._id === id) {
+            return { ...message, lu: true };
           }
-          return msg;
+          return message;
         });
         setMessages(updatedMessages);
       })
@@ -63,7 +63,6 @@ function MessageReceived() {
         console.error('Erreur lors de la mise à jour du statut de lecture:', error);
       });
   };
-  
   
 
   const isUserAdmin = user.data.role === 'admin';
