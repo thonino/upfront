@@ -50,7 +50,7 @@ function MessageReceived() {
   const markAsRead = (id) => {
     markMessageAsRead(id)
       .then(() => {
-        console.log('Message marqué comme lu dans la base de données');
+        // console.log('Message marqué comme lu dans la base de données');
         const updatedMessages = messages.map((message) => {
           if (message._id === id) {
             return { ...message, lu: true };
