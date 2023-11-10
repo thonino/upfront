@@ -162,7 +162,7 @@ function MessageSent() {
               </div>
               <div className="modal-footer">
                 <button onClick={() => setMessageToEdit(null)} type="button" className="btn btn-secondary">Annuler</button>
-                <button onClick={() => handleSaveEdit(messageToEdit)} type="button" className="btn btn-success">Enregistrer</button>
+                <button onClick={() => handleSaveEdit(messageToEdit)} type="button" className="bouton-1">Enregistrer</button>
               </div>
             </div>
           </div>
