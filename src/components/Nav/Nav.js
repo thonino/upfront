@@ -58,7 +58,7 @@ const Nav = () => {
           <Link className="nav-link mt-2r" to="/basket" onMouseEnter={handleMouseEnter1}>
             <i className="bi bi-cart-fill fs-2 hover "> 
               <span className="pacifico me-1">Panier</span> 
-              <span className={cartItemCount > 0 ? "notif roboto cible1" : "d-none"}>
+              <span className={cartItemCount > 0 ? "cible1 notif1" : "d-none"}>
                 {cartItemCount > 0 ? `${cartItemCount}` : "0"}
               </span>
             </i>
@@ -98,7 +98,7 @@ const Nav = () => {
                   <li className="nav-item">
                     <Link className="nav-link fs-4" to="/messagereceived">
                       <span className="txt-hover fs-4" onMouseEnter={handleMouseEnter2}>Messages</span>
-                      <span className={unreadMessagesCount > 0 ? `notif cible2 roboto fst-italic ` : `d-none`}>
+                      <span className={unreadMessagesCount > 0 ? `notif2 cible2 ` : `d-none`}>
                         {unreadMessagesCount > 0 ? `${unreadMessagesCount}` : null}
                       </span>
                     </Link>
