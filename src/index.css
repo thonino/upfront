@@ -165,17 +165,34 @@ span p, li {
   80% {transform: translateY(-5px);}
   90% {transform: translateY(0px);}
 }
-.cible1.demarre1{animation:bounce2 1s;}
-.cible2.demarre2{animation:bounce2 1s;}
-
-.notif {
-  position: relative;
-  top: -12px;
-  background-color: #ff8e3a;
-  border-radius: 50%;
+.notif-container{
   color: white;
-  padding-left: 6px;
-  padding-right: 8px;
-  font-size: 17px;
+  top:20px;
+  
+}
+.cible1.demarre1{animation:bounce2 1s;}
+.notif1 {
+  color: white;
   display:inline-block;
+  background-color: #ac5b26;
+  position: relative;
+  top: -15px;
+  text-size-adjust:initial;
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  font-size: 19px;
+}
+.cible2.demarre2{animation:bounce2 1s;}
+.notif2 {
+  color: white;
+  display:inline-block;
+  background-color: #593924;
+  position: relative;
+  top: -10px;
+  text-size-adjust:initial;
+  border-radius: 100%;
+  width: 25px;
+  height: 25px;
+  font-size: 18px;
 }
