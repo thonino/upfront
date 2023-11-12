@@ -211,7 +211,7 @@ function Products() {
                 <p><strong>Description:</strong> {selectedProduct.description}</p>
               </div>
               <div className="modal-footer">
-                <button onClick={closeProductDetails} type="button" className="btn btn-secondary">Fermer</button>
+                <button onClick={closeProductDetails} type="button" className="bouton-1">Fermer</button>
               </div>
             </div>
           </div>
